@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function fnAdd(a,b) {
+            var c = a + b;
+
+            // 返回c的值  然后结束这个函数的运行
+            return c;
+            // 所以 无法alert(c);
+            alert("内部的c="+c);
+
+        }
+        var iResult = fnAdd(2,5);
+        alert(iResult);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

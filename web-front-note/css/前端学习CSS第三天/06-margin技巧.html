@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*body自带8像素的margin 如果想盒子贴边 需手动设置body下的margin为0*/
+        body {
+            margin:0;
+        }
+
+        /*.box {*/
+        /*    width: 200px;*/
+        /*    height: 200px;*/
+        /*    background-color: gold;*/
+        /*    margin-left: -50px; !*负值反方向*!*/
+        /*}*/
+        .box {
+            width: 202px;
+            height: 156px;
+            background-color: gold;
+            margin: 50px auto 0;
+        }
+        .box div {
+            width: 200px;
+            height: 30px;
+            border: 1px solid green;
+            background-color: gold;
+            border-top: -1px;
+        }
+        /*.box .last{*/
+        /*    border-bottom: 1px solid green;*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>

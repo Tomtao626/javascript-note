@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        function myalert() {
+            alert('hello world');
+        }
+        myalert();
+        */
+
+        // 转换成封闭函数写法
+        (function myalert() {
+            //alert('hello world')
+        })();
+        //封闭函数得第二种写法
+        !function() {
+            alert('hello world');
+        }();
+        // 封闭函数第三种写法
+        ~function() {
+            alert('hello world');
+        }()
+
+        // 在封闭函数前加一个;  可以避免在js压缩时出错
+        /*
+        ;function() {
+            alert('hello world');
+        }();
+        */
+
+        var iNum01 =12;
+        function myalert02() {
+            alert('hello world');
+        }
+
+        (function () {
+            var iNum01 = 24;
+            function myalert02() {
+                alert('hello hello')
+            }
+            alert(iNum01);
+            myalert02();
+        })();
+        alert(iNum01);
+        myalert02();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

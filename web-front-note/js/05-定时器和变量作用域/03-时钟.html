@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+
+            function fnTimego() {
+                var sNow = new Date();
+                // 获取年份
+                var iYear = sNow.getFullYear();
+                // 获取月份  月份是从0-11  0表示1月份  11表示12月份
+                var iMonth = sNow.getMonth()+1;
+                // 获取日
+                var iDate = sNow.getDate();
+                // 星期 是从0到6
+                var iWeek = sNow.getDay();
+                var iHour = sNow.getHours();
+                var iMinute = sNow.getMinutes();
+                var iSecond = sNow.getSeconds();
+
+                var sTr = "当前时间是：" + iYear + "年" + iMonth +"月" + iDate + "日" + "-" + fnToweek(iWeek) + "-" + iHour +":"+fnTodouble(iMinute)+":"+fnTodouble(iSecond);
+                oDiv.innerHTML = sTr;
+            }
+            // 刚开始调用一次 解决干活开始1秒钟空白的问题
+            fnTimego();
+            setInterval(fnTimego,1000);
+
+            function fnToweek(n) {
+                if(n==0){
+                    return "星期日";
+                }
+                else if(n==1){
+                    return "星期一";
+                }
+                else if(n==2){
+                    return "星期二";
+                }
+                else if(n==3){
+                    return "星期三";
+                }
+                else if(n==4){
+                    return "星期四";
+                }
+                else if(n==5){
+                    return "星期五";
+                }
+                else{
+                    return "星期六";
+                }
+            }
+            function fnTodouble(n) {
+                if(n<10){
+                    return "0"+n;
+                }
+                else{
+                    return n;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1" style="color: red; font-size: 20px;text-align: center"></div>
+</body>
+</html>

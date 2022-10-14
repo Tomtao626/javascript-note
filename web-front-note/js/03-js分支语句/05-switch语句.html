@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            var iWeek = 7;
+            var oBody = document.getElementById('body01')
+            /*
+            if(iWeek==1){
+                oBody.style.backgroundColor = 'gold';
+            }
+            else if(iWeek==2){
+                oBody.style.backgroundColor = 'green';
+            }
+            else if(iWeek==3){
+                oBody.style.backgroundColor = 'red';
+            }
+            else if(iWeek==4){
+                oBody.style.backgroundColor = 'black';
+            }
+            else if(iWeek==5){
+                oBody.style.backgroundColor = 'grey';
+            }
+            else if(iWeek==6){
+                oBody.style.backgroundColor = 'yellow';
+            }
+            else{
+                oBody.style.backgroundColor = 'blue';
+            }
+             */
+            switch (iWeek){
+                case 1:
+                    oBody.style.backgroundColor = 'gold';
+                    break;
+                case 2:
+                    oBody.style.backgroundColor = 'red';
+                    break;
+                case 3:
+                    oBody.style.backgroundColor = 'green';
+                    break;
+                case 4:
+                    oBody.style.backgroundColor = 'yellow';
+                    break;
+                case 5:
+                    oBody.style.backgroundColor = 'grey';
+                    break;
+                case 6:
+                    oBody.style.backgroundColor = 'blue';
+                    break;
+                default:
+                    oBody.style.backgroundColor = 'pink';
+            }
+        }
+    </script>
+</head>
+<body id="body01">
+
+</body>
+</html>

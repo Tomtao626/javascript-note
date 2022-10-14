@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        通过类 实例化 来创建数组
+        var aList01 = new Array(1,2,3);
+
+        //通过直接变量创建
+        var aList02 = ['a',2,3];
+        //通过length获取数组成员个数
+        //alert(aList02.length);
+        // 根据下标操作数组元素
+        //alert(aList02[0]);
+        // 通过push方法在数组末尾添加元素
+        aList02.push('b');
+        //alert(aList02);
+        aList02.pop();
+        //alert(aList02);
+        // 从开头添加元素
+        aList02.unshift('c')
+        //alert(aList02);
+        // 从开头删除元素
+        aList02.shift();
+        //alert(aList02);
+        // 数组元素反转
+        aList02.reverse();
+        //alert(aList02);
+
+        var aList03 = ['a','b','c','d','a','b']
+        // 返回数组中元素第一次出现的索引值
+        // alert(aList03.indexOf('b'));
+        //
+        aList03.splice(1,0,'e');
+        alert(aList03); // a,e,b,c,d,a,b
+        //splice(x,y,z)  x参数代表起始位置  y参数代表从起始位置删除几个元素  z代表要增加的元素
+        aList03.splice(1,2,'f','g');
+        alert(aList03); // a,f,g,c,d,a,b
+
+        var str = aList03.join("--"); //a--f--g--c--d--a--b  数组执行方法后返回一个字符串
+        alert(str);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

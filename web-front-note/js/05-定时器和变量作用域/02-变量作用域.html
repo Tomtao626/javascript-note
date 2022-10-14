@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //函数外部定义的是全部变量  函数内外都可以访问
+        var iNum01 = 12;
+        //var iNum01 = 14; //重复定义 后者直接覆盖前者
+
+        function myalert() {
+            // var iNum01 = 24;
+            // 函数内部定义得是全局变量  函数内部可访问  外部不可访问
+            var iNum02 = 36;
+            alert(iNum01);
+            iNum01 += 10;
+
+        }
+
+        function myalert02() {
+            alert(iNum01);
+        }
+
+        myalert();
+        myalert02();
+        // alert(iNum02);  报错
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

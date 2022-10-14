@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            function fntimein() {
+                var oDiv = document.getElementById('div1');
+
+                //实际开发中需要读取后台的时间
+                var sNow = new Date();
+                // 未来时间 5月31日晚24点
+                var sFuture = new Date(2020,4,31,24,0,0);
+                // 计算还有多少秒
+                var sLeft = parseInt((sFuture-sNow)/1000);
+                // 计算还剩多少天
+                var iDays = parseInt(sLeft/86400);
+                // 计算还剩多少小时
+                var iHours = parseInt((sLeft%86400)/3600);
+                // 计算还剩多少分钟
+                var iMinutes = parseInt(((sLeft%86400)%3600)/60);
+                //计算还剩多少秒
+                var iSecond = parseInt(sLeft%60);
+                var sTr = "距离2020年6月1日还剩"+ iDays +"天" + iHours + "小时" + iMinutes + "分钟" + iSecond +"秒";
+                oDiv.innerHTML = sTr;
+            }
+            fntimein();
+            setInterval(fntimein,1000);
+        }
+    </script>
+</head>
+<body>
+    <div id="div1" style="color: #990000; font-size: 25px;text-align: center"></div>
+</body>
+</html>

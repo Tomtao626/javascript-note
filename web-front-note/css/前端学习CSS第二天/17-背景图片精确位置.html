@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .bg {
+            width: 800px;
+            height: 500px;
+            background-color: pink;
+            /*背景图片 1.必须要加url  2.地址不要加引号*/
+            background-image: url(images/l.jpg);
+            /*背景图默认平铺*/
+            background-repeat: repeat;
+            /*精确单位永远都是先x后y 第一个50是x 第二个20是y*/
+            /*background-position: 50px 10px;*/
+            /*注意 如果只填一个精确位置  另一个位置为空  默认为 x 是精确位置  y是垂直居中*/
+            background-position: 50px ;
+            /*background-position:10px center ; 表示水平是10 垂直居中*/
+            /*background-position: center 10px;  表示水平居中 垂直是10*/
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        111111111113233223
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*
+        1.相邻行内元素在一行上，一行可以显示多个
+        2.高宽直接设置是无效的
+        3.默认宽度就是它本身内容的宽度
+        4.行内元素只能容纳纯文本或者其他行内元素
+        注意：
+        1.链接里面不能再放链接
+        2.特殊情况a里面可以放块级元素，但是给a转换一下块级模式最安全
+        */
+        span {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <span>我是行内元素</span>
+    <span>我是行内元素</span>
+    <span>我是行内元素</span>
+    <span>我是行内元素</span>
+    <span>
+        <strong>
+            我是行内元素
+        </strong>
+    </span>
+</body>
+</html>

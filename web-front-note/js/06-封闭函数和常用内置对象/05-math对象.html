@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var iPi = Math.PI;
+        alert(iPi);
+
+
+        var arr = []
+
+        for(var i=0;i<20;i++){
+            // Math.random() 只能返回从0到1之间的随机数  不包括1
+            var iNum = Math.random();
+            arr.push(iNum);
+        }
+
+        // alert(arr);
+        window.console.log(arr);
+        // 向下取整 去掉小数部分
+        alert(Math.floor(5.6));//弹出5
+        // 向上取整 去掉小数部分 整体加1
+        alert(Math.ceil(5.6)); //弹出6
+
+        // 10-20之间的随机数
+        var arr2 = [];
+        var iN01 = 10;
+        var iN02 = 20;
+        for(var i=0;i<20;i++){
+            // 生成10-20的随机数
+            var iNum02 = Math.floor((iN02 - iN01+1)*Math.random()) + iN01;
+            arr2.push(iNum02);
+        }
+        console.log(arr2);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

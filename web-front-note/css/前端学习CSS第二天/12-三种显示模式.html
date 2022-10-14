@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        span {
+            /* 行内元素转换为块内元素*/
+            display: block;
+            width: 300px;
+            height: 100px;
+            background-color: pink;
+        }
+        div {
+            /*转换为行内块元素*/
+            display: inline;
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+        a {
+            /* 行内 块内元素 转换为行内块元素 */
+            display: inline-block;
+            width: 80px;
+            height: 25px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <span>行内</span>
+    <span>行内</span>
+
+    <div>块内</div>
+    <div>块内</div>
+
+    <a href="#">百度</a>
+    <a href="#">新浪</a>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script>
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+            alert('原生弹出的'+oDiv);
+        }
+        /*
+        ready的 完整写法
+        ready 比winodw.onload是 等标签加载完后 再渲染完之后才运行
+        ready 是等标签加载完后就运行
+        $(document).ready(function () {
+            var $div = $('#div1');
+            alert('jquery弹出的'+$div);
+        })
+         */
+        // ready的简写
+        $(function () {
+            var $div = $('#div1');
+            alert('jquery弹出的'+$div);
+        })
+
+    </script>
+</head>
+<body>
+    <div id="div1">这是一个div元素</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        window.onload = function () {
+            var oBody = document.getElementById('body01');
+            var sData = window.location.search;
+            var sHash = window.location.hash;
+            alert(sHash);
+            if(sData!=''){
+                var aRr = sData.split("=");
+                var iNum = aRr[1];
+                if(iNum==1){
+                    oBody.style.backgroundColor = 'red';
+                }
+                else if(iNum==2){
+                    oBody.style.backgroundColor = 'green';
+                }
+                else {
+                    oBody.style.backgroundColor = 'gray';
+                }
+            }
+        }
+
+    </script>
+</head>
+<body id="body01">
+    <div>04页面</div>
+</body>
+</html>

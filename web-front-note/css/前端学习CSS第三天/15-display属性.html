@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*body{*/
+        /*    !*解决间隙问题*!*/
+        /*    font-size: 0;*/
+        /*}*/
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: gold;
+            /*转换为内联元素 不支持宽高*/
+            /*display: inline;*/
+            /*转换为内联块元素*/
+            display: inline-block;
+            font-size: 16px;
+            /*手动设置间隙*/
+            margin: 20px;
+        }
+
+        .con {
+            width: 200px;
+        }
+        .con h3 {
+            font-size: 30px;
+        }
+        .box2 {
+            width: 200px;
+            height: 200px;
+            font-size: 16px;
+            background-color: gold;
+            display: none;
+        }
+        .con:hover .box2{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">div元素</div>
+    <div class="box">div元素</div>
+    <div class="con">
+        <h3>文字标题</h3>
+        <div class="box2">文字标题说明</div>
+    </div>
+</body>
+</html>

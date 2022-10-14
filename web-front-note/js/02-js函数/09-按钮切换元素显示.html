@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            var oBtn = document.getElementById('btn01');
+            var oDiv = document.getElementById('box01');
+            // oDiv.style.display  是读取的标签里面写的display属性值 如果没有写 这个值为空
+            oBtn.onclick = function () {
+                if(oDiv.style.display=='black' || oDiv.style.display==''){
+                    oDiv.style.display = 'none';
+                }
+                else{
+                    oDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+    <style>
+        .box {
+            width: 200px;
+            height: 400px;
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" name="" value="切换" id="btn01">
+    <div class="box" id="box01"></div>
+</body>
+</html>

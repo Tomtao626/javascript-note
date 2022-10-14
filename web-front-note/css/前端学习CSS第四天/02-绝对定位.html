@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定位</title>
+<!--    绝对定位和固定定位的块元素和行内元素会自动转化为行内块元素-->
+    <style>
+        .con {
+            width: 400px;
+            height: 400px;
+            border:1px solid #000;
+            margin: 50px auto 0;
+            position: relative;
+        }
+        /*文档流*/
+        .box1,.box2 {
+            width: 300px;
+            height: 100px;
+            margin: 10px;
+        }
+        .box1{
+            background-color: green;
+            /*相当于上一个设置了定位的父级进行定位  如果没有找到定位的父级  就会相对于body来定位*/
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+        .box2 {
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <div class="box1"></div>
+        <div class="box2"></div>
+    </div>
+</body>
+</html>

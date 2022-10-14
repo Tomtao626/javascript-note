@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>合并单元格</title>
+</head>
+<body>
+	<table border="1" width="500" height="240" align="center" cellspacing="0">
+		<tr>
+			<td>张飞</td>
+			<td>男</td>
+			<td>39</td>
+			<!-- 目标单元格 先上后下 -->
+			<td rowspan="2">照片</td>
+		</tr>
+		<tr>
+			<td>身高 181</td>
+			<td>汉族</td>
+			<td>已婚</td>
+			<!-- <td>照片</td> 此单元格多余-->
+		</tr>
+		<tr>
+			<td>个人作品</td>
+			<!-- 第二个单元格是目标单元格 -->
+			<td colspan="3">个人作品</td>
+		</tr>
+		<tr>
+			<td>个人简历</td>
+			<td colspan="3">个人简历</td>
+		</tr>
+	</table>
+</body>
+</html>
