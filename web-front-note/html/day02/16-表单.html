@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scaable=no">
+    <title>表单类型</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #F7F7F7;
+      }
+
+      form {
+        max-width: 500px;
+        width: 100%;
+        margin: 32px auto 0;
+        font-size: 16px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0;
+      }
+
+      input {
+        width: 100%;
+        height: 25px;
+        margin-top: 2px;
+        display: block;
+      }
+
+    </style>
+</head>
+<body>
+<p>H5中新增的表单类型</p>
+<ul>
+  <li>email 只能输入email格式。自动带有验证功能。</li>
+  <li>tel 手机号码。</li>
+  <li>url 只能输入url格式。</li>
+  <li>number 只能输入数字。</li>
+  <li>search 搜索框</li>
+  <li>range 滑动条</li>
+  <li>color 拾色器</li>
+  <li>time	时间</li>
+  <li>date 日期</li>
+  <li>datetime 时间日期</li>
+  <li>month 月份</li>
+  <li>week 星期</li>
+</ul>
+<form action="">
+  <fieldset>
+    <legend>表单类型</legend>
+    <label for="">
+      email: <input type="email" name="email" required>
+    </label>
+    <label for="">
+      color: <input type="color" name="color">
+    </label>
+    <label for="">
+      url: <input type="url" name='url'>
+    </label>
+    <label for="">
+      number: <input type="number" step="3" name="number">
+    </label>
+    <label for="">
+      range: <input type="range" name="range" value="100">
+    </label>
+    <label for="">
+      search: <input type="search" name="search">
+    </label>
+    <label for="">
+      tel: <input type="tel" name="tel">
+    </label>
+    <label for="">
+      time: <input type="time" name="time">
+    </label>
+    <label for="">
+      date: <input type="date" name="date">
+    </label>
+    <label for="">
+      datetime: <input type="datetime">
+    </label>
+    <label for="">
+      week: <input type="week" name="week">
+    </label>
+    <label for="">
+      month: <input type="month" name="month">
+    </label>
+    <label for="">
+      datetime-local: <input type="datetime-local" name="datetime-local">
+    </label>
+    <input type="submit">
+  </fieldset>
+  <!--fieldset标签降表单里面的内容进行打包，代表一组；-->
+  <!--legend标签的则是fieldset里的元素定义标题-->
+</form>
+</body>
+</html>

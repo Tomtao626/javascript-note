@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单元素(标签)</title>
+</head>
+<body>
+<input type="text" list="myData">
+<!--datalist标签-->
+<datalist id="myData">
+  <option>专科</option>
+  <option>本科</option>
+  <option>研究生</option>
+  <option>不详</option>
+</datalist>
+<!--keygen元素：提供一种验证用户的可靠方法，keygen元素是密钥对生成器。
+当提交表单时，会生成两个键：一个公钥，一个私钥
+私钥存储于客户端，公钥则被发送到服务器。公钥用于之后验证用户的客户端证书-->
+<!--meter元素：度量器-->
+<p>meter元素：度量器</p>
+<ul>
+  <li>low：低于该值后警告</li>
+  <li>high：高于该值后警告</li>
+  <li>value：当前值</li>
+  <li>max：最大值</li>
+  <li>min：最小值</li>
+  <meter value="10" min="0" max="100" low="10" high="80"></meter>
+</ul>
+</body>
+</html>
