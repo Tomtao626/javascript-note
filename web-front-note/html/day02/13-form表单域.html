@@ -5,6 +5,29 @@
 	<title>form表单域</title>
 </head>
 <body>
+	<!--
+		表单标签<form>：用于与服务器的交互。表单就是收集用户输入的信息，让用户填写，选择的
+		属性：
+			name 表单的名称 用于js来操作或控制表单的使用
+			id 表单的名称 用于js来操作或控制表单的使用
+			action 指定表单数据的处理程序，一半是php，如action="login.php"
+			method 表单数据的交互方式 get/post
+		表单和表格嵌套时，是在<form>标记中套<table>标记
+		form标签里面的action属性和method属性，在后续的 ajax文章上再讲。这里简单说一下：action属性就是表示，表单将提交到哪里。 method属性表示用什么HTTP方法提交，有get、post两种。
+		GET方式：
+		将表单数据，以"name=value"形式追加到action指定的处理程序的后面，两者间用"?"隔开，每一个表单的"name=value"间用"&"号隔开。
+		特点：只适合提交少量信息，并且不太安全(不要提交敏感数据)、提交的数据类型只限于ASCII字符。
+
+		POST方式：
+		将表单数据直接发送(隐藏)到action指定的处理程序。POST发送的数据不可见。Action指定的处理程序可以获取到表单数据。
+		特点：可以提交海量信息，相对来说安全一些，提交的数据格式是多样的(Word、Excel、rar、img)。
+
+		**Enctype：**
+		表单数据的编码方式(加密方式)，取值可以是：application/x-www-form-urlencoded、multipart/form-data。Enctype只能在POST方式下使用。
+
+		- Application/x-www-form-urlencoded：**默认**加密方式，除了上传文件之外的数据都可以
+		- Multipart/form-data：**上传附件时，必须使用这种编码方式**。
+	-->
 	<form action="" method="post">
 		用户名:<input type="text" name="username" /><br/>
 		密码:<input type="password" name="pwd" /><br/>
