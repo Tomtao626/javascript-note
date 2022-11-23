@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text"/>
+    <button>localStorage存储</button>
+    <button>localStorage获取</button>
+    <button>localStorage更新</button>
+    <button>localStorage删除</button>
+    <button>localStorage清除</button>
+<script>
+    var txt = document.querySelector('input');
+    var btns = document.querySelectorAll('button');
+    // localStorage存储数据
+    btns[0].onclick = function () {
+        window.localStorage.setItem('userName', txt.value);
+    }
+
+    // localStorage获取数据
+    btns[1].onclick = function () {
+        txt.value = window.localStorage.getItem('userName');
+    }
+
+    // localStorage删除数据
+    btns[3].onclick = function () {
+        window.localStorage.removeItem('userName');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 250px;
+            height: 250px;
+            background-color: green;
+            margin: 100px auto;
+            border-radius: 50%;
+        }
+
+        /*全屏伪类：当元素处于全屏时，改变元素的背景色*/
+        .box:-webkit-full-screen {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        HTML5规范允许用户自定义网页上**任一元素**全屏显示。
+    -->
+    <!-- 代码示例 -->
+    <div class="box"></div>
+    <script>
+        /*
+        rquestFullscreen() 让元素开启全屏显示
+        cancelFullscreen() 让元素关闭全屏显示
+        为考虑兼容性问题，不同的浏览器需要**在此基础之上**，添加私有前缀，比如：（注意 screen 是大写）
+        webkit内核：
+            webkitRequestFullScreen
+            webkitCancleFullScreen
+        moz:
+            mozRequestFullScreen
+            mozCancleFullScreen
+
+        检测当前是否处于全屏状态
+            document.fullScreen
+        不同浏览器需要加私有前缀，比如：
+        webkit
+            document.webkitIsFullScreen
+        moz:
+            document.mozFullScreen
+
+        全屏的伪类  当元素处于全屏状态时，改变它的样式。这时就可以用到伪类。
+        :full-screen .box{}
+        :-webkit-full-screen {}
+        :moz-full-screen {}
+         */
+        var box = document.querySelector('.box');
+        // box.requestFullscreen();   //直接这样写是没有效果的。之所以无效，应该是浏览器的机制，必须要点一下才可以实现全屏功能。
+        document.querySelector('.box').onclick = function () {
+            // 开启全屏显示的兼容写法
+            if (box.requestFullscreen) {
+                //如果支持全屏 那么就让元素全屏
+                box.requestFullscreen();
+            } else if (box.webkitRequestFullScreen) {
+                box.webkitRequestFullScreen();
+            } else if (box.mozRequestFullScreen) {
+                box.mozRequestFullScreen();
+            }
+        }
+    </script>
+</body>
+</html>

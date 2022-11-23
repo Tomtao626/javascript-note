@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!--
+    H5有两种存储的方式，
+    1. window.sessionStorage 会话存储
+        保存在内存中，
+        生命周期：关闭浏览器窗口时，销毁数据
+        在同一个窗口下数据可以共享
+        大小：5M
+    2. window.localStorage 本地存储
+        可能保存在浏览器内存里，有可能在硬盘里。
+        永久生效，除非手动删除
+        可以多窗口共享
+        大小：20M
+    二者只能存储字符串，可以将对象 JSON.stringify() 编码后存储。
+  -->
+  <input type="text"/>
+  <button>sesssionStorage存储</button>
+  <button>sesssionStorage获取</button>
+  <button>sesssionStorage更新</button>
+  <button>sesssionStorage删除</button>
+  <button>sesssionStorage清除</button>
+  <script>
+      /*
+      setItem(key, value); // 新增一个 item，也可以更新一个 item。
+      getItem(key); //读取存储内容
+      removeItem(key); //根据键，删除存储内容
+      clear(); //清空所有存储内容
+      key(n); //根据索引值来获取存储内容
+       */
+      var txt = document.querySelector('input');
+      var btns = document.querySelectorAll('button');
+      // sessionStorage 存储
+      btns[0].onclick = function () {
+          window.sessionStorage.setItem('userName', txt.value);
+          window.sessionStorage.setItem('pwd', '123456');
+          window.sessionStorage.setItem('age', 18);
+      }
+
+      //        sessionStorage获取数据
+      btns[1].onclick = function () {
+          txt.value = window.sessionStorage.getItem('userName');
+      }
+
+      //        sessionStorage更新数据
+      btns[2].onclick = function () {
+          window.sessionStorage.setItem('userName', txt.value);
+      }
+
+      //        sessionStorage删除数据
+      btns[3].onclick = function () {
+          window.sessionStorage.removeItem('userName');
+      }
+
+      //        sessionStorage清空数据
+      btns[4].onclick = function () {
+          window.sessionStorage.clear();
+      }
+  </script>
+</body>
+</html>

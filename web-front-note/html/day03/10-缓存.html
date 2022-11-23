@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html manifest="demo.appcache"></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--
+    应用缓存
+      HTML5中我们可以轻松的构建一个离线（无网络状态）应用，只需要创建一个 `cache manifest` 缓存清单文件。
+      优势：
+        1、可配置需要缓存的资源；
+        2、网络无连接应用仍可用；
+        3、本地读取缓存资源，提升访问速度，增强用户体验；
+        4、减少请求，缓解服务器负担。
+    cache manifest 缓存清单文件
+    缓存清单文件中列出了浏览器应缓存，以供离线访问的资源。推荐使用 `.appcache`作为后缀名，另外还要添加MIME类型。
+    缓存清单文件里的内容怎样写：
+    （1）顶行写CACHE MANIFEST。
+    （2）CACHE: 换行 指定我们需要缓存的静态资源，如.css、image、js等。
+    （3）NETWORK: 换行 指定需要在线访问的资源，可使用通配符（也就是：不需要缓存的、必须在网络下面才能访问的资源）。
+    （4）FALLBACK: 换行 当被缓存的文件找不到时的备用资源（当访问不到某个资源时，自动由另外一个资源替换）。
+    -->
+    <!--
+      **缓存清单文件怎么用：**
+
+     （1）例如我们创建一个名为 `demo.appcache`的文件。例如：
+
+      demo.appcache：
+
+      ```bash
+      CACHE MANIFEST
+
+      # 注释以#开头
+      #下面是要缓存的文件
+      CACHE:
+          http://img.smyhvae.com/2016040101.jpg
+      ```
+    （2）在需要应用缓存在页面的根元素(html)里，添加属性manifest="demo.appcache"。路径要保证正确。例如：
+    -->
+    <img src="http://img.smyhvae.com/2016040101.jpg" alt=""/>
+</body>
+</html>

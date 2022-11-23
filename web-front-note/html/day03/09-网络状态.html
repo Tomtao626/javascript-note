@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+  通过 `window.onLine` 来检测用户当前的网络状况，返回一个布尔值。另外：
+    window.online：用户网络连接时被调用。
+    window.offline：用户网络断开时被调用（拔掉网线或者禁用以太网）。
+  网络状态监听的代码举例：
+-->
+<script>
+  window.addEventListener('online', function () {
+    alert('network connected');
+  })
+  window.addEventListener('offline', function () {
+    alert('network not connected');
+  })
+</script>
+</body>
+</html>
