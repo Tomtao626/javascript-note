@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>定位</title>
-<!--    绝对定位和固定定位的块元素和行内元素会自动转化为行内块元素-->
+<!--    绝对定位和固定定位的块元素和行内元素会自动转化为行内块元素
+        相对浏览器窗口进行定位。无论页面如何滚动，这个盒子显示的位置不变
+-->
     <style>
         .con {
             width: 400px;
             height: 400px;
             border:1px solid #000;
             margin: 50px auto 0;
-            position: relative;
         }
         /*文档流*/
         .box1,.box2 {
@@ -20,10 +21,10 @@
         }
         .box1{
             background-color: green;
-            /*相当于上一个设置了定位的父级进行定位  如果没有找到定位的父级  就会相对于body来定位*/
-            position: absolute;
-            left: 50px;
-            top: 50px;
+            /*相当于浏览器窗口进行定位 即使父级设置了定位属性 也还是以浏览器窗口进行定位*/
+            position: fixed;
+            right: 50px;
+            bottom: 50px;
         }
         .box2 {
             background-color: gold;
