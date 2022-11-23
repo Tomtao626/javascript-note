@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 传统网页布局 -->
+<!-- 头部 -->
+<div class="header">
+    <ul class="nav"></ul>
+</div>
+
+<!-- 主体部分 -->
+<div class="main">
+    <!-- 文章 -->
+    <div class="article"></div>
+    <!-- 侧边栏 -->
+    <div class="aside"></div>
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+
+</div>
+
+<!-- H5网页布局 -->
+<!-- 头部 -->
+<header>
+    <ul class="nav"></ul>
+</header>
+
+<!-- 主体部分 -->
+<div class="main">
+    <!-- 文章 -->
+    <article></article>
+    <!-- 侧边栏 -->
+    <aside></aside>
+</div>
+
+<!-- 底部 -->
+<footer>
+
+</footer>
+
+<!-- H5新增语义标签 -->
+<section>表示区块</section>
+<article>表示文章。文章/评论/帖子博客</article>
+<header>表示页眉</header>
+<footer>表示页脚</footer>
+<nav>表示导航</nav>
+<aside>表示侧边栏。文章侧边栏</aside>
+<figure>表示媒体内容分组</figure>
+<mark>表示标记</mark><br>
+<progress>表示进度</progress><br>
+<time>表示日期</time>
+<!--
+    本质上新语义标签与`<div>`、`<span>`没有区别，只是其具有表意性，使用时除了在HTML结构上需要注意外，其它和普通标签的使用无任何差别，可以理解成`<div class="nav">` 相当于`<nav>`。
+-->
+
+<!--
+    新语义标签的兼容性处理
+    IE8 及以下版本的浏览器不支持 H5 和 CSS3。解决办法：引入`html5shiv.js`文件。
+    引入时，需要做if判断，具体代码如下：
+-->
+<!--  条件注释 只有ie能够识别-->
+
+<!--[if lte ie 8]>
+<script src="html5shiv.min.js"></script>
+<![endif]-->
+<!--
+    上方代码是**条件注释**：虽然是注释，但是IE浏览器可以识别出来。解释一下：
+    - l：less 更小
+    - t：than 比
+    - e：equal等于
+    - g：great 更大
+-->
+<!--
+    H5中新增的表单类型
+-->
+<email>只能输入email格式。自动带有验证功能</email>
+<tel>手机号码</tel>
+<url>只能输入url格式。</url>
+<number> 只能输入数字。</number>
+<search>搜索框</search>
+<range>滑动条</range>
+<color>拾色器</color>
+<time>时间</time>
+<date>日期</date>
+<datetime>时间日期</datetime>
+<month>月份</month>
+<week>星期</week><br>
+</body>
+</html>
+</body>
+</html>
