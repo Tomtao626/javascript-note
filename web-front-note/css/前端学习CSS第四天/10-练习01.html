@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            font-size: 14px;
+            font-family: "Microsoft YaHei";
+            height: 8888px;
+        }
+        .header{
+            height: 58px;
+            background-color: #191D3A;
+        }
+        /*版心*/
+        .inner_c{
+            width: 1000px;
+            margin: 0 auto; /*让导航条，内容区域等部分的版心在父亲里居中*/
+        }
+        /*导航条的logo*/
+        .header .logo{
+            float: left;
+            margin-right: 40px;
+        }
+        .header .nav{
+            float: left;
+        }
+        .header .nav ul{
+            list-style: none; /*去掉列表前面的圆点*/
+        }
+        .header .nav ul li{
+            float: left;
+            width: 100px;
+            line-height: 58px; /*让行高等于这一行的高度，保证里面的文字垂直居中*/
+            border-left: 1px solid #252947; /*每个li之间有间隔线*/
+        }
+        .header .nav ul li.last{
+            border-right: 1px solid #252947;/*最后一个li的右边加间隔线*/
+        }
+        .header .nav ul li a{
+            display: block; /*将超链接转为块儿，可以保证其霸占父亲的整行*/
+            height: 58px;
+            text-decoration: none; /*去掉超链的下划线*/
+            color:#818496;
+            text-align: center;  /*让这个div内部的文本居中*/
+        }
+        .header .nav ul li a.current{
+            color:white;
+            background: #252947;
+        }
+        .header .nav ul li a:hover{
+            color: white;
+            background: #252947;
+        }
+
+        .header .jrwm_box{
+            float: left;
+            height: 58px;
+            width: 100px;
+            padding-left: 48px;
+            padding-top: 12px;
+
+        }
+        /*放背景图片的div*/
+        .header .jrwm_box .jrwm{
+            height: 34px;
+            background-image: url(images/jrwm.png);
+            background-repeat: no-repeat;
+            text-align: center; /*让这个div内部的超链接居中*/
+        }
+        .header .jrwm_box .jrwm a{
+            display: block; /*将超链接转为块儿，可以保证其霸占父亲的整行*/
+            line-height: 34px; /*让行高为背景图片的高度，可以保证超链接的文字在背景图片里垂直居中*/
+            text-decoration: none; /*去掉超链的下划线*/
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        网页结构
+            头部(导航栏)
+            banner区
+            内容区
+            底部
+    -->
+    <div class="header">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="#" class="current">首页</a></li>
+                <li><a href="#">人生无限公司</a></li>
+                <li><a href="#">人生有限公司</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">客服中心</a></li>
+                <li class="last"><a href="#">投资者关系</a></li>
+            </ul>
+        </div>
+        <div class="jrwm_box">
+            <div class="jrwm">
+                <a href="https://www.google.com">加入我们</a>
+            </div>
+        </div>
+    </div>
+<!--
+    class==header这个div是顶部的通栏，我们在里面放一个1000px宽的div，作为通栏的版心，我一般把这个版心称为`class=inner_c`，c指的是center。
+    class=inner_c不需要给高，因为它可以被内容撑高。
+    现在我们需要在`class=inner_c`里放三个东西：左侧的logo、中间的导航栏、右侧的“加入我们”。
+    接下来我们开始做右侧的「加入我们」，「加入我们」的背景是带圆角的矩形，这个圆角，实现的方式有两种：要么切图，要么用CSS3实现（IE 7、IE 8不兼容）。我们暂时使用切图来实现。
+    我们最好把「加入我们」这个超链接`<a>`放到`div`里，然后设置div的margin和padding，而不是直接设置`<a>`的边距。
+    我们起个名字叫`class=jrwm`是没有问题的，这在工作当中很常见，如果写成`class=join_us`反倒很别扭。
+    暂时我们的做法是：
+    （1）给`class=jrwm_box`这个div里放一个`class=jrwm`的div。`class=jrwm`用来放绿色的背景图片。
+    （2）在`class=jrwm`里放一个超链接，并将超链接转为块级元素。
+-->
+</body>
+</html>
