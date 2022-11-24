@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+
+    /*::before 和::after 是通过 css 模拟出的html标签的效果*/
+    span::before{
+      content:"smyhvae";
+      color:red;
+      background-color: pink;
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+    }
+
+    span::after{
+      content:"永不止步";
+      color:yellowgreen;
+    }
+
+    /*给原本的span标签设置一个默认的属性*/
+    span{
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+
+<span>生命壹号</span>
+
+<!--
+  伪元素选择器的标志性符号是 `::`。
+  格式一：
+    E::before 设置在 元素E 前面（依据对象树的逻辑结构）的内容，配合content属性一起使用。
+    E::after 设置在 元素E 后面（依据对象树的逻辑结构）的内容，配合content属性一起使用。
+    E:after、`E:before `在旧版本里是伪类，在 CSS3 这个新版本里是伪元素。新版本里，`E:after`、`E:before`会被自动识别为`E::after`、`E::before`，按伪元素来对待，这样做的目的是用来做兼容处理。
+
+  格式二：
+    通过伪元素选择器，就可以添加出类似于span标签的效果（记得要结合 content 属性使用）。
+    通过这两个属性添加的伪元素，是**行内元素**，需要转换成块元素才能设置宽高。
+    E::first-letter 设置元素 E 里面的**第一个字符**的样式。
+    E::first-line 设置元素 E 里面的**第一行**的样式。
+    E::selection 设置元素 E 里面被鼠标选中的区域的样式（一般设置颜色和背景色）。
+-->
+</body>
+</html>

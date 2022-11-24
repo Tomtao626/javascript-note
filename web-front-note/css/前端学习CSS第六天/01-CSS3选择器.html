@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+  <!--
+    div 标签选择器
+    .box 类名选择器
+    #box id选择器
+    div p 后代选择器
+    div.box 交集选择器
+    div,p,span 并集选择器
+    div>p 子代选择器
+    * : 通配符
+    div+p 选中div后面相邻的第一个p标签
+    div~p 选中div后面所有的p标签
+    CSS3选择器与 jQuery 中所提供的**绝大部分**选择器兼容。
+    属性选择器的标志性符号 []
+      ^ 开头  $ 结尾   * 包含
+    `E[title]` 选中页面的E元素，并且E存在 title 属性即可。
+    `E[title="abc"]`选中页面的E元素，并且E需要带有title属性，且属性值**完全等于**abc。
+    `E[attr~=val]`  选择具有 att 属性且属性值为：用空格分隔的字词列表，其中一个等于 val 的E元素。
+    `E[attr|=val]` 表示要么是一个单独的属性值，要么这个属性值是以“-”分隔的。
+    `E[title^="abc"]` 选中页面的E元素，并且E需要带有 title 属性,属性值以 abc 开头。
+    `E[title$="abc"]` 选中页面的E元素，并且E需要带有 title 属性,属性值以 abc 结尾。
+    `E[title*="abc"]` 选中页面的E元素，并且E需要带有 title 属性,属性值任意位置包含abc。
+  -->
+<div class="wrapper">
+    <header>CSS3-属性选择器</header>
+    <section>
+        <header>简介</header>
+        <div class="wrap-box">
+            <form action="">
+                <ul>
+                    <li>
+                        姓名: <input type="text">
+                    </li>
+                    <li>
+                        密码: <input type="password">
+                    </li>
+
+                    <li>
+                        性别: <input type="radio">男
+                        <input type="radio"> 女
+                    </li>
+                    <li>
+                        兴趣: <input type="checkbox" name="" id="">写代码
+                    </li>
+                    <li>
+                        <input type="submit" value="提交">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </section>
+    <section class="attr1">
+        <header>E[attr]</header>
+        <div class="wrap-box">
+            <a href="./a.rmvb" class="download download-movie">下载</a>
+            <a href="./b.rmvb" class="download download-movie">下载</a>
+            <a href="./a.mp3" class="download download-music">下载</a>
+        </div>
+    </section>
+    <section class="attr2">
+        <header>E[attr~=attr]</header>
+        <div class="wrap-box">
+            <a href="./a.rmvb" class="download download-movie">下载</a>
+            <a href="./b.rmvb" class="download download-movie">下载</a>
+            <a href="./a.mp3" class="download download-music">下载</a>
+        </div>
+    </section>
+    <section class="attr3">
+        <header>E[attr|=attr]</header>
+        <div class="wrap-box">
+            <a href="./a.rmvb" class="download">下载</a>
+            <a href="./b.rmvb" class="download-movie">下载</a>
+            <a href="./a.mp3" class="download-music">下载</a>
+        </div>
+    </section>
+    <section class="attr4">
+        <header>E[attr*=val]</header>
+        <div class="wrap-box">
+            <a href="./a.rmvb" class="download">下载</a>
+            <a href="./b.rmvb" class="moviedownload">下载</a>
+            <a href="./a.mp3" class="downloadmusic">下载</a>
+        </div>
+    </section>
+    <section class="attr5">
+        <header>E[attr^=val]</header>
+        <div class="wrap-box">
+            <a href="./a.rmvb" class="download">下载</a>
+            <a href="./b.rmvb" class="moviedownload">下载</a>
+            <a href="./a.mp3" class="downloadmusic">下载</a>
+        </div>
+    </section>
+    <section class="attr6">
+        <header>E[attr$=val]</header>
+        <div class="wrap-box">
+            <a href="./a.rmvb" class="download">下载</a>
+            <a href="./b.rmvb" class="moviedownload">下载</a>
+            <a href="./a.mp3" class="downloadmusic">下载</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>

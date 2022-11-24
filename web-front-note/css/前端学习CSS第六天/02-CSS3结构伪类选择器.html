@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!--
+    伪类选择器标志性符号 `:`
+    CSS中有一些伪类选择器，比如 `:link` `:visited` `:hover` `:active` `:focus`
+    （1）这里我们要好好理解**父元素**的含义，它指的是：以 E 元素的父元素为参考。
+    （2）注意：以上选择器中所选到的元素的类型，必须是指定的类型E，如果选不中，则无效。这个要好好理解，具体可以看CSS参考手册中的`E:nth-child(n)`的示例。我们可以理解成：**先根据选择器找到选中的全部位置，如果发现某个位置不是类型E，则该位置失效**。
+    （3）另外，`E:nth-child(n)`这个属性也很有意思。比如，针对下面这样一组标签：
+    格式一：
+        E:first-child 匹配父元素的第一个子元素
+        E:last-child
+        E:nth-child(n) 匹配父元素的第n个子元素E。**注意**，盒子的编号是从`1`开始算起，不是从`0`开始算起。
+        E:nth-child(odd) 匹配奇数
+        E:nth-child(even) 匹配偶数
+        E:nth-last-child(n) 匹配父元素的倒数第n个子元素E。
+            如果选择器写成`li:nth-child(2)`，则表示第2个 `li`。
+            如果选择器写成`li:nth-child(n)`，则表示**所有的**`li`。因为此时的 `n` 表示 0,1,2,3,4,5,6,7,8.....（当n小于1时无效，因为n = 0 也是不会选中的）
+            如果选择器写成`li:nth-child(2n)`，则表示所有的**第偶数个** li。
+            如果选择器写成`li:nth-child(2n+1)`，则表示所有的**第奇数个** li。
+            如果选择器写成`li:nth-child(-n+5)`，则表示**前5个** li。
+            如果选择器写成`li:nth-last-child(-n+5)`，则表示**最后5个** li。
+            如果选择器写成`li:nth-child(7n)`，则表示选中7的倍数。。
+
+    格式二： 先在同级里找到所有的E类型，然后根据 n 进行匹配。
+        E:first-of-type 匹配同类型中的第一个同级兄弟元素E。
+        E:last-of-type 匹配同类型中的最后一个同级兄弟元素E。
+        E:nth-of-type(n) 匹配同类型中的第n个同级兄弟元素E。
+        E:nth-last-of-type(n) 匹配同类型中的倒数第n个同级兄弟元素E。
+
+    格式三：
+        E:empty 匹配没有任何子节点（包括空格等text节点）的元素E。
+        E:target 匹配相关URL指向的E元素。要配合锚点使用。
+  -->
+  <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+  </ul>
+</body>
+</html>
