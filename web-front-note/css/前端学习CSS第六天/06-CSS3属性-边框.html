@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+  .parent {
+    width: 400px;
+  }
+  .box {
+    width: 100px;
+    height: 100px;
+    float: left;
+    border: 1px solid rgb(144, 12, 63);
+    margin: 20px;
+    text-align: center;
+    line-height: 100px;
+    color: #fff;
+    font-size: 50px;
+    background-color: rgb(255, 141, 26);
+
+  }
+
+  /*画圆形的方式一*/
+  .box:nth-child(1) {
+    border-radius: 50px;
+  }
+
+  /*画圆形的方式二*/
+  .box:nth-child(2) {
+    border-radius: 50%;
+  }
+
+  .box:nth-child(3) {
+    border-radius: 100px 0 0 0;
+  }
+
+  .box:nth-child(4) {
+    border-radius: 100px/50px;
+  }
+
+  .box:nth-child(5) {
+    border-radius: 10%;
+  }
+
+  .box:nth-child(6) {
+    border-radius: 0 100px;
+  }
+</style>
+<body>
+  <!--
+    边框的属性很多，边框圆角和边框阴影 这俩属性用的较多
+    边框圆角 border-radius
+      解释：
+        边框的每个圆角，本质上是一个圆，圆有**水平半径**和**垂直半径**：如果二者相等，就是圆；如果二者不等， 就是椭圆。
+      写法参考：
+        border-top-left-radius: 60px 120px;        //参数解释：水平半径   垂直半径
+        border-top-right-radius: 60px 120px;
+        border-bottom-left-radius: 60px 120px;
+        border-bottom-right-radius: 60px 120px;
+  -->
+  <div class="parent">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+    <div class="box">6</div>
+  </div>
+  <!--
+    边框阴影 box-shadow
+    写法参考:
+      box-shadow: 水平偏移 垂直偏移 模糊程度 阴影大小 阴影颜色
+	  box-shadow: 15px 21px 48px -2px #666;
+	参数解释：
+      水平偏移：正值向右 负值向左。
+      垂直偏移：正值向下 负值向上。
+      模糊程度：不能为负值。
+    另外，后面还可以再加一个inset属性，表示内阴影。如果不写，则默认表示外阴影。例如：
+      box-shadow:3px 3px 3px 3px #666 inset;
+    注意：设置边框阴影不会改变盒子的大小，即不会影响其兄弟元素的布局。
+    我们还可以设置多重边框阴影，实现更好的效果，增强立体感。
+  -->
+  <!--
+    边框图片
+    属性：
+      /* 边框图片的路径*/
+      border-image-source: url("images/border.pn
+      /* 图片边框的裁剪*/
+      border-image-slice: 27;
+      /*图片边框的宽度*/
+      border-image-width: 27px;
+      /*边框图片的平铺*/
+      /* repeat :正常平铺 但是可能会显示不完整*/
+      /*round: 平铺 但是保证 图片完整*/
+      /*stretch: 拉伸显示*/
+      border-image-repeat: stretch;
+    综合属性：
+      border-image: url("images/border.png") 27/20px round;
+    例子：
+      ![](http://img.smyhvae.com/20180207_2045.png)
+      ![](http://img.smyhvae.com/20180207_2046.png)
+      这张图片将会被“切割”成**九宫格**形式，然后进行平铺。四个角位置、形状保持不变，中心位置和水平垂直向两个方
+      ![](http://img.smyhvae.com/20180207_2050.png)
+      再具体一点：
+      ![](http://img.smyhvae.com/20180207_2051.png)
+  -->
+</body>
+</html>

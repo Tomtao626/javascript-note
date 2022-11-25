@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <!--
+        css3对盒子模型做出了新的定义 可以指定 盒子宽度和高度的计算方式
+        需要用到box-sizing
+        属性值：
+            content-box 外加模型
+                解释：
+                    此时设置的width和height是内容区域的宽高
+                    盒子的宽度=设置的width + padding + border
+                    此时改变 padding 和 border 的大小，也不会改变内容的宽高，而是盒子的总宽高发生变化。
+            border-box 内减模型
+                解释：
+                    此时设置的 width 和 height 是**盒子**的总宽高。
+                    盒子的实际宽度 = 设置的 width
+                    此时改变 padding 和 border 的大小，会改变内容的宽高，盒子的总宽高不变。
+    -->
+    <!--
+        处理兼容性问题：私有前缀
+        如此方法不能解决，应尽量避免使用，无需刻意去处理CSS3的兼容性问题。
+    -->
+    <!--
+        举例：
+            添加从左到右的线性渐变，颜色从绿色变为黄色。
+            background: linear-gradient(left, green, yellow);
+        如果直接这样写，会看不到效果
+        但是可以为不同的浏览器添加不同的私有前缀 属性就可以生效了
+        -webkit-：苹果/google
+        -moz-：火狐
+        -ms-：IE
+        -o-：opera
+
+        background: -webkit-linear-gradient(left, green, yellow)
+        background: -moz-linear-gradient(left, green, yellow);
+        background: -ms-linear-gradient(left, green, yellow);
+        background: -o-linear-gradient(left, green, yellow);
+        background: linear-gradient(left, green, yellow);
+
+    -->
+</body>
+</html>

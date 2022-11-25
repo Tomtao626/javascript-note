@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #666;
+        }
+
+        div {
+            font-size: 100px;
+            text-align: center;
+            font-weight: bold;
+            font-family: "Microsoft YaHei";
+            color: #666;
+        }
+
+        /* text-shadow 可以设置多个阴影 每个阴影之间用逗号隔开 */
+        .tu {
+            text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+        }
+
+        .ao {
+            text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        text-shadow 设置文本阴影
+        格式：
+            text-shadow: 20px 27px 22px pink;
+        参数解析：
+            text-shadow: 水平位移 垂直位移 模糊程度 阴影颜色
+    -->
+    <div class="ao">我自横刀向天笑</div>
+    <div class="tu">俯首甘为孺子牛</div>
+</body>
+</html>
