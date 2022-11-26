@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 50px auto;
+            color: #fff;
+            font-size: 50px;
+            transition: all 2s; /* 过渡：让盒子在进行 transform 转换的时候，有个过渡期 */
+        }
+
+        /* rotate（角度）旋转 */
+        .box:hover {
+            transform: rotate(-405deg); /* 鼠标悬停时，让盒子进行旋转 */
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="box1">1</div>
+</div>
+<!--
+    转换是CSS3中具有颠覆性的一个特征，可以实现元素的位移/旋转/变形/缩放，甚至支持矩阵方式
+    转换再配合过渡动画，可以取代大量早期只能靠flash才可以实现的效果
+    使用transform实现2D转换和3D转换
+    3.旋转
+        transform: rotate(角度);
+	    transform: rotate(45deg);
+	  参数解释：
+	    正值 顺时针；负值：逆时针。
+
+	![](http://img.smyhvae.com/20180208_1630.gif)
+
+	注意，上方代码中，我们给盒子设置了 transform 中的 rotate 旋转，但同时还要给盒子设置 transition 过渡。如果没有这行过渡的代码，旋转会直接一步到位，效果如下：（不是我们期望的效果）
+    ![](http://img.smyhvae.com/20180208_1635.gif)
+-->
+</body>
+</html>

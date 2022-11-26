@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 1000px;
+            margin: 100px auto;
+        }
+
+        .box > div {
+            width: 300px;
+            height: 150px;
+            border: 1px solid #000;
+            background-color: red;
+            float: left;
+            margin-right: 30px;
+        }
+
+        div:nth-child(2) {
+            background-color: pink;
+            transition: all 1s;
+        }
+
+        /* translate:(水平位移，垂直位移)*/
+        div:nth-child(2):hover {
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+</div>
+<!--
+    转换是CSS3中具有颠覆性的一个特征，可以实现元素的位移/旋转/变形/缩放，甚至支持矩阵方式
+    转换再配合过渡动画，可以取代大量早期只能靠flash才可以实现的效果
+    使用transform实现2D转换和3D转换
+    2.位移
+        transform: translate(水平位移, 垂直位移);
+        transform: translate(-50%, -50%);
+      参数解释：
+        参数为百分比，相对于自身移动。
+        正值：向右和向下。 负值：向左和向上。如果只写一个值，则表示水平移动。
+
+    **应用：**让绝对定位中的盒子在父亲里居中
+    我们知道，如果想让一个**标准流中的盒子在父亲里居中**（水平方向看），可以将其设置`margin: 0 auto`属性。
+
+    可如果盒子是绝对定位的，此时已经脱标了，如果还想让其居中（位于父亲的正中间），可以这样做：
+
+    ```
+        div {
+            width: 600px;
+            height: 60px;
+            position: absolute;  绝对定位的盒子
+            left: 50%;           首先，让左边线居中
+            top: 0;
+            margin-left: -300px;  然后，向左移动宽度（600px）的一半
+        }
+    ```
+
+    如上方代码所示，我们先让这个宽度为600px的盒子，左边线居中，然后向左移动宽度（600px）的一半，就达到效果了。
+
+    ![](http://img.smyhvae.com/20180116_1356.png)
+
+    现在，我们还可以利用偏移 translate 来做，这也是比较推荐的写法：
+
+    ```javascript
+        div {
+            width: 600px;
+            height: 60px;
+            background-color: red;
+            position: absolute;       绝对定位的盒子
+            left: 50%;               首先，让左边线居中
+            top: 0;
+            transform: translate(-50%);    然后，利用translate，往左走自己宽度的一半【推荐写法】
+        }
+    ```
+-->
+</body>
+</html>
