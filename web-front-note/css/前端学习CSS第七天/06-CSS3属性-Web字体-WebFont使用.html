@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            font-size: 30px;
+            /*  如果要在网页中使用web字体（用户电脑上没有这种字体）*/
+            /* 第一步：声明字体*/
+            /* 告诉浏览器 去哪找这个字体*/
+            @font-face {
+                font-family: 'my-web-font';
+                src: url(font/webfont.eot); /* IE9 */
+                src: url(font/webfont.eot?#idfix) format('embedded-opentype'), /* IE6-IE8 */
+                url('font/webfont.woff') format('woff'), /* chrome、firefox */
+                url('font/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+                url('font/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+            }
+        /* 第第二步 定义一个类名 谁加这个类名 就会使用 webfont 字体 */
+        .webfont {
+            font-family: 'my-web-font';
+        }
+    </style>
+</head>
+<body>
+  <p class="webfont">特特不步，永不止步</p>
+<!--
+    代码解释：
+        （1）`my-web-font`这个名字是随便起的，只要保证第一步和第二步中的名字一样就行。
+        （2）因为我把字体文件单独放在了font文件夹中，所以在src中引用字体资源时，写的路径是 `font/...`
+-->
+</body>
+</html>
