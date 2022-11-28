@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--
+        通过设置多个节点，来精确控制一个或一组动画，用来实现复杂的动画效果
+        1.定义动画的步骤：
+            (1) 通过@keyframes定义动画
+            (2) 将这段动画通过百分比，分割成多个节点；然后在各个节点中分别定义各种属性
+            (3) 在指定元素里，通过 animation 属性调用动画
+    //先定义 再调用
+    // 定义动画
+    @keyframes 动画名 {
+        from { 初始状态 }
+        to { 结束状态 }
+    }
+    // 调用
+    animation: 动画名称 持续时间;
+        animation属性的格式如下：
+        animation: 定义的动画名称 持续时间  执行次数  是否反向  运动曲线 延迟执行。(infinite 表示无限次)
+        animation: move1 1s  alternate linear 3;
+        animation: move2 4s;
+    -->
+</body>
+</html>
