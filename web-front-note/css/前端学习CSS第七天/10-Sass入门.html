@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!--
+    关系
+      less/sass是语法 compass是框架 css是目标
+    优势
+      写出更好的css
+      解决css编写过程中的痛点问题，比如精灵图合图，属性的浏览器前缀
+      有效阻止样式，图片，字体等项目元素
+    安装(mac)
+      gem install sass  (Ruby 是使用 gem 来管理它的各种包（比如Sass）。我们安装好ruby之后，gem会自动安装上；类似于，我们安装完node之后，npm也自动安装好了)
+    Compass
+      安装完sass之后，在main.scss中写代码，然后输入以下命令，可以将scss文件转化为css文件
+        sass main.scss main.css
+        实际上，在项目开发中，基本不会直接使用scss命令，而是使用Compass，compass可以直接用来搭建前端项目的样式部分
+      安装
+        gem install compass
+      使用
+        compass create CompassDemo
+      文件结构
+        ├── config.rb
+        ├── sass
+        │   ├── ie.scss
+        │   ├── print.scss
+        │   └── screen.scss
+        └── stylesheets
+            ├── ie.css
+            ├── print.css
+            └── screen.css
+      为了能够让文件实时编译，我们可以通过compass watch监听sass文件的变化,当sass文件发生变化时，会自动生成css文件
+        cd CompassDemo && compass watch
+      语法
+        后缀名
+          sass 对空格敏感 不使用大括号和分号 所以每个属性之间是通过换行来分隔
+          例子
+            ```
+                h1
+                    color: #000
+                    background: #fff
+            ```
+          scss css语法的超集，可以使用大括号和分号
+          例子
+            ```
+                h1 {
+                    color: #000;
+                    background: #fff;
+                }
+            ```
+          一个项目可以混用两种语法，但是一个文件中不能同时使用两语法
+       格式转换
+         新建文件main.scss ，输入以下代码
+            ```
+                *{
+                    margin:0;
+                    padding:0;
+                }
+            ```
+         输入以下命令，就可以将 main.scss 转换为 main.sass
+            ```
+                sass-convert main.scss main.sass
+            ```
+         打开后的main.sass，内容如下
+            ```
+                *
+                    margin:0
+                    padding:0
+            ```
+    通过 $ 符号来声明变量
+    （1）我们新建一个文件`_variables.scss`，这个文件专门用来存放变量，然后在其他的文件中引入`_variables.scss`即可。
+        因为这个文件只需要存储变量，并不需要它编译出对应的 css 文件，所以我们给文件名的前面加了**下划线**，意思是声明为**局部文件**。
+        我们在这个文件中，声明两个字体变量：
+        ```
+            $font1: Braggadocio, Arial, Verdana, Helvetica, sans-serif;
+            $font2: Arial, Verdana, Helvetica, sans-serif;
+        ```
+    （2）新建文件main.scss，在里面引入步骤（1）中的变量文件：
+        ```
+            @import "variables"; // 引入变量文件
+
+            .div1{
+                font-family: $font1;
+            }
+
+            .div2{
+                font-family: $font2;
+            }
+        ```
+    基于 Sass 的既定规则：
+        没有文件后缀名时，Sass 会自动添加 .scss 或者 .sass 的后缀（具体要看已经存在哪个后缀的文件）。
+        同一目录下，局部文件和非局部文件不能重名。
+    对应生成的main.css文件如下:
+        ```
+            /* line 9, ../sass/main.scss */
+            .div1 {
+              font-family: Braggadocio, Arial, Verdana, Helvetica, sans-serif;
+            }
+
+            /* line 13, ../sass/main.scss */
+            .div2 {
+              font-family: Arial, Verdana, Helvetica, sans-serif;
+            }
+        ```
+    注释语法：
+        单行注释：
+            ```
+            //我是单行注释
+            ```
+        块级注释：
+            ```
+            /*
+                我是块级注释
+                哈哈
+            */
+            ```
+        二者的区别是：单行注释不会出现在自动生成的css文件中。
+  -->
+</body>
+</html>
