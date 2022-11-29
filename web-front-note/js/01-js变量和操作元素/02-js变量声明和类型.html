@@ -12,15 +12,206 @@
         //var sTr = 'abc';
         var iNum=12 ,sTr='abc';
         var iNum2;
+        iNum2 = "mysql";
+        var iStr1 = "zzzz"
         alert(iNum2);  //未初始化赋值 所以值就是undefined
         alert(iNum);
         alert(sTr);
+        alert(iStr1);
+
+        //弹窗 confirm() 含确认/取消
+        //代码运行 页面显示一个弹窗 弹窗上有确认和取消两个按钮，点击确认返回 true，点击取消返回 false
+        var result = confirm('你听过泰坦计划吗');
+        console.log(result);
+
+        //弹出输入框 prompt()
+        //专门弹出能够让用户输入的对话框。用的比较少
+
+        var promp_a = prompt("看你想说点啥，请输入：");
+        console.log(promp_a);
+
+        /*
+        alert和prompt的区别
+            1.alert语句可以输出数字和字符串，输出字符串，必须用引号括起来；prompt语句中，不论输入什么内容，都是字符串
+            2.prompt语句会返回用户输入的内容，可以用一个变量来接收用户输入的内容。
+         */
+
+        //网页内容区域输出 document.write()
+        document.write('javascript'); // 直接输出内容在页面上
+
+        //console.log() 日志打印
+        console.log('小垃圾'); //普通打印
+        console.warn('大垃圾'); //警告打印
+        console.error('中辣鸡'); //错误打印
+
+        //ES6
+        // const name;
+        // let age;
+
+        /*
+        变量初始化：
+            定义变量：var 就是一个**关键字**，用来定义变量。所谓关键字，就是有特殊功能的单词。
+            变量赋值：等号表示**赋值**，将等号右边的值，赋给左边的变量。
+            变量名：我们可以给变量起个名字。
+        */
+
+        //有两种形式：
+        //形式1 先定义 再赋值
+        var t;
+        t = "mysql";
+        //形式2 在定义的同时进行初始化
+        var t1 = "mysql";
+
+        // 修改变量的值
+        // 一个变量被重新赋值后，它原有的值会被覆盖，变量值将以最后一次赋的值为准
+        var a = 100;
+        a = 200;
+        console.log(a); // 200
+
+        //同时定义多个变量
+        var num1, num2;
+        num1 = num2 = 100;
+        var num3 = 3, num4 = 4;
+        var num5, num6 = 200; // num5=undefined
+        console.log(num1, num2,num3,num4, num5, num6);
         /*
         命名规范:
-        1.区分大小写
-        2.第一个字符必须是字母/下划线,或者美元符号$
-        3.其他字符可以是字母,下划线,美元符或数字
+        1.只能由字母(A-Z、a-z)、数字(0-9)、下划线(\_)、美元符( $ )组成。
+        2.不能以数字开头。必须以字母(A-Z、a-z)、下划线(\_)或者美元符( $ )开头。变量名中不允许出现空格。尤其注意，变量名中不能出现**中划线**`-`，很多人写了多年代码都不知道这一点，让人大跌眼镜。
+        3.严格区分大小写（JS 是区分大小写的语言）。
+        4.不能使用 JS 语言中保留的「关键字」和「保留字」作为变量名。下一篇文章会讲。
+        5.变量名长度不能超过 255 个字符。
+        6.命名要有可读性，方便顾名思义。
+        7.建议用驼峰命名法。比如 getElementById、getUserInfo、aaaOrBbbAndCcc。
+        8.不能以数字开头，是为了把数字和字母区分开。
+        9.JS底层保存标识符的时候，是采用的 Unicode 编码。所以理论上讲，在遵守命名规则的前提下，utf-8中包含的所有内容都可以作为标识符。
         * */
+
+        //数据类型
+        // 基本数据类型（值类型）7种 String-字符串 Number-数值 BigInt-大型数值 Boolean-布尔值 Null-空值 Undefined-为定义 Symbol
+        // 引用数据类型（引用类型）1种 Object-对象（内置对象 Function/Array/Date/RegExp/Error等都属于Object对象）
+
+        // 引用数据类型
+        var obj1 = new Object();
+        obj1.name = 'mysql';
+        var obj2 = obj1;
+        obj1.name = "kubernetes";
+        console.log(obj1.name); //kubernetes
+        console.log(obj2.name); //kubernetes
+        //obj1 和 obj2 都是引用数据类型，让 obj2 等于 obj1，然后**修改 obj1.name 的值之后，发现 obj2.name 的值也发生了改变**。
+
+        // 基本数据类型
+        var b = 100;
+        var c = b;
+        b++;
+        console.log(b); //101
+        console.log(c); //100
+
+        console.log(typeof b);
+        console.log(typeof obj1)
+        //a和b都是基本数据类型，让b等于a，然后改变a的值之后，b的值并没有被改变
+
+        /*
+        栈内存
+         JS中所有的变量的都是保存在栈内存中的
+        基本数据类型的值，直接保存在栈内存中。值与值之间是独立存在的，修改一个变量不会影响其他的变量
+
+        引用数据类型，对象是保存在堆内存中。每创建一个新的对象，就会在堆内存中开辟一个新的空间；
+        而变量保存了对象的内存地址(对象的引用)，保存在栈内存中。
+        如果有两个变量保存了同一个对象的引用，当修改其中一个变量的引用的对象时，另一个也会受到影响。
+        堆内存
+         */
+
+        /*
+        转义字符
+            在字符串中我们可以使用`\`作为转义字符，当表示一些特殊符号时可以使用`\`进行转义。
+                `\"` 表示 `"` 双引号
+                `\'` 表示 `'` 单引号
+                `\\` 表示`\`
+                `\r` 表示回车
+                `\n` 表示换行。n 的意思是 newline。
+                `\t` 表示缩进。t 的意思是 tab。
+                `\b` 表示空格。b 的意思是 blank。
+         */
+        var str1 = '我说:"今天\t天气真不错！"';
+        var str2 = '\\\\\\';
+
+        console.log(str1); // 我说:"今天	天气真不错！"
+        console.log(str2); // \\\
+
+        //获取字符串长度
+        console.log(str1.length);
+        console.log(str2.length);
+        // 一个中文算一个字符 一个英文算一个字符
+        // 一个标点符号(包括中文标点/英文标点)算一个字符
+        // 一个空格算一个字符
+
+        //字符串拼接 +
+        var str1 = 'YYDS' + '永不止步';
+        var str2 = 'YYDS' + 666;
+        var str3 = 'YYDS' + true;
+        var str4 = 'YYDS' + null;
+        var str5 = 'YYDS' + undefined;
+
+        var obj = { name: 'YYDS', age: 28 };
+        var str6 = 'YYDS' + obj;
+
+        console.log(str1); // YYDS永不止步
+        console.log(str2); // YYDS666
+        console.log(str3); // YYDStrue
+        console.log(str4); // YYDSnull
+        console.log(str5); // YYDSundefined
+        console.log(str6); // YYDS[object Object]
+
+        //字符串的不可变性 ---- 字符串里面的值不可被改变，虽然看上去可以改变内容，但其实是地址改变了，内存中新开辟了一个内存空间
+        var str = 'hello';
+        str = 'qianguyihao';
+        // 当重新给变量 str 赋值时，常量`hello`不会被修改，依然保存在内存中；str 会改为指向`qianguyihao`。
+
+
+        //模版字符串
+        var name = "tomtao626";
+        var age = 18;
+        console.log('我是' + name + ',age:' + age);
+        console.log(`我是${name},age:${age}`); //ES6写法
+        // 倒数第二行用的符号是单引号，最后一行用的符号是反引号（在 tab 键的上方）。
+
+        //在模版字符串中插入表达式
+        const x = 5;
+        const y = 10;
+        console.log('this is ' + (x+y) + 'and/not ' + (2*x+y) + '.');
+        console.log(`this is ${x+y} and
+        not ${2*x+y}.`);
+
+        //模版字符串支持换行
+        const result = {
+            name: 'tomtao626',
+            age: 18,
+            sex:'man',
+        };
+        const html = `<div>
+            <span>${result.name}</span>
+            <span>${result.age}</span>
+            <span>${result.sex}</span>
+        </div>`;
+        //模版字符串中调用函数
+        function getName(){
+            return 'tomtao626';
+        }
+        console.log(`wwww.${getName()}.com`);
+        //模版字符串支持嵌套使用
+        const nameList = ['千古壹号', '许嵩', '解忧少帅'];
+
+        function myTemplate() {
+            // join('') 的意思是，把数组里的内容合并成一个字符串
+            return `<ul>
+            ${nameList.map((item) => `<li>${item}</li>`).join('')}
+            </ul>`;
+        }
+        document.body.innerHTML = myTemplate();
+
+        // 布尔值 Boolean
+        // 布尔型和数字型相加时， true 按 1 来算 ，false 按 0 来算。
     </script>
 </head>
 <body>
