@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .container {
+        width: 300px;
+        height: 300px;
+        background: pink;
+      }
+      .div1 {
+        width: 100px;
+        height: 100px;
+        background: green;
+          display: inline-block;
+      }
+      .div2 {
+          width: 100px;
+          height: 100px;
+          background: yellowgreen;
+          display: inline-block;
+      }
+      .div3 {
+          background: yellow;
+      }
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="div1">inline-block布局1</div>
+    <div class="div2">inline-block布局2</div>
+    <div class="div3">琴棋书画无一精通</div>
+  </div>
+<!--
+ 上面的代码存在两个问题，
+    1.如果设置div2的宽度为200px之后，div2会掉下来
+    2.div1和div2设置为inline-block之后，这两个盒子之间存在了间隙，此时的 `div1`和`div2` 已经被当成文本了。文本和文本之间，本身就会存在间隙。
+    为了去掉这个间隙，可以有几种解决办法：
+      (1)设置父元素`container`的字体大小为0，即`font-size: 0`，然后设置子元素 `div1`、`div2`的字体`font-size: 12px`。
+      (2)在写法上，去掉`div1`和`div2`之间的换行。改为：
+      <div class="div1">div1的inline-block 属性</div><div class="div2">div2的inline-block 属性</div>
+-->
+</body>
+</html>
