@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  我们只需写两行声明即可：先给父容器设置 `display: flex`，再给指定的子元素设置我们再熟悉不过的 `margin: auto`，即可让这个指定的子元素在**剩余空间**里，水平垂直居中。大功告成。-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .father{
+      display: flex;
+      min-height: 100vh;
+      background: pink;
+    }
+    .son {
+      margin: auto;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div class="father">
+  <div class="son">子元素的内容，想水平垂直居中</div>
+  <div class="son2">这个元素不想水平垂直居中</div>
+</div>
+<script></script>
+<!--当我们给父容器使用 Flex 布局 时，子元素的`margin: auto`不仅能让其在水平方向上居中，**垂直方向上也是居中的**-->
+</body>
+</html>

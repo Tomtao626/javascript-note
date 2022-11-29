@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 如何让一个子元素在父容器中水平垂直居中 -->
+<!-- 行内元素水平居中
+给父容器设置：
+```
+    text-align: center;
+```
+-->
+<!-- 行内元素垂直居中
+让**文字的行高** 等于 **盒子的高度**，可以让单行文本垂直居中。比如：
+
+```css
+    .father {
+        height: 20px;
+        line-height: 20px;
+    }
+```
+-->
+
+<!-- 如何让一个块级元素水平垂直居中
+margin: auto 的问题
+    在 CSS 中对元素进行水平居中是非常简单的：如果它是一个行内元素，就对它的父容器应用 `text-align: center`；如果它是一个块级元素，就对它自身应用 `margin: auto`或者 `margin: 0 auto`。
+    在这里，`margin: auto`相当于`margin: auto auto auto auto`。`margin: 0 auto`相当于`margin: 0 auto 0 auto`，四个值分别对应上右下左。其计算值取决于**剩余空间**。
+    但是，如果要对一个元素垂直居中，`margin: auto`就行不通了。
+绝对定位 + margin
+绝对定位 + translate
+绝对定位 + top,left,bottom,right = 0 + margin: auto
+flex 布局（待改进）
+flex 布局 + margin: auto（推荐）
+-->
+</body>
+</html>
