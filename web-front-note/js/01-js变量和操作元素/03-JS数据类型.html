@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/decimal.js/10.2.0/decimal.min.js"></script>
+    <script>
+        /*
+        数值型 --- 在JS中所有的数值都是Number类型，包括整点和浮点数(小数)
+        typeof 获取变量数据类型
+        在JS中，只要是数，就是Number数值型的。无论整数/浮点数，无论大小/正负，都是Number类型的
+         */
+
+        var a = 100;
+        console.log(typeof a); // number
+        var b = 12.3
+        console.log(typeof b); // number
+
+        /*
+        数值范围
+        最大值：Number.MAX_VALUE 这个值为 1.7976931348623157e+308
+        最小值：Number.MIN_VALUE 这个值为 5e-324
+        如果使用Number表示的变量超过了最大值，则会返回Infinity
+        无穷大（正无穷）：Infinity
+        无穷小（负无穷）：-Infinity
+
+        typeof Infinity的返回结果是 number
+        */
+
+        console.log(typeof Infinity); // number
+
+        /*
+        NaN 是一个特殊的数字 表示 Not a Number ，非数值。在进行数值运算时，如果得不到正常的结果，就会返回NaN
+        1.typeof NaN返回结果是number
+        2.Undefined和任何数值计算结果都是NaN，NaN与任何值都不相等，包括NaN本身
+        3.关于isNaN()函数
+         */
+        console.log('abc' / 18); // NaN
+        console.log('abc' * 'abcd'); // NaN
+
+        /*
+        连字符和加号的区别
+        总结：如果加号两边**都是** Number 类型，此时是数字相加。否则，就是连字符（用来连接字符串）。
+        在变量中加入字符串进行拼接，可以被同化为字符串
+         */
+        console.log("我" + "爱" + "你");	//连字符，把三个独立的汉字，连接在一起了
+        console.log("我+爱+你");			//原样输出
+        console.log(1+2+3);				//输出6
+
+        var a = '1';
+        var b = 2;
+        console.log(a+b); // 12
+        console.log(typeof a+b); // string
+
+
+        var c = 1;
+        var d = 2;
+        console.log(c+d); // 12
+        console.log('c'+d); // c2
+        console.log(typeof c+d); // number
+
+        /*
+        隐式转换
+        "2"+1得到的结果是字符串 但是"2"-1得到的结果是数值1，因为计算机自动帮我们进行了 隐式转换
+        也就是说 - * / % 这几个符号会自动进行 隐式转换
+         */
+        var a = '4' + 3 -6
+        console.log(a); // 37
+        console.log(typeof a); // number
+
+        /*
+        浮点数运算
+        在JS中，整数的运算基本上可以保证精确，但是小数的运算，可能会得到一个不精确的结果。所以不要使用JS进行对精度要求比较高的运算
+         */
+        var a = 0.1 + 0.2;
+        console.log(a); // 0.30000000000000004
+
+        // 打印结果不是0.3 而是 0.30000000000000004
+        // 计算机在做运算时，所有的运算都要转换成二进制去计算，然而有些数字转换成二进制之后，无法精确表示。
+        // 比如0.1和0.2转换成二进制之后，是无穷的，因此存在浮点数的计算不精确的问题
+        /*
+        处理数学运算的精度问题
+        如果只是一些简单的精度问题，可以使用 toFix() 方法进行小数的截取。
+        在实战开发中，关于浮点数计算的运算库，往往比较复杂
+        - Math.js     属于是很全面的运算库，文件很大，压缩后文件有500kb。
+        - decimal.js  属于是轻量的运算库，压缩后的文件只有32kb。大多数项目的数学运算，使用decimal.js足够了
+        在使用这几个开源库时，既可以用cdn的方式引入，也可以用npm包的方式引入。
+         */
+        // npm引入
+        // npm install --save decimal.js
+        // var Decimal = require('decimal.js');
+
+        // cdn引入
+        //<script src="https://cdn.bootcdn.net/ajax/libs/decimal.js/10.2.0/decimal.min.js">
+        console.log('加法：');
+        var a = 0.1;
+        var b = 0.2;
+        console.log(`${a} 以二进制显示：`, a.toString(2)); // 0.0001100110011001100110011001100110011001100110011001101
+        console.log(`${b} 以二进制显示：`, b.toString(2)); // 0.001100110011001100110011001100110011001100110011001101
+        console.log(a+b); //0.30000000000000004
+        console.log(new Decimal(a).add(new Decimal(b)).toNumber()); // 0.3
+
+        console.log('减法：');
+        var a = 1.0;
+        var b = 0.7;
+        console.log(`${a} 以二进制显示：`, a.toString(2)); // 1
+        console.log(`${b} 以二进制显示：`, b.toString(2)); // 0.1011001100110011001100110011001100110011001100110011
+        console.log(a-b); // 0.30000000000000004
+        console.log(new Decimal(a).sub(new Decimal(b)).toNumber()); // 0.3
+
+        console.log('乘法：');
+        var a = 1.01;
+        var b = 1.003;
+        console.log(`${a} 以二进制显示：`, a.toString(2)); // 1.0000001010001111010111000010100011110101110000101001
+        console.log(`${b} 以二进制显示：`, b.toString(2)); // 1.0000000011000100100110111010010111100011010100111111
+        console.log(a*b); // 1.0130299999999999
+        console.log(new Decimal(a).mul(new Decimal(b)).toNumber()); // 1.01303
+
+        console.log('除法：');
+        var a = 0.029;
+        var b = 10;
+        console.log(`${a} 以二进制显示：`, a.toString(2)); // 0.0000011101101100100010110100001110010101100000010000011001
+        console.log(`${b} 以二进制显示：`, b.toString(2)); // 1010
+        console.log(a/b); // 0.0029000000000000002
+        console.log(new Decimal(a).div(new Decimal(b)).toNumber()); // 0.0029
+
+        /*
+        变量值的传递
+        a = b
+        把b的值赋给a，b不变
+        将等号右边的值，赋给左边的变量；等号右边的变量，值不变。
+         */
+        var a = 1; // 1
+        var b = 2; // 1     2
+        var c = 3; // 1     2       3
+        a = b + c; // 5     2       3
+        b = c - a; // 5     -2      3
+        c = a * b; // 5     -2      -10
+        console.log(a); // 5
+        console.log(b); // -2
+        console.log(c); // -10
+
+        var a = 1;
+        var b = 2;
+        var c = 3; // 1     2     3
+        a = a + b; // 3     2     3
+        b = b + a; // 3     5     3
+        c = c + b; // 3     5     8
+        console.log(a); // 3
+        console.log(b); // 5
+        console.log(c); // 8
+
+        var a = '1';
+        var b = 2; // "1"     2
+        a = a + b; // "12"    2
+        b = b + a; // "12"    "212"
+        console.log(a); // 输出12
+        console.log(b); // 输出212
+
+        var a = '1';
+        var b = 2;
+        a = b + a; //"21"       2
+        b = b + a; //"21"       "221"
+        console.log(a); //21
+        console.log(b); //221
+
+        var a = '3';
+        var b = 2;
+        console.log(a - b); // 1
+
+        // 注意，字符串 - 数值 = 数值
+
+        /*
+        Null 空对象
+        null专门用来定义一个空对象，例如 let a = null, 又例如 Object.create(null)
+        如果你想定义一个变量用来保存引用类型 但是还没想好放什么内容，可以将其初始化设置为null
+        你可以将null理解为：
+            null虽然是一个单独的数据类型，但null相当于是一个object，只不过地址为空(空指针)而已
+         */
+        Object.create(null);
+        let myObj = null;
+        console.log(typeof myObj);
+        /*
+        Null类型的值只有一个，就是null，比如let a = null
+        null表示一个空对象 所以使用typeof检查一个null值时，会返回 object
+         */
+        let xx = null;
+        console.log(xx); // undefined
+        console.log(typeof xx); // undefined
+        /*
+        undefined 未定义类型
+         */
+
+        // 1.变量已声明 未赋值时 --- 声明了一个变量，但没有赋值，此时它的值就是undefined
+        let name;
+        console.log(name); // undefined
+        console.log(typeof name); // undefined
+        /*
+        （1）Undefined类型的值只有一个，就是undefined。比如
+        （2）使用typeof检查一个undefined值时，会返回undefined
+         */
+        let zz = undefined;
+        console.log(zz); // undefined
+        console.log(typeof zz); // undefined
+
+        // 2.变量未声明（未定义时）--- 如果你从未声明一个变量，就去使用它，就会报错；此时，如果用typeof 检查这个变量时，就会返回undefined
+        console.log(typeof yy); // undefined
+        // console.log(yy); 直接报错
+
+        // 3.函数无返回值时，那么这个函数的返回值就是undefined === 等价于 return undefined
+        function f() {}
+        console.log(f()); // undefined
+
+        //4.调用函数未传参 --- 调用函数时，如果没有传参，那么，这个函数的值就是undefined
+        function f1(name) {
+            console.log(name);
+        }
+        f1();  // undefined
+        // 在实际开发中，如果调用函数时没有传参，可以根据需要给形参设置一个默认值
+        function f2(name) {
+            name = name || 'tomtao626';
+        }
+        f2(); // undefined
+
+        //ES6写法
+        function f3(name = 'tomtao626'){}
+        f3(); // undefined
+
+        /*
+        undefined 实际上是由null衍生出来的，所以 null == undefined 的结果是 true
+        但是 null === undefined 的结果是 false。二者虽然相似，但存在区别，和数字运算时：
+        10 + null 结果是 10
+        10 + undefined 结果为 NaN
+
+        总结：
+            任何值和 null 运算，null 可看做 0 运算。
+            任何数据类型和 undefined 运算都是 NaN。
+         */
+
+        /*
+        数据类型转换
+        - 显式类型转换
+            toString()
+            String()
+            Number()
+            parseInt()
+            parseFloat()
+            Boolean()
+        - 隐式类型转换
+            isNaN()
+            自增/自减 ++ --
+            正负 +a -a
+            加号 +
+            运算符 - * /
+            - 特殊的
+                逻辑运算符 && || !    非布尔值进行与或运算时，会将其转换为布尔值，然后再运算。&& || 的运算结果是 原值，! 的运算结果是布尔值
+                关系运算符 < > <= >=  关系运算符，得到的运算结果是布尔值：true/false
+         */
+
+
+        // 转换为String
+        /*
+        1.使用toString()函数
+            语法：
+                变量.toString();
+                常量.toString(); // 这里的常量不允许是数字，但可以是其他常量
+
+                用一个变量接收转换结果
+                var result = 变量.toString();
+            【重要】该方法**不会影响到原变量**，它会将转换的结果返回。当然我们还可以直接写成`a = a.toString()`，这样的话，就是直接修改原变量。
+
+         */
+        // 基本数据类型
+        var a1 = 'tomtao626';
+        var a2 = 18;
+        var a3 = true;
+
+        // 引用数据类型
+        var a4 = [1,2,3];
+        var a5 = {name: 'tomtao626', age: 15};
+
+        // null undefined
+        var a6 = null;
+        var a7 = undefined;
+
+        // 打印转换结果
+        console.log(a1.toString()); // "tomtao626"
+        console.log(a2.toString()); // "18"
+        console.log(a3.toString()); // "true"
+        console.log(a4.toString()); // "1,2,3"
+        console.log(a5.toString()); // [object, Object]
+        // 下面两个打印直接报错
+        // console.log(a6.toString()); // 报错：Uncaught TypeError: Cannot read properties of null
+        // console.log(a7.toString()); // 报错：Uncaught TypeError: Cannot read properties of undefined
+
+        //（1）null 和 undefined 这两个值没有 toString() 方法，所以它们不能用 toString() 。如果调用，会报错。
+        // console.log(null.toString());
+        // console.log(undefined.toString());
+
+        //（2）多数情况下，`toString()`不接收任何参数；当然也有例外：Number 类型的变量，在调用 toString()时，可以在方法中传递一个整数作为参数。此时它会把数字转换为指定的进制，如果不指定则默认转换为 10 进制。例如：
+        var a = 255;
+        a = a.toString(2); // 转换为二进制
+        console.log(a); // 11111111
+        console.log(typeof a); // string
+
+        //（3）纯小数的小数点后面，如果紧跟连续6个或6个以上的"0"时，那么将用e来表示这个小数
+        const num1 = 0.000001; //小数点后紧跟5个0
+        console.log(num1.toString()); //打印结果 0.000001
+
+        const num2 = 0.0000001;
+        console.log(num2.toString()); // 1e-7
+
+        const num3 = 1.000001;
+        console.log(num3.toString()); // 1.000001
+
+        const num4 = 0.10000001;
+        console.log(num4.toString()); // 0.10000001
+
+        //（4）常量可以直接调用 toString() 方法，但这里的常量，不允许是数字。举例如下：
+
+        // 1.toString(); // 注意，会报错
+        console.log(1..toString()); // 合法。得到的结果是字符串"1"
+        console.log(1.2.toString()); // 合法。得到的结果是字符串"1.2"
+        console.log((1).toString()); // 合法。得到的结果是字符串"1"
+
+        /*
+        上方代码中，为何出现这样的打印结果？这是因为：
+        - 第一行代码：JS引擎认为`1.toString()`中的`.`是小数点，小数点后面的字符是非法的。
+        - 第二行、第三行代码：JS引擎认为第一个`.`是小数点，第二个`.`是属性访问的语法，所以能正常解释实行。
+        - 第四行嗲吗：用`()`排除了`.`被视为小数点的语法解释，所以这种写法也能正常解释执行。
+        参考链接：[你不知道的toString方法](https://www.jianshu.com/p/88570529a03c)
+         */
+
+        // （5）既然常量没有方法，那它为什么可以调用 toString()呢？这是因为，除了 null、undefined之外，其他的常量都有对应的特殊的引用类型——**基本包装类型**，所以代码在解释执行的时候，会将常量转为基本包装类型，这样就可以调用相应的引用类型的方法。
+
+        /*
+        2.使用String()函数
+            语法：
+                String(变量/常量)
+            对于 Number/Boolean/String/Object而言，本质上就是调用 toString()方法，返回结果同 toString() 方法
+            但是对于 null 和 undefined，则不会调用 toString() 方法。它会将null直接转换为 "null"。将 undefined 直接转换为 "undefined"
+            该方法不会影响到原数值，它会将转换的结果返回
+         */
+
+        /*
+        3.隐式类型转换：字符串拼接
+            格式：
+                变量+"" 或者 变量+"abc"
+         */
+        var a = 123; // Number 类型
+        console.log(a + ''); // 打印结果："123"
+        console.log(a + 'haha'); // 打印结果："123haha"
+        // 上面的例子中，打印的结果，都是字符串类型的数据。实际上底层是调用的 String() 函数。
+
+        /*
+        prompt() --- 用户的输入 专门用来弹出能够让用户输入的对话框。重要的是：用户不管输入什么，都当字符串处理。
+         */
+
+
+        // 转换为Number
+        /*
+        1.使用Number()函数
+            语法：
+                const result = Number(变量/常量)
+            **情况一：字符串 --> 数字**
+            （1）如果字符串中是纯数字，则直接将其转换为数字。
+            （2）如果字符串是一个**空串**或者是一个**全是空格**的字符串，则转换为 0。
+            （3）只要字符串中包含了其他非数字的内容（`小数点`按数字来算），则转换为 NaN。怎么理解这里的 **NaN** 呢？可以这样理解，使用 Number() 函数之后，**如果无法转换为数字，就会转换为 NaN**。
+            **情况二：布尔 --> 数字**
+            （1）true 转成 1
+            （2）false 转成 0
+            **情况三：null --> 数字**，结果为：0
+            **情况四：undefined --> 数字**，结果为：NaN
+         */
+
+        /*
+        2.隐式类型转换：正负号 `+a`、`-a`
+            任何值 +a -a 运算时，底层调用的是Number()函数。不会改变原数值；得到的结果，会改变正负性
+         */
+        const b1 = '123';
+        console.log(+b1); // 123
+        console.log(-b1); // -123
+
+        const b2 = '123abc';
+        console.log(+b2); // NaN
+        console.log(-b2); // NaN
+
+        const b3 = true;
+        console.log(+b3); // 1
+        console.log(-b3); // -1
+
+
+        const b4 = false;
+        console.log(+b4); // 0
+        console.log(-b4); // -0
+
+        const b5 = null;
+        console.log(+b5); // 0
+        console.log(-b5); // -0
+
+        const b6 = undefined;
+        console.log(+b6); // NaN
+        console.log(-b6); // NaN
+
+        /*
+        3.使用parseInt()函数 字符串 -> 整数
+            语法：
+                const result = parseInt(字符串);
+         */
+        console.log(parseInt(5)); // 5
+
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
