@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 通过 break 终止循环语句
+  for (let i=0;i<5;i++) {
+    console.log(i);
+    if (i == 2) {
+      break; // 注意，虽然在 if 里 使用了 break，但这里的 break 是服务于外面的 for 循环。
+    }
+  }
+  // 输出 0 1 2
+
+
+  // label的使用
+  outer: for (let i=0;i<5;i++) {
+    console.log('外层循环i的值: ' + i);
+    for (let j=0;j<5;j++) {
+      break outer; // 直接跳出outer所在的外层循环 （这个outer是我自定义的label）
+      console.log('内层循环j的值: '+j);
+    }
+  }
+  // 输出 外层循环 i 的值：0
+
+  // continue
+  /*
+  (1)continue 只能用于循环语句（包括 for 循环、while 循环，不包括 if。单独的 if 语句里不能用 break 和 continue，否则会报错）。可以用来跳过**当次**循环，继续下一次循环。
+  (2)同样，continue 默认只会离他**最近**的循环起作用。
+  (3)同样，如果需要跳过指定的当次循环，可以使用 label 标签。
+   */
+  for (let i = 0; i < 10; i++) {
+    if (i % 2 == 0) {
+      continue;
+    }
+    console.log('i的值:' + i);
+  }
+  /*
+  输出结果
+  i的值:1
+  i的值:3
+  i的值:5
+  i的值:7
+  i的值:9
+   */
+
+</script>
+</body>
+</html>
