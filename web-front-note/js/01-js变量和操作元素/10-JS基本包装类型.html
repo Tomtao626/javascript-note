@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+/*
+属性和方法只能添加给对象，不能添加给基本数据类型。
+1.基本数据类型string是无法绑定属性和方法的
+2.引用数据类String是可以绑定属性和方法的
+ */
+
+// 1、基本数据类型：
+var str = 'tomtao';
+str.aaa = 12;
+console.log(typeof str); //string
+console.log(str.aaa); //undefined
+console.log(str.length); //6
+console.log(str.indexOf("t")); //0
+// str.length、str.indexOf("m")等等。因为这两个方法的底层做了数据类型转换（**临时**将 `string` 字符串转换为 `String` 对象，然后再调用内置方法），也就是我们在下一段将要讲到的**包装类**。
+
+// 2、引用数据类型：
+var strObj = String('tomtao');
+strObj.aaa = 123;
+console.log(strObj); // String {'tomtao', aaa:123}
+console.log(typeof strObj); //object
+console.log(strObj.aaa); //123
+
+var num = Number(123456789);
+num.bbb = {aaa:123};
+console.log(num); //Number {123456789, bbb:{aaa:123}}
+console.log(typeof num); //object
+console.log(Number.MAX_VALUE);
+console.log(Number.MIN_VALUE);
+
+// 基本包装类型
+/*
+基本包装类：
+  String()：将基本数据类型字符串，转换为 String 对象。
+  Number()：将基本数据类型的数字，转换为 Number 对象。
+  Boolean()：将基本数据类型的布尔值，转换为 Boolean 对象。
+  通过这三个包装类，可以将基本数据类型的数据转换为对象
+ */
+let str1 = 'tomtao626';
+let str2 = String('tomtao626');
+let num1 = Number(626);
+let bool = Boolean(true);
+console.log(str1);
+console.log(typeof str1); //string
+console.log(str2);
+console.log(typeof str2); //object
+console.log(num1);
+console.log(typeof num1); //object
+console.log(bool);
+console.log(typeof bool); //object
+
+// 需要注意的是，在实际应用中一般不会使用基本数据类型的**对象**。
+// 如果使用基本数据类型的对象，在做一些比较时可能会带来一些**不可预期**的结果。
+// 举例说明：
+var b1 = new Boolean(true);
+var b2 = new Boolean(true);
+console.log(b1 == b2);// 打印结果竟然是：false
+// 再举例说明
+var b3 = new Boolean(false);
+if (b3) {
+  console.log('tomtao626');// 这行代码竟然执行了
+}
+
+// 基本包装类的作用
+// （1）当我们对一些基本数据类型的值去调用属性和方法时，JS引擎会**临时使用包装类将基本数据类型转换为引用数据类型**（即“隐式类型转换”），
+// （2）这样的话，基本数据类型就有了属性和方法，然后再调用对象的属性和方法；
+// （3）调用完以后，再将其转换为基本数据类型。
+var str = 'tomtao626'
+console.log(str.length); // 9
+//上述代码的执行顺序
+// (1)把简单数据类型string转换为引用数据类型String，保存到临时变量中
+var temp = new String('tomtao626');
+// (2)把临时变量的值 赋值给str
+strs = temp;
+// (3)销毁临时变量
+temp = null;
+console.log(strs); // String {'tomtao626'}
+// 'tomtao626'字符串在底层是以["t","o","m","t","a","o","6","2","6"]的形式保存的。
+// 所以我们既可以获取字符串的长度，也可以获取指定索引index位置的单个字符
+// 再比如，String 对象的很多内置方法，也可以直接给字符串用。此时，也是临时将字符串转换为 String 对象，然后再调用内置方法。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
