@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 在JS中所有的数值都是Number类型，包括整数和浮点数 无论大小/正负
+    /*
+    Number.isInteger() --- 判断是否为整数
+    语法：
+        布尔值 = Number.isInteger(数字);
+     */
+    console.log(Number.isInteger('abc'));
+    /*
+    toFixed() --- 小数点后面保留多少位
+    语法：
+        字符串 = myNum.toFixed(num);
+    解释：
+        将数字myNum的小数点后面保留num位小数（四舍五入），并返回。不会改变原数字。注意，返回结果是字符串。
+        参数 num：指定了小数点后面的位数。
+     */
+    let num = 3.456;
+    let num2 = num.toFixed(2);
+    console.log(num); // 3.456
+    console.log(num2); // 3.46
+    console.log(typeof num); // number
+    console.log(typeof num2); // string
+    // `num2`的结果是3.46，但是请注意，`num`的类型Number型，而`num2`的类型却是String型。
+
+    /*
+    内置对象 Math 的常见方法
+    Math.PI	圆周率	Math对象的属性
+    Math.abs()	返回绝对值
+    Math.random()	生成0-1之间的随机浮点数	取值范围是 [0，1)
+    Math.floor()	向下取整（往小取值）
+    Math.ceil()	向上取整（往大取值）
+    Math.round()	四舍五入取整（正数四舍五入，负数五舍六入）
+    Math.max(x, y, z)	返回多个数中的最大值
+    Math.min(x, y, z)	返回多个数中的最小值
+    Math.pow(x,y)	乘方：返回 x 的 y 次幂
+    Math.sqrt()	开方：对一个数进行开方运算
+     */
+    var num = -0.6;
+    console.log(Math.abs(num));   //0.6     //取绝对值
+    console.log(Math.floor(num));  //-1    //向下取整，向小取
+    console.log(Math.ceil(num));  //-0     //向上取整，向大取
+    console.log(Math.round(num)); //-1     //四舍五入取整（正数四舍五入，负数五舍六入）
+    console.log(Math.random());   //0.6453756205275165    //生成0-1之间的随机数
+</script>
+</body>
+</html>
