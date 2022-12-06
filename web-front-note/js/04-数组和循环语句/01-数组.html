@@ -4,42 +4,143 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
-        通过类 实例化 来创建数组
-        var aList01 = new Array(1,2,3);
-
+        // 通过类 实例化 来创建数组
+        let arr2 = new Array(); // 参数为空：创建空数组
+        let arr3 = new Array(4); // 参数为 size
+        console.log('arr2 = ' + JSON.stringify(arr2));
+        console.log('arr3 = ' + JSON.stringify(arr3));
+        let aList01 = new Array(10,20,30,'a', 'x');
+        console.log(typeof aList01); // object
+        console.log('aList01 = ' + JSON.stringify(aList01)); // aList01 = [10,20,30,"a","x"]
         //通过直接变量创建
         var aList02 = ['a',2,3];
         //通过length获取数组成员个数
-        //alert(aList02.length);
+        console.log(aList02.length);
         // 根据下标操作数组元素
-        //alert(aList02[0]);
+        console.log(aList02[0]);
         // 通过push方法在数组末尾添加元素
         aList02.push('b');
-        //alert(aList02);
+        //console.log(aList02);
         aList02.pop();
-        //alert(aList02);
+        console.log(aList02);
         // 从开头添加元素
         aList02.unshift('c')
-        //alert(aList02);
+        console.log(aList02);
         // 从开头删除元素
         aList02.shift();
-        //alert(aList02);
+        console.log(aList02);
         // 数组元素反转
         aList02.reverse();
-        //alert(aList02);
+        console.log(aList02);
 
         var aList03 = ['a','b','c','d','a','b']
         // 返回数组中元素第一次出现的索引值
-        // alert(aList03.indexOf('b'));
+        // console.log(aList03.indexOf('b'));
         //
         aList03.splice(1,0,'e');
-        alert(aList03); // a,e,b,c,d,a,b
+        console.log(aList03); // a,e,b,c,d,a,b
         //splice(x,y,z)  x参数代表起始位置  y参数代表从起始位置删除几个元素  z代表要增加的元素
         aList03.splice(1,2,'f','g');
-        alert(aList03); // a,f,g,c,d,a,b
+        console.log(aList03); // a,f,g,c,d,a,b
 
         var str = aList03.join("--"); //a--f--g--c--d--a--b  数组执行方法后返回一个字符串
-        alert(str);
+        console.log(str);
+
+        // 数组中的元素的类型
+        // 数组中可以存放**任意类型**的数据，例如字符串、数字、布尔值、对象等。
+        const arr = ['tomtao626', 18, true, {name: 'tomtao626'}];
+        console.log(arr);
+        const arr4 = [
+            [1,2,3],
+            [4,5,6],
+            [7,8,9]
+        ];
+        console.log(arr4);
+        // 数组索引
+        // 用来访问数组元素的序号，代表的是数组中的元素在数组中的位置（下标从 0 开始算起）。
+        const arr5 = [];
+        // 向数组中添加元素
+        arr5[0] = 10;
+        arr5[1] = 20;
+        arr5[2] = 30;
+        arr5[3] = 40;
+        arr5[5] = 50;
+        console.log(JSON.stringify(arr5)); // [10,20,30,40,null,50]
+        // 如果读取不存在的索引（比如元素没那么多），系统不会报错，而是返回 undefined。
+        console.log(arr5[6]); // undefined
+        console.log(arr5.length); // 6
+        // 修改数组长度
+        /*
+        可以通过修改length属性来修改数组的长度
+        - 如果修改的length大于原长度，则多出部分会空出来，置为null
+        - 如果修改的length小于原长度，则多出的元素会被删除，数组将从后面删除元素
+        （特例：伪数组 arguments 的长度可以修改，但是不能修改里面的元素，以后单独讲。）
+         */
+        const array1 = [1,2,3];
+        const array2 = [10,20,30];
+        // 修改数组length
+        array1.length = 1;
+        console.log(JSON.stringify(array1)); // [1]
+        array2.length = 5;
+        console.log(JSON.stringify(array2)); // [10,20,30,null,null]
+        // 遍历数组
+        const array3 = [1,2,3,4,5,6,null,7];
+        for (let i=0;i<array3.length;i++){
+            console.log(array3[i]);
+        }
+        /*
+        JS语言中，数组的注意点
+        > 和其他编程语言相比，JS语言中的数组比较灵活，有许多与众不同的地方。
+        1、如果访问数组中不存在的索引时，不会报错，会返回undefined。
+        2、当数组的存储空间不够时，数组会自动扩容。其它编程语言中数组的大小是固定的，不会自动扩容。
+        3、数组可以存储不同类型数据，其它编程语言中数组只能存储相同类型数据。
+        4、数组分配的存储空间不一定是连续的。其它语言数组分配的存储空间是连续的。
+        JS中的数组采用"哈希映射"的方式分配存储空间，我们可以通过索引找到对应空间。各大浏览器也对数组分配的存储空间进行了优化：如果存储的都是相同类型的数据，则会尽量分配连续的存储空间；如果存储的不是相同的数据类型，则不会分配连续的存储空间。
+        */
+        // （1）解构赋值
+        let [q,w,e,r] = [1,2,[5,6,7],3];
+        console.log(q); // 1
+        console.log(w); // 2
+        console.log(e); // [5,6,7]
+        console.log(r); // 3
+        /*
+        注意点：
+        （1）等号左边的个数和格式，必须和右边的一模一样，才能完全解构。
+        （2）当然，左边的个数和右边的个数，可以不一样。
+         */
+        // （2）指定默认值 赋值
+        let [s,d=3,f=4] = [1,2];
+        console.log(s); // 1
+        console.log(d); // 2 默认值被覆盖
+        console.log(f); // 4 继续保持默认值
+        // （3）ES6语法-扩展运算符 - 打包剩余的数据。如果使用了扩展运算符, 那么扩展运算符只能写在最后
+        let [t, ...v] = [1,2,3];
+        console.log(t); // 1
+        console.log(v); // 【2,3】
+        // 稀疏数组和密集数组
+        // - 稀疏数组：索引不连续、数组长度大于元素个数的数组，可以简单理解为有 `empty`（有空隙）的数组。
+        // - 密集数组：索引连续、数组长度等于元素个数的数组。
+
+        // 反转数组
+        const array8 = [10, 20, 30, 40, 50]; // 原始数组
+        const newArr = []; // 翻转后的数组
+        for (let i = 0; i < array8.length; i++) {
+            newArr[i] = array8[array8.length - i - 1];
+        }
+        console.log(JSON.stringify(newArr)); // [50,40,30,20,10]
+
+        // 冒泡排序
+        const array9 = [7,4,1,6,2,5,1,10,4,9,67]
+        for (let i=0;i<array9.length-1;i++) {
+            for (let j=0;j<array9.length-i-1;j++) {
+                if (array9[j] > array9[j+1]) {
+                    let temp = array9[j];
+                    array9[j] = array9[j+1];
+                    array9[j+1] = temp;
+                }
+            }
+        }
+        console.log('sorted array9: ' + array9); // [1,1,2,4,4,5,6,7,9,10,67]
     </script>
 </head>
 <body>
