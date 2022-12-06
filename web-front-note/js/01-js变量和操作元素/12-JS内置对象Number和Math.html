@@ -48,6 +48,97 @@
     console.log(Math.ceil(num3));  //-0     //向上取整，向大取
     console.log(Math.round(num3)); //-1     //四舍五入取整（正数四舍五入，负数五舍六入）
     console.log(Math.random());   //0.6453756205275165    //生成0-1之间的随机数
+
+    /*
+    Math.abs() 获取绝对值
+    参数中可以接收字符串类型的数字，会将字符串做隐式类型转换，然后再调用Math.abs()方法
+     */
+    console.log(Math.abs(2)); // 2
+    console.log(Math.abs(-2)); // 2
+    console.log(Math.abs('-2')); // 2
+    console.log(Math.abs('hello')); // NaN
+    /*
+    Math.random() 生成随机数
+     */
+    // 生成 [0,x) 之间的随机数
+    // console.log(Math.round(Math.random()*x));
+    console.log(Math.round(Math.random()*2));
+    // 生成 [x,y)之间的随机数
+    // console.log(Math.round(Math.random()*(y-x)+x));
+    console.log(Math.round(Math.random()*(8-4)+4));
+    // 生成 [x,y]之间的随机整数
+    // console.log(Math.floor(Math.random()*(y-x+1)+x));
+    function getRandom(min, max) {
+        /*
+        * 生成两个整数之间的随机整数，并且要包含这两个整数
+        */
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    console.log(getRandom(2,9));
+    // 随机点名
+    function getRandomNum(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const arr = ['许嵩', '赵云', '刘备', '张飞'];
+    const index = getRandomNum(0, arr.length - 1);
+    console.log(arr[index]);
+    /*
+    Math.pow() 乘方
+    计算 a的b次方
+    Math.pow(a,b);
+     */
+    var a = Math.pow(3, Math.pow(2,2)); // (3^2)^2
+    console.log(a); // 81
+    var b = Math.pow(Math.pow(3,2), 4); // (3^2)^4
+    console.log(b); // 6561
+    /*
+    Math.sqrt() 开方
+    计算数值x的开二次方
+    Math.sqrt(x);
+     */
+    var c = Math.sqrt(81);
+    console.log(c); // 9
+
+    /*
+    url 编码与解码
+    URI (Uniform ResourceIdentifiers,通用资源标识符)进行编码，以便发送给浏览器。有效的URI中不能包含某些字符，例如空格。而这URI编码方法就可以对URI进行编码，它们用特殊的UTF-8编码替换所有无效的字符，从而让浏览器能够接受和理解。
+     */
+    var url = "http://www.cnblogs.com/smyhvae/";
+    var str = encodeURIComponent(url); // 把字符串作为 URI 组件进行编码
+    console.log(str);
+    console.log(decodeURIComponent(str)); // 把字符串作为 URI 组件进行解码
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
