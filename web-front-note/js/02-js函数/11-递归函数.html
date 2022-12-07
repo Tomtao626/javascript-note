@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 计算阶乘
+  function factorial(n) {
+    let result = 1;
+    for (let i=1;i<=n;i++){
+      result *= i;
+    }
+    return result;
+  }
+  console.log(factorial(5)); // 120
+  // 递归写法
+  function factorialRecursion(n) {
+    // 递归出口：如果计算1的阶乘，就不用递归了
+    if (n == 1) return 1;
+
+    // 开始递归：如果当前这个 n 不是1，就返回 n * (n-1)!
+    return n * factorialRecursion(n - 1);
+  }
+  console.log(factorialRecursion(5)); // 120
+
+  // 寻找所有的喇叭花数
+  // 喇叭花数是一个**三位数**，其每一位数字的阶乘之和恰好等于它本身，即`abc＝a! + b! + c!`，其中abc表示一个三位数。请找出所有的喇叭花数。
+  // 思路：将计算某个数的阶乘封装成函数 上面已经写过了就不写了
+  for (let i=100;i<=999;i++) {
+    const curOne = i.toString();
+    const a = Number(curOne[0]);
+    const b = Number(curOne[1]);
+    const c = Number(curOne[2]);
+    if (factorialRecursion(a) + factorialRecursion(b) + factorialRecursion(c) == i) {
+      console.log(i);
+    }
+  }
+
+  // 非波拉契数列
+  // 递归函数：返回斐波那契数列中下标为n的那一项的值
+  function fib(n) {
+    // 下标为0和1的项，值为1
+    if (n == 0 || n == 1) return 1;
+    // 从下标为2的项开始，每一项等于前面两项之和
+    return fib(n - 1) + fib(n - 2);
+  }
+
+  // 循环语句：打印斐波那契数列的前10项
+  for (let i = 0; i < 15; i++) {
+    console.log(fib(i));
+  }
+
+</script>
+</body>
+</html>
