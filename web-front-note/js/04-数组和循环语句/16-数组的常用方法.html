@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
 <script>
     // 数组类型相关方法
     // （1）获取数组的长度是用length属性，不是方法。关于 length属性，详见上一篇文章。
@@ -22,6 +25,7 @@
     console.log(Array.isArray(arr2)); //false
     arr1 = ['s', 1,2, [1,2]];
     console.log(Array.isArray(arr1)); //true
+
     // 数组转换为字符串
     //（1）toString()
     const result1 = [1, 3, 5].toString(); // 转换结果 result 为字符串 '1, 3, 5'
@@ -43,6 +47,49 @@
     console.log('result3：' + result3); // a,b,c
     console.log('result4：' + result4); // a-b-c
 
+    // split() --- 字符串方法 不是数组方
+    const sss = 'a-b-c-d';
+    arrayRes = sss.split('-');
+    console.log(arrayRes); // ['a', 'b', 'c', 'd']
+
+    // Array.from() 将伪数组或可遍历对象转换为真数组
+    const arrayLike = 'tomtao626';
+    console.log(Array.from(arrayLike)); // ['t', 'o', 'm', 't', 'a', 'o', '6', '2', '6']
+    // 伪数组和真数组的区别
+    /*
+    伪数组：包含 length属性的对象或可迭代的对象，
+    另外，伪数组的原型链中没有 Array.prototype,而真数组的原型链中有 Array.prototype,因此伪数组没有数组的一般方法，比如 pop() join() 等方法
+     */
+    /*
+    <body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+     */
+    let btnArray = document.getElementsByTagName('button');
+    console.log(btnArray);
+    console.log(btnArray[0]);
+    // 上面的布局中，有三个 button 标签，我们通过`getElementsByTagName`获取到的`btnArray`实际上是**伪数组**，并不是真实的数组：
+    // 既然`btnArray`是伪数组，它就不能使用数组的一般方法，否则会报错：
+    // btnArray.forEach(function (item, index){
+    //     console.log(item, index); // Uncaught TypeError: btnArray.forEach is not a function
+    // })
+    //但可以使用 Array.from() 将 btnArray这个伪数组转换为真数组即可
+    Array.from(btnArray).forEach(function (item, index){
+        console.log('伪数组转换为真数组：' + item, index);
+    })
+    /*
+    输出结果：
+    伪数组转换为真数组：[object HTMLButtonElement] 0
+    伪数组转换为真数组：[object HTMLButtonElement] 1
+    伪数组转换为真数组：[object HTMLButtonElement] 2
+     */
+
+    // Array.of() 创建数组 根据参数，创建数组
+    const createArray = Array.of(1, 'tomtao626', [2,2,3], {name:'zhangsan'}, true);
+    console.log(createArray); // [1, 'tomtao626', [2,2,3], {name:'zhangsan'}, true]
+    // new Array() 和 Array.of() 的区别在于：当参数只有一个时，前者表示数组的长度，后者表示数组的内容
+
     // 数组的添加和删除
     /*
     push()	向数组的最后面插入一个或多个元素，返回结果为新数组的长度	会改变原数组
@@ -53,13 +100,210 @@
     slice()	从数组中提取指定的一个或多个元素，返回结果为新的数组	不会改变原数组
     concat()	合并数组：连接两个或多个数组，返回结果为新的数组	不会改变原数组
     fill()	填充数组：用固定的值填充数组，返回结果为新的数组	会改变原数组
-
      */
+    // push() --- 向数组尾部插入一个元素 返回结果为新数组的长度。会改变原数组，因此原数组变成了新数组
+    var pushArray = ['王一', '王二', '王三'];
+    var pushRes1 = pushArray.push('张三'); // 尾部插入一个元素
+    var pushRes2 = pushArray.push('刘备', '孙权'); // 尾部插入多个元素
+    console.log(JSON.stringify(pushArray)); // ["王一","王二","王三","张三","刘备","孙权"]
+    console.log(pushRes1); // 4
+    console.log(pushRes2); // 6
+
+    // pop() --- 删除数组最后一个元素，返回结果为被删除的元素
+    var popRes = pushArray.pop();
+    console.log(popRes); // 孙权
+
+    // unshift() --- 在数组最前面插入一个或多个元素 返回结果为新数组的长度。会改变原数组，因此原数组变成了新数组
+    var pushArray = ['王一', '王二', '王三'];
+    var pushRes1 = pushArray.unshift('赵云'); // 尾部插入一个元素
+    var pushRes2 = pushArray.unshift('张飞', '程咬金'); // 尾部插入多个元素
+    console.log(JSON.stringify(pushArray)); // ["张飞","程咬金","赵云","王一","王二","王三"]
+    console.log(pushRes1); // 4
+    console.log(pushRes2); // 6
+
+    // shift() --- 删除数组中的第一个元素 返回结果为被删除的元素
+    var shiftRes = pushArray.shift();
+    console.log(JSON.stringify(pushArray)); // ["程咬金","赵云","王一","王二","王三"]
+    console.log(shiftRes); // 张飞
+
+    // splice() --- 从数组中删除指定的一个或多个元素，返回结果为被删除元素组成的新数组（会改变原来的数组）
+    // 该方法会改变原数组，会将指定元素从原数组中删除；被删除的元素会封装到一个新的数组中返回
+    /*
+    新数组 = 原数组.splice(起始索引index);
+    新数组 = 原数组.splice(起始索引index, 需要删除的个数);
+    新数组 = 原数组.splice(起始索引index, 需要删除的个数, 新的元素1, 新的元素2...);
+    第三个及之后的参数，表示：删除元素之后，向原数组中添加新的元素，这些元素将会自动插入到起始位置索引的前面。也可以理解成：删除了哪些元素，就在那些元素的所在位置补充新的内容。
+     */
+    var spliceArray = [1, 'a', [4,5,6,'nmsl'], 'b', 'c', 'd', 'f', 'kfc', 666];
+    var spliceRes = spliceArray.splice(2);
+    console.log('spliceArray: ' + JSON.stringify(spliceArray)); // spliceArray: [1,"a"]
+    console.log('spliceRes: ' + JSON.stringify(spliceRes)); // spliceRes: [[4,5,6,"nmsl"],"b","c","d","f","kfc",666]
+
+    var spliceArray2 = [1, 'a', [4,5,6,'nmsl'], 'b', 'c', 'd', 'f', 'kfc', 666];
+    var spliceRes2 = spliceArray2.splice(-2); // 删除最后两个元素
+    console.log('spliceArray2: ' + JSON.stringify(spliceArray2)); // spliceArray2: [1,"a",[4,5,6,"nmsl"],"b","c","d","f"]
+    console.log('spliceRes2: ' + JSON.stringify(spliceRes2)); // spliceRes2: ["kfc",666]
+
+    var spliceArray3 = [1, 'a', [4,5,6,'nmsl'], 'b', 'c', 'd', 'f', 'kfc', 666];
+    var spliceRes3 = spliceArray3.splice(1, 3); // 从index为1的位置开始删除元素，一共删除三个元素
+    console.log('spliceArray3: ' + JSON.stringify(spliceArray3)); // spliceArray3: [1,"c","d","f","kfc",666]
+    console.log('spliceRes3: ' + JSON.stringify(spliceRes3)); // spliceRes3: ["a",[4,5,6,"nmsl"],"b"]
+
+    // 删除指定元素
+    const spliceArray4 = ['a', 'b', 'c', 'd'];
+    spliceArray4.splice(spliceArray4.indexOf('c'), 1) // 删除数组中的 'c' 这个元素
+    console.log('spliceArray4： ' + JSON.stringify(spliceArray4)); // spliceArray4： ["a","b","d"]
+
+    // 第三个参数的用法
+    var spliceArray5 = ['a', 'b', 'c', 'd', 'e', 'f'];
+    // 从index为1的位置开始删除元素，共删除三个元素。并且在index=1的位置前面追加两个元素"tomtao626"、"lalallal"（其实就是将index为1的元素改为"tomtao626"，index为2的元素改为"lalallal"）。
+    var spliceRes5 = spliceArray5.splice(1, 3, 'tomtao626', 'lalallal');
+    console.log('spliceArray5: ' + JSON.stringify(spliceArray5)); // spliceArray5: ["a","tomtao626","lalallal","e","f"]
+    console.log('spliceRes5: ' + JSON.stringify(spliceRes5)); // spliceRes5: ["b","c","d"]
+
+    // 将数组指定index位置的数据修改
+    // 针对数组 [a, b, c, d] 将索引为1的数据修改为e, 索引为2的修改为f
+    // 写法1
+    const arraySingle = ['a','b','c','d'];
+    arraySingle[1] = 'e';
+    arraySingle[2] = 'f'
+    console.log(arraySingle); // ['a', 'e', 'f', 'd']
+    // 写法2 通过splice实现
+    const arraySplice = ['a','b','c','d'];
+    arraySplice.splice(1, 2, 'e', 'f');
+    console.log(arraySplice); // ['a', 'e', 'f', 'd']
+
+    // concat() --- 连接多个数组，返回新的数组，不会改变原有数组
+    const arr11 = [1, 2, 3];
+    const arr22 = ['a', 'b', 'c'];
+    const arr33 = ['tomtao626', 'vae'];
+    const result11 = arr11.concat(arr22);
+    const result22 = arr22.concat(arr11, arr33);
+    console.log('arr11 =' + JSON.stringify(arr11)); // arr11 = [1, 2, 3];
+    console.log('arr22 =' + JSON.stringify(arr22)); // arr22 = ['a', 'b', 'c'];
+    console.log('arr33 =' + JSON.stringify(arr33)); // arr33 = ['tomtao626', 'vae'];
+    console.log('result11 =' + JSON.stringify(result11)); // result11 = [1, 2, 3, 'a', 'b', 'c'];
+    console.log('result22 =' + JSON.stringify(result22)); // result22 = ['a', 'b', 'c', 1, 2, 3, 'tomtao626', 'vae'];
+    // 从打印结果中可以看到，原数组并没有被修改
+    // 数组合并的另一种方式 ... 扩展运算符
+    const array33 = [1,2,3];
+    const result33 = ['a', 'b', 'c', ...array33];
+    console.log(JSON.stringify(result33)); // ["a","b","c",1,2,3]
+
+    // slice() 从数组提取一个或多个元素，返回结果为新的数组。不会改变原有数组，
+    const arraySlice = ['a', 'b', 'c', 'd', 'e', 'f'];
+    const resSlice1 = arraySlice.slice(); // 不加参数时，则获取所有的元素。相当于数组的整体赋值
+    const resSlice2 = arraySlice.slice(2); // 从第二个值开始提取 直到末尾
+    const resSlice3 = arraySlice.slice(-2); // 提取最后两个元素
+    const resSlice4 = arraySlice.slice(2,4); // 提取第二个到第四个之间的元素 顾头不顾尾
+    const resSlice5 = arraySlice.slice(4,2); // 空
+    console.log('arraySlice:' + JSON.stringify(arraySlice)); // arraySlice:["a","b","c","d","e","f"]
+    console.log('resSlice1:' + JSON.stringify(resSlice1)); // resSlice1:["a","b","c","d","e","f"]
+    console.log('resSlice2:' + JSON.stringify(resSlice2)); // resSlice2:["c","d","e","f"]
+    console.log('resSlice3:' + JSON.stringify(resSlice3)); // resSlice3:["e","f"]
+    console.log('resSlice4:' + JSON.stringify(resSlice4)); // resSlice4:["c","d"]
+    console.log('resSlice5:' + JSON.stringify(resSlice5)); // resSlice5:[]
+    // 使用 slice() 将伪数组转换为真数组
+    // arraySlice1 = Array.prototype.slice.call(arrayLike);
+    // array = [].slice.call(arrayLike);
+    // ES6 新语法
+    // array = Array.from(arrayLike);
+
+    // fill() --- 用一个固定值填充数组 返回结果为 新的数组 会改变原数组
+    // 创建一个长度为4的空数组，然后用 'f' 填充
+    console.log(Array(4).fill('f')); // ['f', 'f', 'f', 'f']
+    // 将现有数组的每一个元素都进行填充
+    console.log(['a', 'b', 'c', 'd'].fill('f')); // ['f', 'f', 'f', 'f']
+    // 按指定位置填充
+    let arrayFill = ['a', 'b', 'c', 'd'];
+    let arrayFill2 = arrayFill.fill('f',1,3);
+    console.log(arrayFill); // ['a', 'f', 'f', 'd']
+    console.log(arrayFill2); // ['a', 'f', 'f', 'd']
+
     // 数组排序
     /*
     reverse()	反转数组，返回结果为反转后的数组	会改变原数组
     sort()	对数组的元素,默认按照Unicode 编码，从小到大进行排序	会改变原数组
      */
+    // reverse() --- 反转数组，返回结果为反转后的数组	会改变原数组
+    var arrayReverse = ['a', 'b', 'c', 'd', 'e', 'f'];
+    var resReverse = arrayReverse.reverse();
+    console.log('arrayReverse =' + JSON.stringify(arrayReverse)); // arrayReverse =["f","e","d","c","b","a"]
+    console.log('resReverse =' + JSON.stringify(resReverse)); // resReverse =["f","e","d","c","b","a"]
+
+    // sort() -- 排序 默认升序 默认按照元素的Unicode编码，从小到大排序 会改变原来数组
+    let arraySort = ['e', 'b', 'd', 'a', 'f', 'c'];
+    let resSort = arraySort.sort();
+    console.log(JSON.stringify(arraySort)); // ["a","b","c","d","e","f"]
+    console.log(JSON.stringify(resSort)); // ["a","b","c","d","e","f"]
+    // 当数组中的元素为数字时
+    let arraySort1 = [5, 2, 11, 3, 4, 1];
+    let resSort1 = arraySort1.sort();
+    console.log(JSON.stringify(arraySort1)); // [1,11,2,3,4,5]
+    console.log(JSON.stringify(resSort1)); // [1,11,2,3,4,5]
+    // 使用 sort() 排序后，数字`11`竟然在数字`2`的前面。这是为啥呢？因为上面讲到了，`sort()`方法是按照**Unicode 编码**进行排序的。
+    // 所以需要自定义排序规则，在 sort()的参数中添加一个回调函数，来指定排序规则。回调函数中需要定义两个形参，JS将会分别使用数组中的元素作为实参去调用回调函数。
+    /*
+    JS根据回调函数的返回值来决定元素的排序：
+    （1）如果返回一个大于0的值，则元素交换位置
+    （2）如果返回一个小于0的值，则不交换位置
+    （3）如果返回一个等于0的值，则认为两个元素相等，则不交换位置
+     */
+    var sortArray = [5, 2, 11, 3, 4, 1];
+    var sortResult = sortArray.sort(function (a,b){
+        if (a > b) {
+            return 1;
+        } else if (a < b) {
+            return -1;
+        } else {
+            return 0;
+        }
+    })
+    console.log('sortArray = ' + JSON.stringify(sortArray)); // sortArray = [1,2,3,4,5,11]
+    console.log('sortResult = ' + JSON.stringify(sortResult)); //sortResult = [1,2,3,4,5,11]
+    // 简化写法（ES5写法）
+    var sortArray1 = [5, 2, 11, 3, 4, 1];
+    var sortResult1 = sortArray1.sort(function (a,b) {
+        return a-b; // 升序
+        // return b-a; // 降序
+    })
+    console.log('sortArray1 = ' + JSON.stringify(sortArray1)); // sortArray1 = [1,2,3,4,5,11]
+    console.log('sortResult1 = ' + JSON.stringify(sortResult1)); //sortResult1 = [1,2,3,4,5,11]
+    // ES6写法
+    let sortArray2 = [5, 2, 11, 3, 4, 1];
+    let sortResult2 = sortArray2.sort((a,b) => {
+        return a-b; // 升序
+        // return b-a; // 降序
+    })
+    console.log('sortArray2 = ' + JSON.stringify(sortArray2)); // sortArray2 = [1,2,3,4,5,11]
+    console.log('sortResult2 = ' + JSON.stringify(sortResult2)); //sortResult2 = [1,2,3,4,5,11]
+    // 推荐写法
+    let sortArray3 = [5, 2, 11, 3, 4, 1];
+    let sortResult3 = sortArray3.sort((a,b) => a-b);
+    console.log('sortArray3 = ' + JSON.stringify(sortArray3)); // sortArray3 = [1,2,3,4,5,11]
+    console.log('sortResult3 = ' + JSON.stringify(sortResult3)); //sortResult3 = [1,2,3,4,5,11]
+    // 将数组从小到大排序
+    let dataList = [
+        {
+            title: '品牌鞋子，高品质低价入手',
+            publishTime: 200,
+        },
+        {
+            title: '不是很贵，但是很暖',
+            publishTime: 100,
+        },
+        {
+            title: '无法拒绝的美食，跟我一起吃',
+            publishTime: 300,
+        },
+    ];
+    console.log('tomtao626 排序前的数组：' + JSON.stringify(dataList));
+    // tomtao626 排序前的数组：[{"title":"品牌鞋子，高品质低价入手","publishTime":200},{"title":"不是很贵，但是很暖","publishTime":100},{"title":"无法拒绝的美食，跟我一起吃","publishTime":300}]
+    // 将dataList 数组，按照 publishTime 字段，从小到大排序。（会改变原数组）
+    dataList.sort((a, b) => parseInt(a.publishTime) - parseInt(b.publishTime));
+    console.log('tomtao626 排序后的数组：' + JSON.stringify(dataList));
+    // tomtao626 排序后的数组：[{"title":"不是很贵，但是很暖","publishTime":100},{"title":"品牌鞋子，高品质低价入手","publishTime":200},{"title":"无法拒绝的美食，跟我一起吃","publishTime":300}]
+    // 上方代码中，肯定有人会问： publishTime 字段已经是 int 类型了，为啥在排序前还要做一次 parseInt() 转换？这是因为，这种数据，一般是后台接口返回给前端的，数据可能是 int 类型、也可能是字符串类型，所以前端还是统一先做一下 partInt() 比较保险。这是一种良好的工作习惯和风险意识。
 
     // 查找数组元素
     /*
@@ -71,6 +315,70 @@
     every()	确保数组中的每个元素都满足「指定条件返回 true」，则停止遍历，此方法才返回 true	全真才为真。要求每一项都返回 true，最终的结果才返回 true
     some()	数组中只要有一个元素满足「指定条件返回 true」，则停止遍历，此方法就返回 true	一真即真。只要有一项返回 true，最终的结果就返回 true
      */
+    // indexOf() --- 从左往右查找元素的位置
+    // lastIndexOf() --- 从右往左查找元素的位置
+    /*
+    可以检索一个数组中是否含有指定的元素。如果数组中含有该元素，则会返回其**第一次出现**的索引，并立即停止查找；如果没有找到指定的内容，则返回 -1。
+    - 如果找到了指定的元素，就返回元素对应的位置。
+    - 如果没有找到指定的元素，就会返回-1。
+    indexOf() 在检索时，有严格的类型约束，类似于 ===
+     */
+    const arrayIndex = ['a', 'b', 'c', 'd', 'e', 'd', 'c'];
+    console.log(arrayIndex.indexOf('c')); //从前往后，找第一个"c"在哪个位置 2
+    console.log(arrayIndex.lastIndexOf('d')); //从后往前，找第一个"d"在哪个位置 5
+    let arrayIndex2 = ['1', '2', '3', '4', '5'];
+    console.log(arrayIndex2.indexOf(2)); // -1
+    // 指定查找的起始位置
+    let arrayIndex3 = ['q', 'i', 'a', 'n', 'g', 'u', 'y', 'i', 'h', 'a', 'o'];
+    resultIndex3 = arrayIndex3.indexOf('a', 3); // 从下标为3的位置开始查找 'a'这个元素 【重要】
+    console.log(resultIndex3); // 打印结果：9
+
+    // includes() --- 判断一个数组中是否包含指定的元素。如果是，则会返回 true；否则返回 false。
+    // 也可以指定查找的起始位置
+    const arrayIncludes = [11, 12, 13, 14, 15];
+    console.log(arrayIncludes.includes(12)); // 打印结果：true
+    console.log(arrayIncludes.includes(20)); // 打印结果：false
+    console.log(arrayIncludes.includes(11, 1)); // 打印结果：false
+
+    // find() --- 找出**第一个**满足「指定条件返回 true」的元素，并立即停止查找；如果没找到，则返回 undefined。
+    let arrayFind = [2,3,2,5,7,6];
+    const itemResult = arrayFind.find((item,index)=>item>4); // 一旦发现有第一个元素大于4，就把这个元素返回
+    console.log(itemResult); // 5
+    // findIndex() --- 找出**第一个**满足「指定条件返回 true」的元素的索引，并立即停止遍历；如果没找到，则返回 -1。
+    let arrayfindIdex = [2,3,2,5,7,6];
+    let resultfindIndex = arrayfindIdex.findIndex((item,index)=>item>4);
+    console.log(resultfindIndex);
+
+    // every() --- 对数组中每一项运行回调函数，如果都返回 true，every 就返回 true；如果有一项返回 false，则停止遍历，此方法返回 false。
+    // 返回值是 boolean 值，参数是回调函数。
+    var arrayEvery = ['千古', '宿敌', '南山忆', '素颜'];
+    var bool1 = arrayEvery.every(function (item, index, array){
+       if (item.length > 2) {
+           return false;
+       }
+       return true;
+    });
+    console.log(bool1); // false 只要有一个元素的长度是超过两个字符的，就返回false
+
+    var arrayEvery2 = ['千古', '宿敌', '南山', '素颜'];
+    var bool2 = arrayEvery2.every(function (item, index, array){
+        if (item.length > 2) {
+            return false;
+        }
+        return true;
+    });
+    console.log(bool2); // true 因为每个元素的长度都是两个字符。
+
+    // some() --- 对数组中每一个元素运行回调函数，只要有一个元素，返回true，则停止遍历，此方法返回true
+    // some()方法的返回值是boolean值
+    /*
+    every() 和 some() 的使用场景
+    every() 和 some() 这两个方法，初学者很容易搞混。要怎么区分呢？你可以这样记：
+    - every()：全部真，才为真。当你需要让数组中的每一个元素都满足指定条件时，那就使用 every()。
+    - some()：一个真，则为真，点到为止。数组中只要有一个元素满足指定条件时，就停止遍历。那就使用 some()。
+     */
+
+    // valueOf()：返回数组本身
 
     // 遍历数组
     /*
@@ -80,8 +388,321 @@
     map()	对原数组中的每一项进行加工，将组成新的数组	不会改变原数组
     filter()	过滤数组：返回结果是 true 的项，将组成新的数组，返回结果为新的数组	不会改变原数组
     reduce	接收一个函数作为累加器，返回值是回调函数累计处理的结果	比较复杂
-
      */
+    // ES5：
+    /*
+    数组/boolean/无 = 数组.forEach/map/filter(function (item, index, arr) {
+        相关代码和返回值；
+    })
+     */
+    // ES6：
+    /*
+    数组/boolean/无 = 数组.forEach/map/filter((item, index, arr) => {
+        相关代码和返回值；
+    })
+     */
+    // for循环遍历
+    const arrayfor = ['tomtao626', '许嵩', 'vae'];
+    for (let i = 0; i < arrayfor.length; i++) {
+        console.log(arrayfor[i]); // arr[i]代表的是数组中的每一个元素i
+    }
+    console.log(JSON.stringify(arrayfor)); // ["tomtao626","许嵩","vae"]
+
+    // forEach() 只支持IE8+浏览器 IE8- 请使用for循环遍历
+    /*
+    forEach()方法需要一个函数作为参数。这种函数，是由我们创建但是不由我们调用的，我们称为回调函数。
+    数组中有几个元素，该回调函数就会执行几次。
+    回调函数中传递三个参数：
+    - 参数1：当前正在遍历的元素
+    - 参数2：当前正在遍历的元素的索引
+    - 参数3：正在遍历的数组
+    注意，forEach() 没有返回值。也可以理解成：forEach() 的返回值是 undefined。如果你尝试 `newArray = currentArray.forEach()`这种方式来接收，是达不到效果的。
+     */
+    let myArr = ['王一', '王二', '王三'];
+    myArr.forEach((currentItem, currentIndex, currentArray) => {
+        console.log('item:' + currentItem);
+        console.log('index:' + currentIndex);
+        console.log('arr:' + JSON.stringify(currentArray));
+        console.log('----------');
+    });
+    /*
+    输出结果：
+    item:王一
+    index:0
+    arr:["王一","王二","王三"]
+    ----------
+    item:王二
+    index:1
+    arr:["王一","王二","王三"]
+    ----------
+    item:王三
+    index:2
+    arr:["王一","王二","王三"]
+    ----------
+     */
+    // forEach() 会不会改变原数组
+    //（1）数组的元素是基本数据类型 不会改变原数组
+    let numArr = [1,2,3];
+    numArr.forEach((item)=>item=item*2);
+    console.log(JSON.stringify(numArr));
+
+    //（2）数组的元素是引用数据类型，直接修改整个元素对象时，无法改变原数组
+    let objArr = [
+        { name: '千古', age: 20 },
+        { name: '许嵩', age: 30 },
+    ];
+    objArr.forEach((item)=>item={name:'邓紫棋',ahe:18,});
+    console.log(JSON.stringify(objArr)); // 打印结果：[{"name":"千古","age":20},{"name":"许嵩","age":30}]
+
+    //（3）数组的元素是引用数据类型，修改元素对象里的某个属性时，可以改变原数组
+    let objArr2 = [
+        { name: '千古', age: 20 },
+        { name: '许嵩', age: 30 },
+    ];
+    objArr2.forEach((item)=>item.name='邓紫棋');
+    console.log(JSON.stringify(objArr2)); // 打印结果：[{"name":"邓紫棋","age":28},{"name":"邓紫棋","age":30}]
+
+    //（4）如果需要通过forEach()修改原数组 建议用参数 2 和参数 3 来做，具体请看下面的标准做法。
+    // forEach() 通过参数2和参数3修改原数组
+    // 1 数组的元素是基本数据类型
+    let numArr2 = [1,2,3];
+    numArr2.forEach((item,index,arr)=>arr[index]=arr[index]*2);
+    console.log(JSON.stringify(numArr2)); // [2,4,6]
+    // 2 数组的元素是引用数据类型时，直接修改对象
+    let objArr3 = [
+        { name: '千古', age: 28 },
+        { name: '许嵩', age: 34 },
+    ];
+    objArr3.forEach((item,index,arr)=>arr[index]={name:'小明',age:'19',});
+    console.log(JSON.stringify(objArr3)); // [{"name":"小明","age":"19"},{"name":"小明","age":"19"}]
+    // 3 数组的元素是引用数据类型时，修改对象的某个属性
+    let objArr4 = [
+        { name: '千古', age: 28 },
+        { name: '许嵩', age: 34 },
+    ];
+
+    objArr4.forEach((item, index, arr) => {
+        arr[index].name = '小明';
+    });
+    console.log(JSON.stringify(objArr4)); // 打印结果：[{"name":"小明","age":28},{"name":"小明","age":34}]
+    // 如果纯粹只是遍历数组，那么，可以用 forEach() 方法。但是，如果你想在遍历数组的同时，去改变数组里的元素内容，那么，最好是用 map() 方法来做，不要用 forEach()方法，避免出现一些低级错误。
+
+    // ES6 for of
+    // for in 是专门用于遍历对象的。对象的属性是无序的（而数组的元素有顺序），for in循环就是专门用于遍历无序的对象。所以，不要用 for in 遍历数组。
+    /*
+    for of 语法
+    for(let value of arr) {
+	    console.log(value);
+     */
+    /*
+    for in 语法
+    for (let key in obj) {
+        console.log(key);
+        console.log(obj.key);
+    }
+     */
+
+    // map() --- 对数组中每一项运行回调函数，返回该函数的结果，组成的新数组（返回的是**加工后**的新数组）。不会改变原数组。
+    // 作用：对数组中的每一项进行加工。
+    // 拷贝的过程中改变数据元素的值
+    const arrMap1 = [1,3,6,2,5,6];
+    const arrMap2 = arrMap1.map(item => item + 10);
+    console.log(arrMap2); // [11, 13, 16, 12, 15, 16]
+    // 将 A 数组中某个属性的值，存储到 B 数组中。
+    const arrMap3 = [
+        { name: '千古', age: '28' },
+        { name: '许嵩', age: '32' },
+    ];
+    // 将数组 arrMap3 中的 name 属性，存储到 数组 arrMap4 中
+    const arrMap4 = arrMap3.map(item => item.name);
+    // 将数组 arrMap3 中的 name、age这两个属性，改一下“键”的名字，存储到 arrMap5 中
+    const arrMap5 = arrMap3.map(item => ({myName: item.name, myAge: item.age}));
+    console.log('arrMap3:' + JSON.stringify(arrMap3)); // arrMap3:[{"name":"千古","age":"28"},{"name":"许嵩","age":"32"}]
+    console.log('arrMap4:' + JSON.stringify(arrMap4)); // arrMap4:["千古","许嵩"]
+    console.log('arrMap5:' + JSON.stringify(arrMap5)); // arrMap5:[{"myName":"千古","myAge":"28"},{"myName":"许嵩","myAge":"32"}]
+    // map() 方法会不会改变原数组 --- 不一定
+    const arrMap6 = [
+        {
+            name: "tomtao626",
+            age: 22,
+        },
+        {
+            name: "tomtao627",
+            age: 23,
+        },
+    ];
+
+    arrMap6.map((item) => {
+        item.name = "haha"; // 修改 item 里的某个属性
+        return item;
+    });
+    console.log(JSON.stringify(arrMap6)); // [{"name":"haha","age":22},{"name":"haha","age":23}]
+    // 总结：map方法如果是修改整个item的值，则不会改变原数组。但如果是修改item里面的某个属性，那么就会改变原数组
+
+    // fliter() --- 对数组中的**每一项**运行回调函数，该函数返回结果是 true 的项，将组成新的数组（返回值就是这个新数组）。不会改变原数组。
+    //（1）找出数组 arrFilter1 中大于 4 的元素，返回一个新的数组。
+    let arrFilter1 = [1, 3, 6, 2, 5, 6];
+    let arrFilter2 = arrFilter1.filter(item => {
+        if (item > 4) {
+            return true; // 将arrFilter1中大于4的元素返回，组成新的数组
+        }
+        return false;
+    });
+    // let arrFilter2 = arrFilter1.filter(item => item > 4); // 简洁写法
+    console.log(JSON.stringify(arrFilter1)); // 打印结果：[1,3,6,2,5,6]
+    console.log(JSON.stringify(arrFilter2)); // 打印结果：[6,5,6]
+    //（2）获取对象数组 arrFilter3 中指定类型的对象，放到数组 arrFilter4 中
+    const arrFilter3 = [
+        { name: '许嵩', type: '一线' },
+        { name: '周杰伦', type: '退居二线' },
+        { name: '邓紫棋', type: '一线' },
+    ];
+    const arrFilter4 = arrFilter3.filter((item) => item.type == '一线'); // 筛选出一线歌手
+    console.log(JSON.stringify(arrFilter4)); // [{"name":"许嵩","type":"一线"},{"name":"邓紫棋","type":"一线"}]
+
+    // reduce() --- 接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值。返回值是回调函数累计处理的结果。
+    /*
+    语法：
+        arr.reduce(function (previousValue, currentValue, currentIndex, arr) {}, initialValue);
+    参数说明：
+        - previousValue：必填，上一次调用回调函数时的返回值
+        - currentValue：必填，当前正在处理的数组元素
+        - currentIndex：选填，当前正在处理的数组元素下标
+        - arr：选填，调用 reduce()方法的数组
+        - initialValue：选填，可选的初始值（作为第一次调用回调函数时传给 previousValue 的值）
+    在以往的数组方法中，匿名的回调函数里是传三个参数：item、index、arr。但是在 reduce() 方法中，前面多传了一个参数`previousValue`，这个参数的意思是上一次调用回调函数时的返回值。第一次执行回调函数时，previousValue 没有值怎么办？可以用 initialValue 参数传给它。
+    备注：绝大多数人在一开始接触 reduce() 的时候会很懵逼，但是没关系，有事没事多看几遍，自然就掌握了。如果能熟练使用 reduce() 的用法，将能替代很多其他的数组方法，并逐渐走上进阶之路，领先于他人。
+    */
+    let arrReduce = [1,2,3,4,5,6,7,8,9];
+    arrReduce.reduce((prev,item)=>{
+        console.log(prev);
+        console.log(item);
+        console.log('--------');
+        return 88;
+    }, 0);
+    // 由于`return`的是固定值，所以 prev 打印的也是固定值（只有初始值是 0，剩下的遍历中，都是打印 88）
+    //（1）求和
+    const arrReduce1 = [2,0,1,9,6];
+    const total = arrReduce1.reduce((prev, item) => {
+        return prev+item;
+    });
+    console.log('total: ' + total); //total: 18
+    //（2）统计某个元素出现的次数
+    function repeatCount(arr, value) {
+        if (!arr || arr.length == 0) return 0;
+        return arr.reduce((totalCount, item) => {
+            totalCount += item == value ? 1 : 0;
+            return totalCount;
+        }, 0);
+    }
+    let arrReduce2 = [1,2,3,4,5,62,3,2,6];
+    console.log(repeatCount(arrReduce2, 2)); // 2
+    //（3）求元素的最大值
+    const arrReduce3 = [2, 0, 1, 9, 6];
+    // 数组求最大值
+    const maxValue = arrReduce3.reduce((prev, item) => {
+        return prev > item ? prev : item;
+    });
+    console.log(maxValue); // 打印结果：9
+
+    // splice()练习：数组去重
+    //创建一个数组
+    const arr9 = [1, 2, 3, 2, 2, 1, 3, 4, 2, 5];
+
+    //去除数组中重复的数字
+    //获取数组中的每一个元素
+    for (let i = 0; i < arr9.length; i++) {
+        /*获取当前元素后的所有元素*/
+        for (let j = i + 1; j < arr9.length; j++) {
+            //console.log("---->"+arr[j]);
+            //判断两个元素的值是否相等
+            if (arr9[i] == arr9[j]) {
+                //如果相等则证明出现了重复的元素，则删除j对应的元素
+                arr9.splice(j, 1);
+                //当删除了当前j所在的元素以后，后边的元素会自动补位
+                //此时将不会再比较这个元素，我们需要再比较一次j所在位置的元素
+                //使j自减
+                j--;
+            }
+        }
+    }
+
+    // 清空数组
+    let arr10 = [1, 2, 3];
+
+    arr10 = []; //方式1：推荐
+    arr10.length = 0; //方式2：length属性可以赋值，在其它语言中length是只读
+    arr10.splice(0); //方式3：删除数组中所有元素。也可以写成 arr.splice(0, arr.length)
+    // join练习 --- 将一个字符串数组输出为`|`分割的形式，比如“千古|宿敌|素颜”。使用两种方式实现。
+    // 方式一   由于字符串的不变性，str 拼接过多的话，容易导致内存溢出（很多个 str 都堆放在栈里）。
+    var arr = ['千古', '宿敌', '素颜'];
+    var str = arr[0];
+    var separator = '|';
+    for (var i = 1; i < arr.length; i++) {
+        str += separator + arr[i]; //从第1个数组元素开始，每个元素前面加上符号"|"
+    }
+
+    console.log(str);
+    // 方式二
+    const arr13 = ['千古', '宿敌', '素颜'];
+    console.log(arr13.join('|'));
+
+    // reverse() 练习
+    // 将一个字符串数组的元素的顺序进行反转，使用两种种方式实现。提示：第 i 个和第 length-i-1 个进行交换。
+    // 方式一
+    function reverse(array) {
+        var newArr = [];
+        for (var i = array.length - 1; i >= 0; i--) {
+            newArr[newArr.length] = array[i];
+        }
+        return newArr;
+    }
+    // 方式二
+    function reverse(array) {
+        for (var i = 0; i < array.length / 2; i++) {
+            var temp = array[i];
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = temp;
+        }
+        return array;
+    }
+    // 方式三 数组自带reverse()
+
+    // 数组去重
+    //    编写一个方法 去掉一个数组的重复元素
+    var arrRemoveSame = [1, 2, 3, 4, 5, 2, 3, 4];
+    console.log(arrRemoveSame);
+    var aaa = fn(arrRemoveSame);
+    console.log(aaa);
+    //思路：创建一个新数组，循环遍历，只要新数组中有老数组的值，就不用再添加了。
+    function fn(array) {
+        var newArr = [];
+        for (var i = 0; i < array.length; i++) {
+            //开闭原则
+            var bool = true;
+            //每次都要判断新数组中是否有旧数组中的值。
+            for (var j = 0; j < newArr.length; j++) {
+                if (array[i] === newArr[j]) {
+                    bool = false;
+                }
+            }
+            if (bool) {
+                newArr[newArr.length] = array[i];
+            }
+        }
+        return newArr;
+    }
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
