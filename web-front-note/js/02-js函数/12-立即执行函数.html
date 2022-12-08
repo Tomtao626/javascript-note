@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+// 立即执行函数 IIFE
+// 语法一
+(function () {
+    //函数体
+})();
+// 语法二
+/*
+(function (a,b){
+    // 函数体
+})(a,b);
+ */
+
+// 匿名函数
+/*
+function(a,b) {
+    console.log("a = " + a);
+    console.log("b = " + b);
+}
+ */
+// 立即执行函数
+(function(a,b) {
+    console.log("a = " + a);
+    console.log("b = " + b);
+})(11,22); // 立即执行函数往往只会执行一次， 因为没有变量保存它，执行完了之后，就找不到它了。
+
+// 立即执行函数的作用
+// 为变量赋值
+const sex = 'male';
+const nickName = (function () {
+    if (sex == 'male') {
+        return '帅哥';
+    } else {
+        return '美女';
+    }
+})();
+console.log(nickName);
+
+// 将全局变量变为局部变量
+var arr = [];
+console.log(arr);
+for (var i=0;i<5;i++){
+    arr.push(function () {
+        console.log(i); // i是全局变量 所有函数共享内存中的同一个变量i
+    });
+}
+arr[2](); // 5
+// 立即执行函数
+var arr1 = []
+for (var i = 0;i<5;i++) {
+    (function (i) { // i作为传递给IIFE的形参，让i得以成为IIFE的局部变量；并让IIFE形成了闭包 (arr[2]()打印出了IIFE内部变量i的值，说明形成了闭包)
+       arr1.push(function () {
+           console.log(i);
+       });
+    })(i);
+}
+arr1[2](); // 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
