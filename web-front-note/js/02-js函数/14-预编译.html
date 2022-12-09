@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 预编译
+  /*
+  （1）任何变量，如果未经声明就赋值，此变量就属于是 window 的属性，而且不会做变量提升。
+  （2）一切声明的全局变量，全是 window 的属性。（这里说的是在全局作用域内声明的全局变量，不是说局部变量）
+  （3）window 代表了全局作用域
+   */
+  function foo() {
+    var a = b = 100;
+  }
+  foo();
+  console.log(window.b); // 100
+  console.log(b); // 100
+  console.log(window.a); // undefined
+  // console.log(a); // Uncaught ReferenceError: a is not defined
+  // 当执行 foo()函数之后，var a = b = 100, 连续赋值的代码等价于 var a = (b = 100)，其执行顺序是：
+  // （1）先把 100 赋值给 b；
+  // （2）再声明变量 a；
+  // （3）再把 b 的值赋值给 a。
+  // 可以看到 b 是未经声明的变量就被赋值了，此时根据规律1，这个b是属于 window.b；而a的作用域仅限于 foo() 函数内部，不属于 window
+
+  // 函数预编译的步骤 ---  函数执行前
+  /*
+  （1）创建AO对象，即Activation Object活跃对象，其实就是执行期上下文；
+  （2）找形参和变量声明，将形参名和变量作为AO的属性名，值为undefined;
+  （3）将实参和形参统一，实参的值赋给形参；
+  （4）查找函数声明，函数名作为AO对象的属性名，作为整个函数整体。
+   */
+  function fn(a) {
+    console.log(a);
+    var a = 666; // 变量声明
+    console.log(a);
+    function a() {} // 函数声明
+    console.log(a);
+    var b = function() {}; // 这是变量声明
+    console.log(b);
+    function c() {}
+  }
+  fn(1);
+  console.log('-----------');
+  // 1. 上述代码解析：预编译执行过程
+  /*
+   （1）创建AO对象
+   AO {
+    //空对象
+   }
+   （2）找形参和变量声明，将形参名和变量作为AO的属性名，值为undefined;
+   AO {
+    a: undefined,
+    b: undefined
+   }
+   （3）形参和实参统一，实参的值赋给形参
+   AO {
+    a: 1,
+    b: undefined,
+   }
+   （4）查找函数声明
+   AO {
+    a: function a() {},
+    b: undefined,
+    c: function c() {}
+   }
+
+   2. 函数逐行按顺序执行：
+   function fn(a) {
+      console.log(a); // 由于此时预编译后，a = function a() {}; 所以输出 f a() {}
+      var a = 666; // 执行到这里重新对a赋，AO对象再一次更新
+      console.log(a);// 输出666
+
+      function a(){};//预编译环节已经进行了变量提升，故执行时不在看这行代码
+      console.log(a);// 输出666
+
+      var b = function(){};//这个是函数表达式不是函数声明，故不能提升，会对AO中的b重新赋值
+      console.log(b);//输出function(){}
+
+      function c(){};
+   }
+   */
+</script>
+<script>
+    var a = 1;
+    console.log(a);
+    function test(a) {
+        console.log(a);
+        var a = 123;
+        console.log(a);
+        function a() {}
+        console.log(a);
+        var b = function() {}
+        console.log(b);
+        function d() {}
+    }
+    var c = function (){
+        console.log("I at C function");
+    }
+    console.log(c);
+    test(2);
+
+    // 执行顺序如下
+    // 同上
+    /*
+  （1）创建AO对象，即Activation Object活跃对象，其实就是执行期上下文；
+   AO {
+    a: undefined,
+    b: undefined
+   }
+  （2）找形参和变量声明，将形参名和变量作为AO的属性名，值为undefined;
+   AO {
+    a: undefined,
+    b: undefined
+   }
+  （3）将实参和形参统一，实参的值赋给形参；
+   AO {
+    a: 2,
+    b: undefined
+   }
+  （4）查找函数声明，函数名作为AO对象的属性名，作为整个函数整体。
+   AO {
+    a: function a() {},
+    b: undefined,
+    c: function c() {}
+   }
+
+
+   2. 函数逐行按顺序执行：
+    var a = 1;
+    console.log(a); // 输出 1
+    var c = function (){
+        console.log("I at C function");
+    }
+    console.log(c); // 输出 c
+    function test(a) {
+        console.log(a); // 预编译后，a = function a() {}, 输出 f a() {}
+        var a = 123; // 重新对 a 赋值
+        console.log(a); // 输出 123
+        function a() {}; // 预编译环节已经进行了变量提升，故执行时不在看这行代码
+        console.log(a); // 再次输出 123
+        var b = function() {} //这个是函数表达式不是函数声明，故不能提升，会对AO中的b重新赋值
+        console.log(b); // //输出function(){}
+        function d() {}
+    }
+     */
+</script>
+</body>
+</html>

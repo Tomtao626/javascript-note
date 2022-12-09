@@ -85,8 +85,8 @@
   // 使用`函数表达式`创建的函数`const foo = function(){}`，**不会被声明提前**，所以不能在声明前调用。
   // 很好理解，因为此时只是变量 foo 被提升了，且值为 undefined，并没有把 `function(){}` 赋值给 foo。
   fun6();
-  // 此时 fun2 相当于 undefined。执行时会报错：Uncaught ReferenceError: Cannot access 'fun2' before initialization
-  fun7();
+  // 此时 fun7 相当于 undefined。执行时会报错：Uncaught ReferenceError: Cannot access 'fun2' before initialization
+  // fun7();
   // 函数声明，会被提前声明
   function fun6() {
       console.log('我是 fun1 函数');
@@ -172,40 +172,17 @@
    */
   var num = 10;
 
-  function fn7() {
+  function fn9() {
       // 外部函数
       var num = 20;
 
-      function fun() {
+      function fun9() {
           // 内部函数
           console.log(num);
       }
-      fun();
+      fun9();
   }
-  fn7(); // 20
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  fn9(); // 20
 </script>
 </body>
 </html>

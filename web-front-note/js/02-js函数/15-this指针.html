@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+// 执行期上下文 --- 在函数预编译之前，会创建一个执行期上下文的内部对象；每调用一次函数，就会创建一个新的数组上下文对象，他们之间是相互独立且独一无二的。当函数执行完毕后，所产生的执行期上下文会被销毁
+// this 指向 --- 解析器在调用函数每次都会向函数内部传递进一个隐含的参数，这个隐含的参数就是 this，this指向的是一个对象，这个对象我们称为函数执行的 上下文对象。
+// ES5 函数内 this的指向
+/*
+在ES5语法中，根据函数的调用方式不同，this 会指向不同的对象
+（1）以函数的形式（包括普通函数，定时器函数，立即执行函数）调用时，this 的指向永远都是 window
+（2）以方法的形式调用时，this 指向调用方法的那个对象
+（3）以构造函数的形式调用时，this 指向实例对象
+（4）以事件绑定函数的形式调用时， this 指向绑定事件的对象
+（5）使用 call，apply调用时，this 指向指定的那个对象
+ */
+//（1）
+function fun() {
+    console.log(this);
+    console.log(this.name);
+}
+
+var obj1 = {
+    name: 'tomtao626',
+    sayName: fun,
+};
+
+var obj2 = {
+    name: 'vae',
+    sayName: fun,
+}
+
+var name = '全局的name属性';
+
+// 以函数形式调用 this是window
+fun(); // 可以理解为window.fun();
+
+/*输出结果：
+Window
+全局的name属性
+ */
+// 可以看出 this 指向的是 window对象，所以 this.name 指的是全局的 name
+
+// （2）
+function fun2() {
+    console.log(this);
+    console.log(this.name1);
+}
+
+var obj3 = {
+    name1: 'tomtao626',
+    sayName: fun2,
+};
+
+var obj4 = {
+    name1: 'vae',
+    sayName: fun2,
+};
+
+var name1 = '全局的name属性';
+
+// 以方法的形式调用，this 也是调用方法的对象
+obj4.sayName();
+/*输出结果
+Object
+vae
+ */
+// this指向的是 对象obj4，所以 this.name1 指的是 obj4.name
+
+// ES6 箭头函数中 this 指向 --- 直接继承外层函数调用的 this 绑定，无论 this 绑定到什么
+// 改变函数内部的 this 指向 --- JS 专门为我们提供了一些方法来改变函数内部的 this 指向。常见的方法有 call()、apply()、bind() 方法。
+
+// call()
+/*
+（1）可以调用一个函数，也可以改变这个函数内部的 this 指向
+（2）可以实现继承。
+语法：
+    fn1.call(想要将this指向哪里, 函数实参1, 函数实参2);
+    第一个参数中，如果不需要改变 this 指向，则传 null。
+ */
+// （1）通过 call() 调用函数
+const obj11 = {
+    nickName: 'tomtao626',
+    age: 18,
+};
+function fn11() {
+    console.log(this); // window
+    console.log(this.nickName); // undefined
+}
+fn11.call(this);
+// （2）通过 call() 改变 this 指向
+var obj12 = {
+    nickName: 'tomtao626',
+    age: 18,
+};
+function fn12(a, b) {
+    console.log(this); // obj12
+    console.log(this.nickName); // tomtao626
+    console.log(a+b); // 6
+}
+fn12.call(obj12,2,4); // 先将 this 指向 obj12， 然后执行 fn12() 函数
+
+// （3）通过 call() 实现继承
+// 给 Father 增加 name 和 age属性
+function Father(myName, myAge) {
+    this.name = myName;
+    this.age = myAge;
+}
+
+function Son(myName, myAge) {
+    // 将 Father 里面的this修改为 Son里面的this；另外给 son加上相应的参数，让 Son自动拥有 Father的属性，最终实现继承
+    Father.call(this, myName, myAge);
+}
+
+const son1 = new Son('tomtao626', 18);
+console.log(JSON.stringify(son1)); // {"name":"tomtao626","age":18}
+// 通过 call() 方法，让 Son 继承了 Father的 name 和 age属性
+
+// apply()
+/*
+（1）可以调用一个函数，也可以改变这个函数内部的 this 指向。和 call() 类似
+（2）由于 apply() 需要传递数组。
+ 语法：
+    fn1.apply(需要将this指向哪里, [函数实参1，函数实参2]);
+    第一个参数中，如果不需要改变 this 指向，则传 null。
+ */
+// 到这里可以看出， call() 和 apply() 方法的作用是相同的。
+// 唯一的区别在于，apply() 里面传入的**实参，必须是数组（或者伪数组）**。
+//（1）通过apply() 改变this指向
+var obj13 = {
+    nickName: 'tomtao626',
+    age: 18,
+};
+function fn13(a) {
+    console.log(this); // obj1
+    console.log(this.nickName); // tomtao626
+    console.log(a); // hello
+};
+
+fn13.apply(obj13, ['hello']);
+//（2）apply()巧妙应用 求数组的最大值
+const arr1 = [3, 7, 10, 8];
+
+// 下面这一行代码的目的，无需改变 this 指向，所以：第一个参数填 null，或者填 Math，或者填 this 都可以。严格模式中，不让填null。
+const maxValue = Math.max.apply(Math, arr1); // 求数组 arr1 中元素的最大值
+console.log(maxValue); // 10
+
+const minValue = Math.min.apply(Math, arr1); // 求数组 arr1 中元素的最小值
+console.log(minValue); // 3
+
+// bind()
+/*
+（1）不调用函数，但可以改变函数内部的 this 指向
+（2）实际开发中， bind() 方法使用得最为频繁。如果有些函数，我们不需要立即调用，但是又想改变这个函数内部的this指向，此时用 bind() 是最为合适的。
+ 语法：
+    新函数 = fn1.bind(需要将this指向哪里, 函数实参1， 函数实参2);
+    - 第一个参数：在fn1函数运行时，指定fn1函数的this指向。如果不改变this指向，则传null
+    - 其他参数，fn1函数的实参
+    它不会调用 fn1 函数，但会返回 由指定this 和指定实参的**原函数拷贝**。可以看出， bind() 方法是有返回值的。
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
