@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>闭包的应用-自定义JS模块</title>
+</head>
+<body>
+<!--
+闭包应用举例: 定义JS模块
+  * 具有特定功能的js文件
+  * 将所有的数据和功能都封装在一个函数内部(私有的)
+  * 【重要】只向外暴露一个包含n个方法的对象或方法
+  * 模块的使用者, 只需要调用模块暴露的对象或者方法来实现对应的功能
+-->
+<script type="text/javascript" src="myModule.js"></script>
+<script type="text/javascript">
+  var module = myModule();
+  module.doSomething1();
+  module.doOtherthing2();
+</script>
+</body>
+</html>
