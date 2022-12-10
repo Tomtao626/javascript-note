@@ -108,9 +108,9 @@
     return checkTemp;
   }
   // 创建一个 checkStandard_A 函数，它以60分为合格线
-  var checkStandard_A = createCheckTemp(60);
+  var checkStandard_A = cteareCheckTemp(60);
   // 再创建一个 checkStandard_B 函数，它以70分为合格线
-  var checkStandard_B = createCheckTemp(70);
+  var checkStandard_B = cteareCheckTemp(70);
 
   // 调用函数
   checkStandard_A(65); // 成绩合格
@@ -174,6 +174,67 @@
   // 引用见index2.html
   // 上方两个文件中，我们在`myModule2.js`里直接把两个方法直接传递给window对象了。于是，在index.html中引入这个js文件后，会立即执行里面的匿名函数。在index.html中把myModule直接拿来用即可。
 
+  // 内存溢出和内存泄漏
+  /*
+  内存泄漏：占用的内存没有及时释放
+  内存泄漏次数累计多了，易导致内存溢出
+  （1）意外的全局变量
+  （2）没有及时清理的计时器或回调函数
+  （3）闭包
+   */
+  //（1）意外的全局变量
+  function func() {
+      a = new Array(10000000);
+      console.log(a);
+  }
+  func();
+
+  //（2）没有及时清理的计时器或回调函数
+  var intervalId = setInterval(function () {
+      console.log('-------');
+  }, 1000);
+  clearInterval(intervalId); // 清理定时器
+
+  //（3）闭包
+  function func1(){
+      var a = 4;
+      function func2() {
+          console.log(++a);
+      }
+      return func2;
+  }
+  var func3 = func1();
+  func3(); // 5
+  // func3 = null // 让内部函数成为垃圾对象 ---> 回收闭包
+
+  // 内存溢出 --- 程序运行时出现的错误。当程序运行需要的内存超过剩余的内存时，就抛出内存溢出的错误
+  /*
+  var obj = {};
+  for (var i=0;i<10000;i++) {
+      obj[i] = new Array(1000000); // //把所有的数组内容都放到obj里保存，导致obj占用了很大的内存空间
+      console.log("-----");
+  }
+   */
+
+  // 闭包是否会造成内存泄漏
+  // 一般来说，并不会。因为内存泄漏是非预期情况，本来想回收，但实际没回收；而闭包是预期情况，一般不会造成内存泄漏
+  // 闭包面试题
+  function addCount() {
+      let count = 0;
+      return function () {
+          count += 1;
+          console.log(count);
+      };
+  }
+  const func5 = addCount();
+  const func6 = addCount();
+  func5(); // 1
+  func6(); // 1
+  func5(); // 2
+  func6(); // 2
+  //代码解释：
+  //（1）func5和func6这两个闭包是互不影响的，因为第一次调用时，count变量都是0，最终都各自输出1。
+  //（2）第二次调用时，由于闭包有记忆性，所以会在上一次结果上再加1，因此输出2
 
 
 

@@ -1,6 +1,6 @@
 function myModule() {
     //私有数据
-    var msg = 'Qinguyihao Haha'
+    var msg = 'tomtao626 Haha'
 
     //操作私有数据的函数
     function doSomething() {
