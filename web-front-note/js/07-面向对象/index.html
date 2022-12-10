@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    function DomElement(id) {
+        this.dom = document.getElementById(id);
+    }
+    DomElement.prototype.html = function (val) {
+        var ele = this.dom;
+        if (val) {
+            ele.innerHTML = val;
+            return this;
+        } else {
+            return ele.innerHTML;
+        }
+    };
+    DomElement.prototype.on = function (type, fn) {
+        var ele = this.dom;
+        ele.addEventListener(type, fn);
+        return this;
+    };
+    var div1 = new DomElement('div1');
+    div1.html('<p>这是一段文字</p >');
+    div1.on('click', function () {
+        console.log('clicked');
+    });
+</script>
+</body>
+</html>
