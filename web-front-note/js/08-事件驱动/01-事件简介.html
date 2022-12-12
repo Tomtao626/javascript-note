@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box4 {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<!--
+事件源：引发后续事件的html标签
+事件：js
+事件驱动程序：对样式和html的操作。也就是DOM
+-->
+
+<!--1. 获取事件源的方式（DOM节点的获取）
+（1）获取事件源：document.getElementById("box1");
+（2）绑定事件：事件源box.事件onclick = function() { 事件驱动程序 };
+（3）书写事件驱动程序：关于DOM的操作。
+在事件对应的属性中写一些js代码，当事件被触发后，这些代码就会执行。
+-->
+
+<!--2. 绑定事件的方式-->
+<!--直接绑定匿名函数-->
+<div id="box1">boox1</div>
+<script>
+    var div = document.getElementById('box1');
+    // 绑定事件的第一种方式
+    div.onclick = function () {
+        console.log('box box box');
+    }
+</script>
+<!--先单独定义函数，再绑定-->
+<div id="box2">boox2</div>
+<script>
+    var div2 = document.getElementById("box2");
+    // 绑定事件的第二种方式
+    div2.onclick = fn;
+    // 单独定义函数
+    function fn() {
+        console.log('box 666 box 666');
+    }
+    // 注意上方代码的注释。**绑定的时候，是写fn，不是写fn()**。fn代表的是整个函数，而fn()代表的是返回值。
+</script>
+<!--行内绑定-->
+<!--注意第一行代码，绑定时，是写的`"fn()"`，不是写的`"fn"`。因为绑定的这段代码不是写在js代码里的，而是被识别成了**字符串**。-->
+<div id="box3" onclick="fn()">boox3</div>
+<script>
+    function fn() {
+        console.log('box 777 box 777');
+    }
+</script>
+
+<!--3. 事件驱动程序-->
+<div id="box4">change-style</div>
+<script>
+    var div1 = document.getElementById('box4');
+    // 点击鼠标时，原本粉色的div变大了，背景变红了
+    div1.onclick = function () {
+        div1.style.width = "200px"; // 属性值要写引号
+        div1.style.height = "200px";
+        div1.style.backgroundColor = 'blue'; // 属性名是backgroundColor，不是background-color
+    }
+</script>
+
+<!--onload事件-->
+<script>
+    // 当页面加载（文本和图片）完毕的时候，就触发onload事件
+    window.onload = function () {
+        console.log("tomtao626"); // 等页面加载完毕时，打印字符串
+    }
+    // js的加载是和html同步加载的**。因此，如果使用元素在定义元素之前，容易报错。这个时候，onload事件就能派上用场了，我们可以把使用元素的代码放在onload里，就能保证这段代码是最后执行。
+    // 建议是：整个页面上所有元素加载完毕再执行js内容。所以，window.onload可以预防使用标签在定义标签之前。
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

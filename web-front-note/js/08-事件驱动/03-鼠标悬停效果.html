@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img id="box" src="../08-事件驱动/image/jd1.png" style="..cursor: pointer;border: 1px solid #ccc;"/>
+<script>
+  // window.onload页面加载完毕后再执行此代码
+  window.onload = function() {
+    // 需求：鼠标放到img上，更换为另一张图，也就是修改路径（src的值）
+      //   1.获取事件源
+      var img = document.getElementById('box');
+      //   2.绑定事件
+      img.onmouseover = function () {
+          //   3.书写事件驱动程序
+          img.src = "image/women.jpg";
+      }
+
+      //   2.绑定事件
+      img.onmouseout = function () {
+          //   3.书写事件驱动程序
+          img.src = "image/man.jpg";
+      }
+  }
+</script>
+</body>
+</html>
