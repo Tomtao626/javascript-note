@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+        border: 10px solid #000;
+        margin: 100px;
+        background-color: pink;
+      }
+
+      .bx1 {
+        width: 300px;
+        height: 300px;
+        padding: 100px;
+        margin: 100px;
+        position: relative;
+        border: 100px solid #000;
+        background-color: pink;
+      }
+
+      .bx2 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        /*position: absolute;*/
+        /*left: 10px;*/
+        /*top: 10px;*/
+      }
+    </style>
+</head>
+<body>
+<!-- JS动画主要内容
+1.三大家族和一个事件对象
+- 三大家族：offset/scroll/client 三大系列
+- 事件对象/event（事件被触动时，鼠标和键盘的状态）（通过属性控制））
+2.动画（闪现/匀速/缓动）
+3.冒泡/兼容/封装
+-->
+
+<!-- offset家族
+- offsetWidth
+- offsetHight
+- offsetLeft
+- offsetTop
+- offsetParent
+-->
+
+<!--
+offsetWidth 和 offsetHight
+offsetWidth = width + padding + border
+offsetHeight = Height + padding + border
+这两个属性，绑定在了所有的节点元素上。获取元素之后，只要调用这两个属性，我们就能获取元素节点的宽和高。
+-->
+
+
+<div class="bx1">
+  <div class="bx2" style="left: 10px"></div>
+</div>
+<script>
+  // offsetHeight
+  var div1 = document.getElementsByTagName("div")[0];
+  console.log(div1.offsetHeight);
+  console.log(typeof div1.offsetHeight);
+</script>
+</body>
+</html>

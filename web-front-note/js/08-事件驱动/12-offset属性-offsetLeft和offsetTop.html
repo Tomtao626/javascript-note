@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box1 {
+            width: 300px;
+            height: 300px;
+            padding: 100px;
+            margin: 100px;
+            position: relative;
+            border: 100px solid #000;
+            background-color: pink;
+        }
+
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            /*position: absolute;*/
+            /*left: 10px;*/
+            /*top: 10px;*/
+        }
+    </style>
+</head>
+<body>
+<!-- offsetLeft 和 offsetTop
+`offsetLeft`：当前元素相对于其**定位父元素**的水平偏移量。
+`offsetTop`：当前元素相对于其**定位父元素**的垂直偏移量。
+备注：从父亲的 padding 开始算起，父亲的 border 不算在内。
+-->
+<script>
+    var box2 = document.getElementsByClassName("box2")[0];
+
+    //offsetTop和offsetLeft
+    console.log(box2.offsetLeft);  //100
+    console.log(box2.style.left);  //10px
+</script>
+</body>
+</html>
