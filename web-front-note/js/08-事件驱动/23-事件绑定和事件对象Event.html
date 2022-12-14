@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点我</button>
+<button>再点我一下！</button>
+<button>IE8再再再点我一下！</button>
+<button>兼容性按钮</button>
+<script>
+    // DOM的写法：onclick()
+    // element.onclick = function () {}
+    var btn = document.getElementsByTagName("button")[0];
+    btn.onclick = function () {
+        console.log("事件1");
+    }
+
+    btn.onclick = function () {
+        console.log("事件2");
+    }
+    // 会打印 事件2
+    // 可以看到，DOM对象.事件 = 函数 的这种绑定事件的方式：一个元素的一个事件只能绑定一个响应函数。如果绑定了多个响应函数，则后者会覆盖前者。
+    // DOM2的写法
+    // element.addEventListener('click', function () {}, false);
+    /*
+    参数解释：
+        参数1：事件名的字符串（注意 没有on）
+        参数2：回调函数：当事件触发时，该函数会执行
+        参数3：true表示捕获阶段触发 false表示冒泡阶段触发。如果不写，默认false
+     */
+    var btn2 = document.getElementsByTagName("button")[1];
+    // addEventListener: 事件监听器。 原事件被执行的时候，后面绑定的事件照样被执行
+    // 这种写法不存在响应函数被覆盖的情况。（更适合团队开发）
+    btn2.addEventListener('click', fn1);
+    btn2.addEventListener('click', fn2);
+    function fn1() {
+        console.log("新事件1"); // 新事件1
+    }
+
+    function fn2() {
+        console.log("新事件1"); // 新事件2
+    }
+    /*
+    - 一个元素的一个事件，可以绑定多个响应函数。不存在响应函数被覆盖的情况。
+    - 执行顺序：事件被触发时，响应函数会按照函数的绑定顺序执行。
+    - addEventListener()中的this，是绑定事件的对象
+    - addEventListener() 不支持IE8及以下的浏览器。在IE8中可以使用`attachEvent`来绑定事件（详见下一小段）。
+     */
+    // DOM2写法：attachEvent (IE8及以下版本浏览器)
+    // element.attachEvent('onclick', function () {});
+    /*
+    参数1：事件名的字符串（注意 有on）
+    参数2：回调函数：当事件触发时，该函数会执行。
+    重要事情说三遍：
+        attachEvent是IE浏览器独有的！！！
+        attachEvent是IE浏览器独有的！！！
+        attachEvent是IE浏览器独有的！！！
+     */
+    /*
+    var btn3 = document.getElementsByTagName('button')[2];
+    btn3.attachEvent('onclick', function () {
+        console.log("IE8事件1");
+    });
+    btn3.attachEvent('onclick', function () {
+        console.log("IE8事件2");
+    });
+    - 一个元素的一个事件，可以绑定多个响应函数。不存在响应函数被覆盖的情况。**注意**：执行顺序是，后绑定的先执行。
+    - attachEvent()中的this，是window
+     */
+
+    // 兼容性写法
+    // - `addEventListener()`中的this，是绑定事件的对象。
+    // - `attachEvent()`中的this，是window。
+    // 既然这两个写法的`this`不同，那么，有没有一种兼容性的写法可以确保这两种绑定方式的this是相同的呢？我们可以封装一下。代码如下：
+    var btn4 = document.getElementsByTagName('button')[3];
+    myBind(btn4, "click", function () {
+       console.log(this);
+    });
+
+    //定义一个函数，用来为指定元素绑定响应函数
+    /*
+     * addEventListener()中的this，是绑定事件的对象
+     * attachEvent()中的this，是window
+     *  需要统一两个方法this
+     */
+    /*
+     * 参数：
+     *  element 要绑定事件的对象
+     *  eventStr 事件的字符串(不要on)
+     *  callback 回调函数
+     */
+    function myBind(element, eventStr, callback) {
+        if (element.addEventListener) {
+            element.addEventListener(eventStr, callback, false);
+        } else {
+            /*
+             * this是谁，由调用方式决定
+             * callback.call(element)
+             */
+            //IE8及以下
+            element.attachEvent("on"+eventStr , function(){
+                //在匿名函数 function 中调用回调函数callback
+                callback.call(element);
+            });
+        }
+    }
+    // 事件对象 --- 当事件的响应函数被触发时，会产生一个事件对象`event`。浏览器每次都会将这个事件`event`作为实参传进之前的响应函数。
+    // - 这个对象中包含了与当前事件相关的一切信息。比如鼠标的坐标、键盘的哪个按键被按下、鼠标滚轮滚动的方向等。
+    // 获取event对象
+    // 兼容性写法
+    // event = event || window.event; // 兼容性写法
+    // 代码举例
+    document.onclick = function (event) {
+        event = event || window.event;
+        console.log(event);
+        console.log(event.timeStamp);
+        console.log(event.bubbles);
+        console.log(event.button);
+        console.log(event.pageX);
+        console.log(event.pageY);
+        console.log(event.screenX);
+        console.log(event.screenY);
+        console.log(event.target);
+        console.log(event.type);
+        console.log(event.clientX);
+        console.log(event.clientY);
+    }
+
+    // event属性
+    // 有很多属性
+    /*
+    timeStamp  返回事件生成的日期和时间
+    bubbles    返回布尔值 指示事件是否是起泡事件类型
+    button     返回当事件触发时，哪个鼠标按钮被点击
+    pageX      光标相对于该网页的水平位置
+    pageY      光标相对于该网页的垂直位置
+    clientX    光标相对于该网页的水平位置（可视区域）
+    clientY    光标相对于该网页的垂直位置（可视区域）
+    target     该事件被传送到的对象
+    type       事件的类型
+    screenX    光标相对于显示器的水平位置
+    screenY    光标相对于显示器的垂直位置
+     */
+
+    // 由于pageX和pageY的兼容性不好，所以可以： 鼠标在页面的位置 = 滚动条滚动的距离 + 可视区域的坐标
+    // Event举例
+    // 使 div 跟随鼠标移动
+</script>
+</body>
+</html>
