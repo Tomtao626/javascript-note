@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- client
+clientWidth 和 clientHeight
+元素调用时：
+  - clientWidth：获取元素的可见宽度（width + padding）。
+  - clientHeight：获取元素的可见高度（height + padding）。
+body/html 调用时：
+  - clientWidth：获取网页可视区域宽度。
+  - clientHeight：获取网页可视区域高度。
+声明：
+  - `clientWidth` 和 `clientHeight` 属性是只读的，不可修改。
+  - `clientWidth` 和 `clientHeight` 的值都是不带 px 的，返回的都是一个数字，可以直接进行计算。
+
+clientX 和 clientY
+
+event调用：
+  - clientX：鼠标距离可视区域左侧距离。
+  -  clientY：鼠标距离可视区域上侧距离。
+
+clientTop 和 clientLeft
+  - clientTop：盒子的上border。
+  - clientLeft：盒子的左border。
+
+三大家族 offset/scroll/client 的区别
+
+区别1：宽高
+  - offsetWidth  = width  + padding + border
+  - offsetHeight = height + padding + border
+
+  - scrollWidth   = 内容宽度（不包含border）
+  - scrollHeight  = 内容高度（不包含border）
+
+  - clientWidth  = width  + padding
+  - clientHeight = height + padding
+
+区别2：上左
+  offsetTop/offsetLeft：
+    - 调用者：任意元素。(盒子为主)
+    - 作用：距离父系盒子中带有定位的距离。
+  scrollTop/scrollLeft：
+    - 调用者：document.body.scrollTop（window调用）(盒子也可以调用，但必须有滚动条)
+    - 作用：浏览器无法显示的部分（被卷去的部分）。
+  clientY/clientX：
+    - 调用者：event
+    - 作用：鼠标距离浏览器可视区域的距离（左、上）。
+-->
+
+<!-- 根据浏览器的宽度，给定不同的背景的色 -->
+<script src="js/tool.js"></script>
+<script>
+    //需求：浏览器每次更改大小，判断是否符合某一标准然后给背景上色。
+    //  // >960红色，大于640小于960蓝色，小于640绿色。
+
+    window.onresize = fn;  //页面大小发生变化时，执行该函数。
+    //页面加载的时候直接执行一次函数，确定浏览器可视区域的宽，给背景上色
+    fn();
+
+    //封装成函数，然后指定的时候去调用和绑定函数名
+    function fn() {
+        if (client().width > 960) {
+            document.body.style.backgroundColor = "red";
+        } else if (client().width > 640) {
+            document.body.style.backgroundColor = "blue";
+        } else {
+            document.body.style.backgroundColor = "green";
+        }
+    }
+</script>
+<!--
+上当代码中，`window.onresize`事件指的是：在窗口或框架被调整大小时发生。各个事件的解释如下：
+- window.onscroll        屏幕滑动
+- window.onresize       浏览器大小变化
+- window.onload	        页面加载完毕
+- div.onmousemove    鼠标在盒子上移动（注意：不是盒子移动）
+-->
+<script>
+    // 获取显示器的分辨率
+    window.onresize = function () {
+        document.title = window.screen.width + "    " + window.screen.height;
+        console.log(document.title);
+    }
+</script>
+</body>
+</html>
