@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            height: 6000px;
+            width: 5000px;
+        }
+    </style>
+</head>
+<body>
+<!-- scroll
+scrollTop：获取水平滚动条的距离
+scrollLeft：获取垂直滚动条滚动的距离
+（1）当某个元素满足scrollHeight - scrollTop == clientHeight时，说明垂直滚动条滚动到底了
+（2）当某个元素满足scrollWidth - scrollLeft == clientWidth时，说明水平滚动条滚动到底了。
+ 可以用来判断用户是否已经将内容滑动到底了。比如说，有些场景下，希望用户能够看完“长长的活动规则”，才允许触发接下来的表单操作。
+
+scrollTop兼容性 --- 如果想要获取页面滚动的距离，scrollTop这个属性的写法要注意兼容性
+（1）如果文档没有 DTD 声明，写法为： （在没有 DTD 声明的情况下，要求是这种写法，chrome浏览器才能认出来。）
+    document.body.scrollTop
+（2）如果文档有 DTD 声明，写法为： （在有 DTD 声明的情况下，要求是这种写法，IE6、7、8才能认出来。）
+    document.documentElement.scrollTop
+（3）兼容以上二者的写法
+    document.body.scrollTop || document.documentElement.scrollTop //方式一
+    document.body.scrollTop + document.documentElement.scrollTop  //方式二
+ 另外还有一种兼容性的写法：`window.pageYOffset` 和 `window.pageXOffset`。这种写法无视DTD的声明。这种写法支持的浏览器版本是：火狐/谷歌/ie9+。
+ 综合上面的几种写法，为了兼容，不管有没有DTD，**最终版的兼容性写法：**
+    window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+
+ 判断是否已经 DTD 声明
+    document.compatMode === "CSS1Compat; // 已声明
+    document.compatMode === "Backompat; // 未声明
+
+ 封装scrollLeft 和 scrollTop
+    我们将 scrollTop 和 scrollLeft 封装为一个方法，名叫scroll()，返回值为 一个对象。以后就直接调用`scroll().top` 和 `scroll().left`就好。
+-->
+<script>
+    // 封装一个兼容的scroll.返回的是对象 用scroll().top获取scrollTop，用scroll().left获取scrollLeft
+    window.scroll = function () {
+        console.log(scroll().top);
+        console.log(scroll().left);
+    }
+    // 函数封装
+    function scroll() {
+        return {
+            left : window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop,
+            rigth: window.pageXOffset || document.body.scrollLeft || document.documentElement.scrollLeft,
+        }
+    }
+    // 函数定义的那部分就是要封装的代码。
+    // 另外还有一种比较麻烦的封装方式：（仅供参考）
+</script>
+<script>
+    function scroll() {
+        if (window,pageYOffset != undefined) { // ie9+ 高版本浏览器
+            // 因为 window.pageYOffset 默认的是  0  所以这里需要判断
+            return {
+                left: window.pageXOffset,
+                right: window.pageYOffset
+            }
+        } else if (document.compatMode === "CSS1Compat") { // 标准浏览器   来判断有没有声明DTD
+            return {
+                left: document.documentElement.scrollLeft,
+                right: document.documentElement.scrollTop
+            }
+        } else { // 未声明 DTD
+            left: document.body.scrollLeft
+            right: document.body.scrollTop
+        }
+    }
+</script>
+<script>
+    // 获取html文档的方法
+    /*
+    获取title,body,head,html标签的方法如下：
+    - document.title 文档标题；
+    - document.head  文档的头标签
+    - document.body  文档的body标签；
+    - document.documentElement  （这个很重要）。
+    document.documentElement 表示文档的html标签。也就是说，基本结构当中的 `html 标签`而是通过`document.documentElement`访问的，并不是通过 document.html 去访问的。
+     */
+</script>
+</body>
+</html>

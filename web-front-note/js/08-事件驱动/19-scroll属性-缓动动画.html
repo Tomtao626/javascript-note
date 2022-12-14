@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<!-- 缓慢动画 需要用到三个函数
+- Math.ceil() 向上取整
+- Math.floor()  向下取整
+- Math.round() 四舍五入
+
+缓慢动画的原理：
+  在移动的过程中，步长越来越小
+  设置步长为：目标位置和盒子当前位置的十分之一。用公式表达，即：
+    盒子位置 = 盒子本身位置 + (目标位置 - 盒子本身位置) / 10
+-->
+<button>运动left = 400px</button>
+<div></div>
+<script>
+  var btn = document.getElementsByTagName("button")[0];
+  var div = document.getElementsByTagName("div")[0];
+  btn.onclick = function () {
+      setInterval(function () {
+          //动画原理：盒子未来的位置 = 盒子当前的位置+步长
+          div.style.left = div.offsetLeft + (400 - div.offsetLeft) / 10 + "px";
+      }, 30);
+  }
+  console.log(div.style.left);
+  console.log(div.offsetLeft);
+  /*
+  缓慢动画的封装（解决四舍五入的问题）
+  我们发现一个问题，上图中的盒子最终并没有到达400px的位置，而是只到了396.04px就停住了：
+  原因是：JS在取整的运算时，进行了四舍五入。
+  我们把打印396.04px这个left值打印出来看看：
+  http://img.smyhvae.com/20180202_2150.png
+  我么发现，通过`div.style.left`获取的值是精确的，通过`div.offsetLeft`获取的left值会进行四舍五入。
+  此时，我们就要用到取整的函数了。
+  通过对缓动动画进行封装，完整版的代码实现如下：
+   */
+</script>
+</body>
+</html>
