@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    li {
+      width: 100px;
+      height: 100px;
+      margin: 20px;
+      float: left;
+      list-style: none;
+      text-align: center;
+      font: 50px/100px "simsun";
+      color: white;
+      background-color: black;
+    }
+  </style>
+
+  <script src="js/jquery-3.6.2.min.js"></script>
+  <script>
+    jQuery(function () {
+      //设置每个不一样的盒子透明度逐渐递增
+      $("ul li").each(function (index, element) {
+        $(element).css("opacity", (index + 1) / 10);
+        console.log(index+"---"+element.tagName);
+
+      });
+    });
+  </script>
+</head>
+<body>
+<ul>
+  <li class="aaa1">1</li>
+  <li class="aaa2">2</li>
+  <li class="aaa3">3</li>
+  <li class="aaa4">4</li>
+  <li class="aaa5">5</li>
+  <li class="aaa6">6</li>
+  <li class="aaa7">7</li>
+  <li class="aaa8">8</li>
+  <li class="aaa9">9</li>
+  <li class="aaa10">10</li>
+</ul>
+
+</body>
+</html>

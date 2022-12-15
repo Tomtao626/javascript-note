@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    div {
+      height: 3000px;
+      background-color: pink;
+    }
+  </style>
+  <script src="js/jquery-3.6.2.min.js"></script>
+  <!--懒加载的使用。第一步：导包(必须在jquery库的下方）-->
+  <script src="js/jquery.lazyload.js"></script>
+  <script>
+    $(function () {
+
+
+      //第二步骤：调用懒加载的方法实现功能。参数的不同，功能也不同。
+      $("img.lazy").lazyload();
+    })
+  </script>
+</head>
+<body>
+<div></div>
+<!--需要实现将图片设置为懒加载模式-->
+<img class="lazy" data-original="images/01.jpg" width="640" height="480">
+</body>
+</html>

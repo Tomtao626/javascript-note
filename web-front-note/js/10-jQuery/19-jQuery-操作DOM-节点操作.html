@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/jquery-3.6.2.min.js"></script>
+  <script>
+    jQuery(document).ready(function () {
+      $("button").click(function () {
+        //创建一个新的jquery对象li
+        var jqNewLi = $("<li>我是jquery创建出来的li。用的是append方法添加</li>");
+
+        //append();  在盒子里的最末尾添加与严肃
+        $("ul").append(jqNewLi);    //把新创建的 li 塞进已知的 ul 中
+        //jqNewLi.appendTo($("ul")); //方式二：把新创建的li塞进ul中。作用同上
+      })
+    });
+  </script>
+</head>
+<body>
+<button>添加li</button>
+
+<ul>
+  <li>我是土著li</li>
+</ul>
+
+</body>
+</html>

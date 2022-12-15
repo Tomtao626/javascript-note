@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      #btn {
+        width: 200px;
+        height: 200px;
+        background: pink;
+        margin: 10px auto;
+      }
+    </style>
+</head>
+<body>
+<div id="btn">我是 div</div>
+<script src="js/zepto.js"></script>
+<script src="js/touch.js"></script>
+<script>
+  $(function () {
+    $('#btn').on('touchstart', function () {
+      alert('hello world');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      }
+      .current {
+        background-color: red;
+      }
+    </style>
+</head>
+<body>
+<button>切换背景</button>
+<div></div>
+<script src="js/jquery-3.6.2.min.js"></script>
+<script>
+  $(function() {
+    $("button").click(function () {
+      $("div").toggleClass("current");
+    });
+  })
+</script>
+</body>
+</html>
