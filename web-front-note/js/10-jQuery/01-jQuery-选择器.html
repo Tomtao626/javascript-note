@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      div {
+        height: 100px;
+        background-color: pink;
+        margin: 10px;
+        display: none;
+      }
+    </style>
+</head>
+<body>
+<button>显示五个div盒子和设置内容</button>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+<ul>
+    <li>生命壹号，永不止步</li>
+    <li>生命壹号，永不止步</li>
+    <li>生命壹号，永不止步</li>
+    <li>生命壹号，永不止步</li>
+    <li>生命壹号，永不止步</li>
+    <li>生命壹号，永不止步</li>
+    <li>生命壹号，永不止步</li>
+</ul>
+<script>
+// 原生js
+window.onload = function () {
+  var btn = document.getElementsByTagName("button")[0];
+  var divArr = document.getElementsByTagName("div");
+  btn.onclick = function () {
+    for (var i=0;i<divArr.length;i++) {
+      divArr[i].style.display = "block";
+      divArr[i].innerHTML = "tomtao626";
+    }
+  }
+}
+</script>
+<!-- jQuery写法 -->
+<script src="js/jquery-3.6.2.min.js"></script>
+<script>
+  // 引入jQuery
+  $(document).ready(function () {
+    // 获取元素
+    var jQbtn = $("button");
+    var jQdiv = $("div");
+    // 绑定事件
+    jQbtn.click(function () {
+      jQdiv.show(1000); // 显示盒子
+      jQdiv.html("tomorrow"); // 设置内容
+      //上面的两行可以写成链式编程：jQdiv.show(3000).html(1111);
+    });
+  });
+</script>
+
+<!-- 使用jQuery基本步骤
+（1）引包
+（2）入口函数
+（3）功能实现代码（事件处理）
+
+jQuery的入口函数和 $ 符号
+ -->
+<script>
+  // 原生js入口函数
+  // 原生 js 的入口函数。页面上所有内容加载完毕，才执行。
+  // 不仅要等文本加载完毕，而且要等图片也要加载完毕，才执行函数。
+  window.onload = function () {};
+
+  // jQuery入口函数
+  // 写法一
+  // 1.文档加载完毕，图片不加载的时候，就可以执行这个函数。
+  $(document).ready(function () {
+    console.log(1);
+  });
+  // 写法二
+  //2.文档加载完毕，图片不加载的时候，就可以执行这个函数。
+  $(function () {
+    console.log(2);
+  })
+  // 写法三
+  //3.文档加载完毕，图片也加载完毕的时候，在执行这个函数。
+  $(window).ready(function () {
+    console.log(3);
+  });
+  /*
+  **jQuery入口函数与js入口函数的区别**：
+  区别一：书写个数不同：
+  - Js 的入口函数只能出现一次，出现多次会存在事件覆盖的问题。
+  - jQuery 的入口函数，可以出现任意多次，并不存在事件覆盖问题。
+  区别二：执行时机不同：
+  - Js的入口函数是在**所有的文件资源加载**完成后，才执行。这些**文件资源**包括：页面文档、外部的js文件、外部的css文件、图片等。
+  - jQuery的入口函数，是在文档加载完成后，就执行。文档加载完成指的是：DOM树加载完成后，就可以操作DOM了，不用等到所有的**外部资源**都加载完成。
+  文档加载的顺序：从上往下，边解析边执行。
+   */
+
+  // $ 符号
+  console.log("------------");
+  console.log($);
+  console.log(jQuery);
+  console.log($===jQuery);
+  // 从打印结果可以看出，$ 代表的就是 jQuery。
+  /*
+  $(); // 调用上面我们自定义的函数$
+  $(document).ready(function(){}); // 调用入口函数
+  $(function(){}); // 调用入口函数
+  $(“#btnShow”) // 获取id属性为btnShow的元素
+  $(“div”) // 获取所有的div标签元素
+   */
+  // jQuery里面的 $ 函数，根据传入参数的不同。进行不同的调用，实现不同的功能，返回的是jQuery对象 jQuery === $
+  /*
+  针对一个div结构
+  <div></div>
+  <div class="box"></div>
+  <div id="box"></div>
+  <div class="box"></div>
+  <div></div>
+
+   // 原生js获取元素节点
+   var myBox = document.getElementById("box");
+   var boxArr = document.getElementsByClassName("box");
+   var divArr = document.getElementsByTagName("div");
+
+   // jQuery获取元素节点
+  var jqBox1 = $("#box");
+  var jqBox2 = $(".box");
+  var jqBox3 = $("div");
+  // 获取的是数组，里面包含着原生 JS 中的DOM对象。
+   */
+  // jQuery就是把DOM对象重新包装了一下，让其拥有了jQuery方法
+  // 1.DOM对象转换为jQuery对象
+  // $(js对象)
+  // jqBox1 = $(myBox);
+  // jqBox2 = $(boxArr);
+  // jqBox3 = $(divArr);
+  // DOM 对象转换成了 jquery 对象之后，上面的功能可以直接调用。
+
+  // 2.jQuery对象 转为 DOM 对象
+  // jquery对象[index];
+  // jquery对象.get(index);
+  // jQuery对象转换成了 DOM 对象之后，可以直接调用 DOM 提供的一些功能
+  // jqBox3[0].style.backgroundColor = "black";
+  // jqBox3.get(4).style.backgroundColor = "pink";
+
+  // 隔行换色
+  jQuery(function () {
+      var jqLi = $("li");
+      for (var i=0;i<jqLi.length;i++) {
+          if (i%2===0) {
+              //jquery对象，转换成了js对象
+              jqLi[i].style.backgroundColor = "pink";
+          } else {
+              jqLi[i].style.backgroundColor = "yellow";
+          }
+      }
+  })
+
+</script>
+</body>
+</html>
