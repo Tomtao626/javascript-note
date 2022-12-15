@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="aa">
+<input type="button" value="bb">
+<input type="button" value="cc">
+<input type="button" value="dd">
+<script>
+  var myBtn = document.getElementsByTagName('input');
+  // for (var i=0;i<myBtn.length;i++) {
+  //   myBtn[i].onclick = function () {
+  //     alert(i);
+  //   };
+  // }
+  // 用 var 定义的变量 i，是在全局作用域声明的。整个代码中，自始至终只有一个变量。
+  // for 循环是同步代码，而 onclick 点击事件是异步代码。当我们还没点击按钮之前，同步代码已经执行完了，变量 i 已经循环到 4 了。
+
+  // 所以需要使用 let定义变量
+  for (let i=0;i<myBtn.length;i++) {
+    myBtn[i].onclick = function () {
+      alert(i);
+    };
+  }
+</script>
+</body>
+</html>
