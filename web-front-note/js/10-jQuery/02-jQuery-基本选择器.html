@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- jQuery基本选择器 -->
+<div></div>
+<div class="box"></div>
+<div id="box"></div>
+<div class="box"></div>
+<div></div>
+<script src="js/jquery-3.6.2.min.js"></script>
+<script>
+  jQuery(document).ready(function () {
+      // 三种方式获取jquery对象
+      var jqBox1 = $("#box");
+      var jqBox2 = $(".box");
+      var jqBox3 = $("div");
+
+      // 操作标签选择器
+      jqBox3.css("width", 100);
+      jqBox3.css("height", 100);
+      jqBox3.css("margin", 10);
+      jqBox3.css("background", "pink");
+
+      // 操作类选择器（隐式迭代 不用一个个设置）
+      jqBox2.css("background", "red");
+      // 操作id选择器
+      jqBox1.css("background", "yellow");
+  });
+</script>
+</body>
+</html>

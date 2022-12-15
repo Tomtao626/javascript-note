@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+  <li>111</li>
+  <li>222</li>
+  <li>333</li>
+  <ol>
+    <li>aaa</li>
+    <li>bbb</li>
+    <li>ccc</li>
+  </ol>
+</ul>
+<script src="js/jquery-3.6.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // :odd
+        $("li:odd").css("background", "red");
+
+        // :even
+        $("li:even").css("background", "green");
+
+        // :eq(index)
+        $("ul li:eq(3)").css("font-size", "30px");  //设置第四个li的字体
+
+        // :lt(index)
+        $("li:lt(6)").css("font-size", "30px");
+
+        // :gt(index)
+        $(".ulList1 li:gt(7)").css("font-size", "40px");
+
+        // :first
+        $(".ulList li:first").css("font-size", "40px");
+
+        // :last
+        $("li:last").css("font-size", "40px");
+    });
+</script>
+</body>
+</html>
