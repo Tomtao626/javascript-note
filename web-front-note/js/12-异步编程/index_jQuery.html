@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="点击" id="btn" />
+<div id="showInfo"></div>
+<script type="text/javascript" src="jquery-1.11.2.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#btn').click(function () {
+      $.ajax({
+        url: 'https://xxx.com/getUserInfo.php', // 接口的请求地址
+        dataType: 'text',
+        data: 'name=fox&age=18', // 请求参数
+        type: 'get',
+        success: function (data) {
+          console.log('接口请求成功');
+          alert(data);
+          // $("#showInfo").html(data);
+        },
+        error: function (err) {
+          console.log('接口请求失败：' + err);
+        },
+      });
+    });
+  });
+</script>
+</body>
+</html>
