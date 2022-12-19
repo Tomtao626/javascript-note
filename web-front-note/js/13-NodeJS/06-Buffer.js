@@ -118,7 +118,7 @@ var b3 = Buffer.from('abcdefghijk');
 var b4 = Buffer.from('tomtao626');
 //将 b4 插入到 b3 指定位置上
 b4.copy(b3, 5);
-console.log(b3.toString());
+console.log(b3.toString()); // abcdetomtao
 
 // 缓冲区裁剪
 // buf.slice([start[, end]])
