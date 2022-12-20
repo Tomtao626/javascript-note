@@ -16,16 +16,52 @@
 //express_demo.js 文件
 var express = require('express');
 var app = express();
- 
+
+// 路由
+
 app.get('/', function (req, res) {
    res.send('Hello World');
 })
- 
+
+app.post('/', function(req, res) {
+  console.log('主页POST请求');
+  res.send('Hello POST');
+})
+
+app.get('/del_user', function (req, res){
+    console.log('del_user请求');
+    res.send('del_user');
+})
+
+app.get('/list_user', function (req, res){
+    console.log('list_user请求');
+    res.send('list_user');
+})
+
+app.get('/ab*cd', function (req, res){
+    console.log("/ab*cd GET 请求");
+    res.send('正则匹配');
+})
+
+// 静态文件
+app.use('/public', express.static('public'));
+
+// cookie管理
+var cookieParser = require('cookie-parser');
+var util = require('util');
+app.use(cookieParser());
+
+app.get('/cookie', function(req, res) {
+  console.log("Cookies: " + util.inspect(req.cookies));
+  /*Cookies: {
+  csrftoken: 'ca3D9dZWKVRSgORKezIlomcsbQC9eI6S0FLGxfiiWRkZB3eM10ZGTgwY3STe8p4C'
+  }*/
+})
+
 var server = app.listen(8082, function () {
  
   var host = server.address().address
   var port = server.address().port
  
-  console.log("应用实例，访问地址为 http://%s:%s", host, port)
- 
+  console.log("应用实例，访问地址为 http://%s:%s", host, port);
 })
