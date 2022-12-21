@@ -6,5 +6,5 @@ class Site{
         console.log('tomtao626');
     }
 }
-var obj = new Site();
+let obj = new Site();
 obj.name();

@@ -22,31 +22,3 @@ emitter.on("someEvent", function (args1, args2) {
 emitter.emit('someEvent', 'arg1 参数', 'arg2 参数');
 // emitter 为事件 someEvent 注册了两个事件监听器，然后触发了 someEvent 事件。运行结果中可以看到两个事件监听器回调函数被先后调用。 这就是EventEmitter最简单的用法。
 // EventEmitter 提供了多个属性，如 on 和 emit。on 函数用于绑定事件函数，emit 属性用于触发一个事件。
-
-// 以下实例通过 connection（连接）事件演示了 EventEmitter 类的应用。
-var eventEmitter = new EventEmitter();
-// 创建监听函数listener1
-var listener1 = function listener1() {
-    console.log("监听器 listener1 执行");
-}
-// 创建监听函数listener2
-var listener2 = function listener2() {
-    console.log("监听器 listener2 执行");
-}
-// 绑定connection事件，处理函数为 listener1
-eventEmitter.addListener('connection', listener1);
-// 绑定connection事件，处理函数为 listener2
-eventEmitter.on('connection', listener2);
-// 计算 connection事件的监听器数量
-var eventListeners = eventEmitter.listenerCount('connection');
-console.log(eventListeners + " 监听器监听连接事件");
-// 处理connection事件
-eventEmitter.emit('connection');
-// 移除绑定的监听器 listener1 函数
-eventEmitter.removeListener('connect', listener1);
-console.log("监听器 listener1 不再受监听 ");
-// 再次触发连接事件
-eventEmitter.emit('connection');
-eventListeners = eventEmitter.listenerCount('connection');
-console.log(eventListeners + " 监听器监听连接事件");
-console.log("程序执行完毕");
