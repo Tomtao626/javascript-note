@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--    写法1-->
+    <h1 :style="{color: 'red', 'font-size': '20px'}">tomtao626</h1>
+    <!--    写法2-->
+    <h1 :style="styleObj">tomtao627</h1>
+    <!--    写法3-->
+    <h1 :style="[ styleObj1, styleObj2 ]">tomtao628</h1>
+    <!--    写法4-->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data: {
+            styleObj:{color:'red', 'font-size':'20px'}
+        }
+    })
+    /*
+    写法3
+    var vm = new Vue({
+            el: '#app',
+            data: {
+                styleObj1: { color: 'red', 'font-size': '20px' },
+                styleObj2: { 'font-style': 'italic' }
+            }
+        });
+     */
+</script>
+</body>
+</html>

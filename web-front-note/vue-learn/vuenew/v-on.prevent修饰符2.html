@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <!-- 阻止表单中submit的默认事件 -->
+    <form @submit.prevent action="http://www.baidu.com">
+        <!-- 执行自定义的click事件 -->
+        <input type="submit" @click="mySubmit" value="表单提交">
+    </form>
+
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+            mySubmit: function() {
+                alert('ok');
+            }
+        }
+    });
+    // 用`.prevent`来阻止这种默认行为。修改为：点击按钮后，不提交到服务器，而是执行我们自己想要的事件（在submit方法中另行定义）。如下：
+    // 通过`.prevent`阻止了提交按钮的默认事件，点击按钮后，执行的是`mySubmit()`方法里的内容。这个方法名是可以随便起的，我们甚至可以起名为`submit`，反正默认的submit已经失效了。
+
+    // - `.self`  只有当事件在该元素本身（比如不是子元素）触发时，才会触发回调。
+    // 既然`.stop`和`.self`都可以阻止冒泡，那二者有什么区别呢？区别在于：前者能够阻止整个冒泡行为，而后者只能阻止自己身上的冒泡行为。
+</script>
+
+</html>

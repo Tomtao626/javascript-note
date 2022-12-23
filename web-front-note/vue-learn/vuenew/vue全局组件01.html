@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 如果要使用组件，直接把组件的名称，以 HTML 标签的形式，引入到页面中，即可 -->
+    <account></account>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    // 模块化和组件化的区别
+    /*
+    - 模块化：是从代码逻辑的角度进行划分的；方便代码分层开发，保证每个功能模块的职能单一
+    - 组件化：是从UI界面的角度进行划分的；前端的组件化，方便UI组件的重用
+     */
+    // 全局组件的定义和注册
+    // 组件Component是Vue.js最强大的功能之一。组件可以扩展HTML元素，封装可重用的代码。
+    // 写法1 --- 使用Vue.extend方法定义组件，使用Vue.component方法注册组件
+    // 第一步：使用Vue.extend定义组件
+    var myAccount = Vue.extend({
+        template:'<div><h2>登录页面</h2> <h3>注册页面</h3></div>'
+    });
+    // 第二步：使用Vue.component注册组件
+    // Vue.component('组件的名称','创建出来的组件模版对象')
+    Vue.component('account', myAccount); // 第一个参数是组件的名称（标签名），第二个参数是模板对象
+    new Vue({
+        el:'#app'
+    });
+    /*注意：
+    1.要保证二者的名字是一致的。如果在注册时，组件的名称是驼峰命名.那么，在标签中使用组件时，需要把大写的驼峰改为小写的字母，同时两个单词之间使用`-`进行连接：
+    2.一定要用一个大的根元素（例如`<div>`）包裹起来。
+     */
+</script>
+</body>
+</html>

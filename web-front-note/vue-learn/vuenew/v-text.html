@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-text可以将一个变量的值渲染到指定的元素中</title>
+</head>
+<body>
+<div id="div1">
+    <span v-text="name"></span>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#div1',
+        data:{
+            name:'hello world'
+        }
+    });
+    // 插值表达式和v-text的区别：
+    /*
+    区别1：v-text没有闪烁的问题，因为它是放在属性里面的
+    区别2：插值表达式只会替换自己的这个占位符，并不会把整个元素的内容清空。v-text 会**覆盖**元素中原本的内容。
+     */
+</script>
+</body>
+</html>

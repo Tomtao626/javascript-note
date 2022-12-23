@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!-- 普通写法 -->
+    <h1 class="my-red my-thin">tomtao626</h1>
+    <!-- vue写法1 数组的形式 -->
+    <h1 :class="['my-red', 'my-thin']">tomtao627</h1>
+    <!-- 注意，数组里写的是字符串；如果不加单引号，就不是字符串了，而是变量。 -->
+
+    <!-- 写法2 在数组中使用三元表达式 配合写法2的js代码 -->
+    <h1 :class="[flag?'my-active':'']">tomtao628</h1>
+    <!-- 通过data中布尔值flag来判断：如果flag为true，就给h1标签添加my-active样式；否则不设置样式-->
+
+    <!-- 写法3 数组中使用对象来代替三元表达式 配合写法2的js代码 -->
+    <h1 :class="[{'my-active':flag}]">tomtao629</h1>
+
+    <!-- 写法4 直接使用对象 -->
+    <!-- 在为 class 使用 v-bind 绑定 对象的时候，对象的属性是类名。由于 对象的属性名可带引号，也可不带引号，所以 这里我没写引号；  属性的值 是一个标识符 -->
+    <h1 :class="classObj">tomtao630</h1>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+    });
+    /*
+    写法2 在数组中使用三元表达式
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            flag:true
+        }
+    });
+     */
+
+    /*
+    写法4 直接使用对象
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            classObj:{style1:true, style2:false}
+        }
+    })
+     */
+</script>
+</body>
+</html>

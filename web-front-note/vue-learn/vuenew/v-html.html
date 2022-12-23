@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--  使用v-html渲染数据可能会非常危险，因为它很容易导致 XSS（跨站脚本） 攻击，使用的时候请谨慎，能够使用{{}}或者v-text实现的不要使用v-html。
+    -->
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <p v-text="msg"></p>
+    <p v-html="msg"></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    new Vue({
+       el:'#app',
+       data:{
+           msg:'<h1>我是一个大大的h1标题</h1>'
+       }
+    });
+</script>
+</body>
+</html>

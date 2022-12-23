@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<template id="myAccount">
+    <div>
+        {{myData}}
+        <a href="#" v-on:click="login">登录</a>
+        <h2>登录页面</h2>
+        <h3>注册页面</h3>
+    </div>
+</template>
+<div id="app">
+    <!-- 第一次调用组件 -->
+    <account> </account>
+    <!-- 第二次调用组件 -->
+    <account> </account>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    Vue.component(
+        'account',{
+            template: '#myAccount',
+            // 组件中的data
+            //【注意】组件中的data，不再是对象，而是一个方法（否则报错）；而且这个方法内部，还必须返回一个对象才行
+            // 组件中 的data 数据,使用方式,和实例中的 data 使用方式完全一样!!!
+            data: function () {
+                return {
+                    myData: 'tomtao626',
+                }
+            },
+            // 组件中的 method
+            methods: {
+                login: function () {
+                    alert('login操作');
+                }
+            }
+        });
+    new Vue({
+        el:'#app'
+    });
+    /*
+    在`account`组件中添加的data 和 methods，其**作用域**只限于`account`组件里，保证独立性。
+    注意，在为组件添加数据时，data不再是对象了，而是function，而且要通过 return的形式进行返回；否则，页面上是无法看到效果的。通过 function返回对象的形式来定义data，作用是：
+    - 上方代码中，组件`<account>`被调用了两次（不像根组件那样只能调用一次），但是每个组件里的数据 myData是**各自独立**的，不产生冲突。
+    - 换而言之，通过函数返回对象的目的，是为了让每个组件都有自己**独立的数据存储**，而不应该共享一套数据。
+     */
+</script>
+</body>
+</html>

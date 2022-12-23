@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .father {
+            height: 300px;
+            width: 300px;
+            background: pink;
+        }
+
+        .child {
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="father" @click="fatherClick">
+        <div class="child" @click.stop="childClick"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{},
+        methods:{
+            fatherClick: function () {
+                console.log('father 被点击了');
+            },
+            childClick: function () {
+                console.log('child 被点击了');
+            }
+        }
+    })
+    /*
+    上方代码中，存在冒泡的现象，父标签中包含了一个子标签。当点击子标签时，父标签也会被触发。打印顺序是：
+    如果我不想让子标签的点击事件冒泡到父亲，该怎么做呢？办法是：给子标签加一个**事件修饰符**`.stop`，阻止冒泡。代码如下：
+    <div class="child" @click.stop="childClick">
+    上方的这行代码中，如果把`.stop`改为`:stop`，造成的现象是，父标签被触发了，而子标签没有被触发。
+    .capture`：触发事件时，采用捕获的形式，而不是冒泡的形式。
+    当按钮点击时，如果想要采取捕获的方式，而不是冒泡的方式，办法是：可以直接在父标签上加事件修饰符`.capture`。代码如下：
+    <div class="father" @click.capture="fatherClick">
+     */
+</script>
+</body>
+</html>

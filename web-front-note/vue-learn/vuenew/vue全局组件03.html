@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<template id="myAccount">
+    <div>
+        <h2>登录页面</h2>
+        <h3>注册页面</h3>
+    </div>
+</template>
+    <div id="app">
+    <!-- 使用组件 -->
+    <account></account>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    // 写法3 将组件内容定义到template标签中去。
+    // 定义注册组件
+    Vue.component(
+        'account', {
+            template:'#myAccount'
+        });
+    new Vue({
+        el:'#app'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <account> </account>
+</div>
+<script>
+    // 写法2 Vue.component方法定义/注册组件
+    // 定义、注册组件：第一个参数是组件的名称（标签名），第二个参数是组件的定义
+    Vue.component(
+        'account', {
+            template: '<div><h2>登录页面</h2> <h3>注册页面</h3></div>'   // template 是 Vue 中的关键字，不能改。
+        });
+        new Vue({
+            el:'#app'
+        });
+        /*注意
+        1.要保证二者的名字是一致的。
+        2.一定要用一个大的根元素（例如`<div>`）包裹起来。
+         */
+</script>
+</body>
+</html>

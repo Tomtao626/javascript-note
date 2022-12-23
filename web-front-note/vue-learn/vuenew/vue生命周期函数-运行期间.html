@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="修改flag" @click="myMethod">
+    <h3 id="h3">{{ flag }}</h3>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<!-- 生命周期函数的主要分类 -->
+<script>
+    /*
+    1.运行期间的生命周期函数
+    - beforeUpdate：状态更新之前执行此函数， 此时 data 中的状态值是最新的，但是界面上显示的 数据还是旧的，因为此时还没有开始重新渲染DOM节点
+    - updated：实例更新完毕之后调用此函数，此时 data 中的状态值 和 界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了。
+     */
+    new Vue({
+        el: '#app',
+        data: {
+            msg: 'hello vue',
+            flag: false
+        },
+
+        methods: {
+            myMethod: function () {
+                this.flag = true;
+            }
+        },
+
+
+        // 接下来的是运行中的两个事件
+        // 这时候，我们的界面还没有被更新【但是，数据被更新了吗？  数据肯定被更新了】
+        beforeUpdate() {
+            console.log('-------------05 beforeUpdate', this.msg);
+
+            // 结论：当执行 beforeUpdate 的时候，页面中的显示的数据，还是旧的，此时 data 数据是最新的，页面尚未和 最新的数据保持同步
+            console.log('界面上DOM元素显示的内容：' + document.getElementById('h3').innerText)
+            console.log('data 中的 msg 数据：' + this.flag)
+        },
+        updated() {
+            console.log('-------------06 updated', this.msg);
+
+            // 结论：updated 事件执行的时候，页面和 data 数据已经保持同步了，都是最新的
+            console.log('界面上DOM元素显示的内容：' + document.getElementById('h3').innerText)
+            console.log('data 中的 msg 数据：' + this.flag)
+        }
+    });
+// 当执行 beforeUpdate 的时候，页面中的显示的数据还是旧的，但此时 data 数据是最新的
+// updated 事件执行的时候，页面和 data 数据已经保持同步了，都是最新的
+</script>
+</body>
+</html>

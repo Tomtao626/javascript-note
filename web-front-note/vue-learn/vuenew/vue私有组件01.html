@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 在Vue实例内部定义私有组件，只有当前这个Vue实例才可以使用这个组件 -->
+<div id="app">
+    <!-- 使用Vue实例内部的私有组件 -->
+    <my-login></my-login>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{},
+        component:{
+            // 定义、注册Vue实例内部的私有组件
+            myLogin: {
+                template: '<h3>这是私有的login组件</h3>'
+            }
+        }
+    });
+</script>
+</body>
+</html>

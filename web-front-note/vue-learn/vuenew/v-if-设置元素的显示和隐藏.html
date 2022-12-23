@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+作用：根据表达式的值的真假条件，来决定是否渲染元素，如果为false则不渲染（达到隐藏元素的目的），如果为true则渲染。
+在切换时，元素和它的数据绑定会被销毁并重建。
+ -->
+<div id="app">
+    <button v-on:click="toggle">显示/隐藏</button>
+    <div v-if="isShow">我是盒子</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            isShow:true
+        },
+        methods:{
+            toggle:function () {
+                this.isShow = !this.isShow;
+            }
+        }
+    })
+</script>
+</body>
+</html>
