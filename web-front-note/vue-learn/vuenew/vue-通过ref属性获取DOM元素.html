@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <!-- 第一步：在标签中给 DOM 元素设置 ref 属性 -->
+    <h3 id="myH3" ref="myTitle"> 今天天气太好了</h3>
+
+    <input type="button" value="按钮元素" @click="getElement" ref="myBtn">
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+
+    var login = {
+        template: '<h1>登录组件</h1>',
+        data() {
+            return {
+                msg: 'son msg'
+            }
+        },
+        methods: {
+            show() {
+                console.log('调用了子组件的方法')
+            }
+        }
+    }
+
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            getElement() {
+                // 原生js获取DOM元素
+                // console.log(document.getElementById('myTitle').innerText)
+
+                // 第二步：通过 this.this.$refs.xxx 获取 DOM 元素
+                console.log(this.$refs.myTitle.innerText)
+
+
+            }
+        },
+        components: {
+            login
+        }
+    });
+</script>
+</body>
+</html>

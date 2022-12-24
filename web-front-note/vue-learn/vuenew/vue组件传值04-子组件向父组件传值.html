@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>将子组件中的data数据传递给父组件，存放到父组件的data中</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <component1 @parent-show='show'></component1>
+</div>
+
+<!-- 定义子组件的模板 -->
+<template id="myTemplate">
+    <h2 @click="childClick">我是子组件，点击调用父组件的方法</h2>
+</template>
+
+<script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+        el: '#app',
+        data: { //父组件的data
+            parentData: null
+        },
+        methods: { // 定义父组件的方法
+            show: function (arg) { //【第二步】父组件里放参数，这个参数就代表着子组件中的 child.data
+                console.log('父组件提供的方法');
+                this.parentData = arg; //将参数arg传递给父组件的data，也就达到了目的：子组件传递数据，赋值给父组件
+                console.log('打印父组件的数据（这是子组件传过来的）：'+ JSON.stringify(this.parentData));
+            }
+        },
+        components: {
+            component1: { //将子组件的名称定义为 component1
+                template: '#myTemplate',
+                data() { // 子组件的data
+                    return {
+                        childData: { //定义自组件的数据
+                            name: 'smyhvae',
+                            age: 26
+                        }
+                    }
+                },
+                props: [''],
+                directives: {},
+                filters: {},
+                components: {},
+                methods: {
+                    childClick() {
+                        // 子组件如果要给父组件传递参数，在触发 emit 的时候，通过参数的形式带出去就可以了
+                        // 【第一步】在子组件里，通过传参的形式，把子组件的data，传给父组件
+                        this.$emit('parent-show', this.childData);
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+
+</html>

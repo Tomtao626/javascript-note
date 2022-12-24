@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <style>
+        .foo{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<div id="example"></div>
+<div id="hello"></div>
+<div id="demo"></div>
+<div id="gggg"></div>
+<div id="zs"></div>
+<div id="arr"></div>
+<script type="text/babel">
+    const element = <h1 className="foo">Hello, world</h1>;
+    ReactDOM.render(element, document.getElementById('root'));
+
+    // jsx
+    ReactDOM.render(
+        <div>
+            <h1>tomtao626</h1>
+            <h2>欢迎学习React</h2>
+            <p data-myattribute="'somevalue">这是一个很不错的javascript库</p>
+        </div>,
+        document.getElementById('example')
+    );
+</script>
+<script type="text/babel" src="./helloworld_react.js"></script>
+<script type="text/babel">
+    ReactDOM.render(
+        <div>
+            <h1>
+                result: {1+10}
+            </h1>
+        </div>,
+        document.getElementById('demo')
+    )
+</script>
+<script type="text/babel">
+    const myStyle = {
+        color:'green',
+        fontSize:100,
+    };
+    ReactDOM.render(
+        <h1 style={myStyle}>海阔提案</h1>, document.getElementById('gggg')
+    )
+</script>
+<script type="text/babel">
+    ReactDOM.render(
+        <div>
+            <h1>
+                团队伤害
+            </h1>
+            {/*z注释。。。*/}
+        </div>, document.getElementById('zs')
+    )
+</script>
+<script type="text/babel">
+    var arr = [
+        <h1>呼保义-宋江</h1>,
+        <h2>玉麒麟-卢俊义</h2>,
+    ]
+    ReactDOM.render(
+        <div>{arr}</div>, document.getElementById('arr')
+    )
+</script>
+</body>
+</html>

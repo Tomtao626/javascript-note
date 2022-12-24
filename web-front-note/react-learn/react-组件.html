@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+<br>
+<div id="temp"></div>
+<script type="text/babel">
+    // 封装一个 HelloReact 的组件 使用函数定义
+    function HelloReact(props) {
+        return <h1>Hello {props.name}!</h1>;
+    }
+    // const element = <HelloMessage /> 为用户自定义的组件。
+    // 注意，原生 HTML 元素名以小写字母开头，而自定义的 React 类名以大写字母开头，比如 HelloMessage 不能写成 helloMessage。除此之外还需要注意组件类只能包含一个顶层标签，否则也会报错。
+
+    // 使用ES6 class定义一个组件
+    // class Welcome extends React.Component{
+    //     render() {
+    //         return <h1>Hello React</h1>;
+    //     }
+    // }
+    const element = <HelloReact name="YYDS NMSL"/>;
+
+    ReactDOM.render(
+        element,
+        document.getElementById('hello')
+    );
+
+    // 复合组件
+    function Name(props) {
+        return <h1>网站名称：{props.name}</h1>
+    }
+    function Url(props) {
+        return <h1>网站地址：{props.url}</h1>
+    }
+    function Nickname(props) {
+        return <h1>网站别称：{props.nickname}</h1>
+    }
+    function App() {
+        return <div>
+            <Name name="人生有限公司" />
+            <Url url="www.tomtao.cn" />
+            <Nickname nickname="tomtao626" />
+        </div>;
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('temp')
+    )
+</script>
+</body>
+</html>

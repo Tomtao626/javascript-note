@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <component1 @parent-show='show'></component1>
+</div>
+
+<!-- 定义子组件的模板 -->
+<template id="myTemplate">
+    <h2 @click="childClick">我是子组件，点击调用父组件的方法</h2>
+</template>
+
+<script>
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+        el: '#app',
+        data: { //父组件的data
+            // msg: '父组件中的数据'
+        },
+        methods: { // 定义父组件的方法
+            show: function (arg1, arg2) { //【第二步】父组件里放两个参数，这个两个参数就代表着子组件中的`child 123`、`child 789`
+                console.log('父组件提供的方法');
+                console.log('打印子组件传递过来的参数。参数一：' + arg1 + '，参数二：'+ arg2);
+            }
+        },
+        components: {
+            component1: { //将子组件的名称定义为 component1
+                template: '#myTemplate',
+                data() { // 子组件的data
+                    return {
+                        // content: '子组件私有的数据 content'
+                    }
+                },
+                props: [''],
+                directives: {},
+                filters: {},
+                components: {},
+                methods: {
+                    childClick() {
+                        // 子组件如果要给父组件传递参数，在触发 emit 的时候，通过参数的形式带出去就可以了
+                        // 【第一步】在子组件里，我们带两个参数出去，传给父组件
+                        this.$emit('parent-show', 'child 123', 'child 789');
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+
+</html>
