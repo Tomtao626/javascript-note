@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--    第一次调用组件-->
+    <counter></counter>
+    <hr>
+    <counter></counter>
+    <hr>
+    <!--    第二次调用组件 -->
+    <counter></counter>
+</div>
+<!--定义模版-->
+<template id="tmpl">
+    <div>
+        <input type="button" value="让count+1" @click="increment">
+        <h3>{{count}}</h3>
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    var dataObj = {count:0};
+    // 这是一个计数器组件 每当点击按钮 让data中的count值+1
+    Vue.component('counter', {
+        template: '#tmpl',
+        data:function () {
+            // return dataObj; // 当我们return全局的dataObj时，子组件会共享这个dataObj
+            return {count:0}; // return 一个新开辟的对象数据
+            // 每当我们创建一个新的组件实例时，就会调用data函数，data函数里会return一个新开辟的对象数据。这样做，就可以保证每个组件实例有独立的数据存储。
+        },
+        methods: {
+            increment() {
+                this.count++;
+            }
+        }
+    });
+    // 创建Vue实例 得到ViewModel
+    var vm = new Vue({
+        el:'#app',
+        data:{},
+        methods:{}
+    });
+    // 将组件<counter>调用了两次，由于dataObj是全局对象，导致两个组件实例都可以共享这个dataObj数据。于是，我们点击任何一个组件实例的按钮，都可以让 count 数据+1
+    // 如果我们想让<counter>的两个实例去单独操作count数据，应该修改data中return出去的内容。
+</script>
+</body>
+</html>

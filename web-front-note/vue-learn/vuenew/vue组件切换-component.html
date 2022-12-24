@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!-- 在上面那个例子中，通过flag的值进行组件切换。但是flag的值只可能有两种情况，
+也就是说 v-if和v-else只能进行两个组件之间的切换，如何实现三个以上的组件切换呢
+可以使用Vue提供的<component>标签-->
+<div id="app">
+    <!-- 点击按钮后，设置变量`comName`为不同的值，代表着后面的component里显示不同的组件 -->
+    <a href="" @click.prevent="comName='login'">登录</a>
+    <a href="" @click.prevent="comName='register'">注册</a>
+
+    <!-- Vue提供了 component ,来展示对应名称的组件 -->
+    <!-- component 是一个占位符, :is 属性,可以用来指定要展示的组件的名称 -->
+    <!-- 此处的`comName`是变量，变量值为组件名称 -->
+    <component :is="comName"></component>
+
+    <!-- 通过 mode 属性,设置组件切换时候的 过渡动画 -->
+    <!-- 【重点】亮点是 mode="out-in" 这句话 -->
+    <!--    <transition mode="out-in">-->
+    <!--        <component :is="comName"></component>-->
+    <!--    </transition>-->
+    <!--    多个组件切换时，如果要设置动画，可以用`<transition>`把组件包裹起来。需要注意的是，我给`<transition>`标签里添加了`mode="out-in"`这种模式，它表示第一个组件消失之后，第二个组件才会出现。如果没有这个mode属性，效果如下：（第一个组件准备消失的时候，第二个组件马上就准备出现，这不是我们想要的效果）-->
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    Vue.component('login', {
+        template: '<h3>登录组件</h3>'
+    })
+
+    Vue.component('register', {
+        template: '<h3>注册组件</h3>'
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            comName:'login' // 当前 component 中的 :is 绑定的组件名称
+        },
+        methods:{}
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 登录组件/注册组件，二选一 -->
+<div id="app">
+    <!-- 温馨提示：`.prevent`可以阻止超链接的默认事件 -->
+    <a href="" @click.prevent="flag=true">登录</a>
+    <a href="" @click.prevent="flag=false">注册</a>
+
+    <!--    登录注册组件 同时只显示一个-->
+    <login v-if="flag"></login>
+    <register v-else="flag"></register>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script>
+    Vue.component('login', {
+        template: '<h3>登录组件</h3>'
+    })
+    Vue.component('register', {
+        template: '<h3>注册组件</h3>'
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag: false
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>
