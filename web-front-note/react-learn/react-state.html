@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    class Hello extends React.Component {
+      // es6继承必须用super调用父类的constructor
+      constuctor() {
+        super()
+        this.state = {
+          gender: 'male'
+        }
+      }
+      render() {
+        return (
+          <div>性别：{this.state.gender}</div>
+        )
+      }
+    }
+    /*
+    作用：用来给组件提供组件内部使用的数据
+    注意：只有通过class创建的组件才具有状态
+    注意：状态是私有的，完全由组件来控制
+    注意：不要在 state 中添加 render() 方法中不需要的数据，会影响渲染性能！
+
+    可以将组件内部使用但是不渲染在视图中的内容，直接添加给 this
+    注意：不要在 render() 方法中调用 setState() 方法来修改state的值
+
+    但是可以通过 this.state.name = 'rose' 方式设置state（不推荐!!!!）
+    */
+  </script>
+</body>
+
+</html>

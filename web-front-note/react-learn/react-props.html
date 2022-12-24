@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    // props 是一个包含数据的对象参数，不要试图修改 props 参数
+    // 返回值：react元素
+    function Welcome(props) {
+        // 返回的 react元素中必须只有一个根元素
+        return <div>Hello, {props.name}</div>
+    }
+    class Welcome extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return <h1>Hello, {this.props.name}</h1>
+        }
+    }
+    /*
+    作用：给组件传递数据，一般用在父子组件之间
+    说明：React把传递给组件的属性转化为一个对象并交给 props
+    特点：props是只读的，无法给props添加或修改属性
+    props.children：获取组件的内容，比如：
+
+    <Hello>组件内容</Hello> 中的 组件内容
+    */
+  </script>
+</body>
+
+</html>
